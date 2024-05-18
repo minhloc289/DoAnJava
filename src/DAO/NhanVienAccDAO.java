@@ -43,11 +43,11 @@ public class NhanVienAccDAO implements DAOInterface<NhanVienAcc> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    boolean checkLogin (String username, String password) {
+    public boolean checkLogin (String username, String password){
         try {
             Connection con = JDBC.getConnection();
             
-            String sql = "SELECT * FROM NHANVIENACC WHERE UserName = ? AND Password = ?"; 
+            String sql = "SELECT * FROM NHANVIENACC WHERE TenDN = ? and MatKhau = ?"; 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, username);
             ps.setString(2, password);

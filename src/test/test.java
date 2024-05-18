@@ -21,8 +21,6 @@ public class test {
                 "0987654321",
                 "tranvanb@example.com"
         );
-        System.out.println('ABC');
-
         KhachHangDAO khachHangDAO = KhachHangDAO.getInstance();
         int result = khachHangDAO.insert(khachHang);
 
