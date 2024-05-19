@@ -122,6 +122,4 @@ public class HuanLuyenVien {
     public String toString() {
         return "HuanLuyenVien{" + "Id_HLV=" + Id_HLV + ", HoTen=" + HoTen + ", NgaySinh=" + NgaySinh + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", soDT=" + soDT + ", NgayVL=" + NgayVL + ", ChuyenMon=" + ChuyenMon + ", Email=" + Email + '}';
     }
-    
-    
 }

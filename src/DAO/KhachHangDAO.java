@@ -35,7 +35,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
             ketQua = pst.executeUpdate();
             JDBC.closeConnection(conn);
         } catch (SQLException e) {
-         
+            
         }
         return ketQua;
     }
