@@ -8,64 +8,13 @@ import DAO.NhanVienAccDAO;
 
 public class Main extends javax.swing.JFrame {
 
-//    private Animator animatorLogin;
-//    private Animator animatorBody;
+
     private boolean signIn;
 
     public Main() {
         initComponents();
         getContentPane().setBackground(new Color(245, 245, 245));
-//        TimingTarget targetLogin = new TimingTargetAdapter() {
-//            @Override
-//            public void timingEvent(float fraction) {
-//                if (signIn) {
-//                    background1.setAnimate(fraction);
-//                } else {
-//                    background1.setAnimate(1f - fraction);
-//                }
-//            }
-//
-//            @Override
-//            public void end() {
-//                if (signIn) {
-//                    panelLogin.setVisible(false);
-//                    background1.setShowPaint(true);
-//                    panelBody.setAlpha(0);
-//                    panelBody.setVisible(true);
-//                    animatorBody.start();
-//                } else {
-//                    enableLogin(true);
-//                    txtUser.grabFocus();
-//                }
-//            }
-//        };
-//        TimingTarget targetBody = new TimingTargetAdapter() {
-//            @Override
-//            public void timingEvent(float fraction) {
-//                if (signIn) {
-//                    panelBody.setAlpha(fraction);
-//                } else {
-//                    panelBody.setAlpha(1f - fraction);
-//                }
-//            }
-//
-//            @Override
-//            public void end() {
-//                if (signIn == false) {
-//                    panelBody.setVisible(false);
-//                    background1.setShowPaint(false);
-//                    background1.setAnimate(1);
-//                    panelLogin.setVisible(true);
-//                    animatorLogin.start();
-//                }
-//            }
-//        };
-//        animatorLogin = new Animator(1500, targetLogin);
-//        animatorBody = new Animator(500, targetBody);
-//        animatorLogin.setResolution(0);
-//        animatorBody.setResolution(0);
-//        jScrollPane1.getViewport().setOpaque(false);
-//        jScrollPane1.setViewportBorder(null);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -79,6 +28,7 @@ public class Main extends javax.swing.JFrame {
         SignIn = new com.raven.swing.Button();
         txtUser = new com.raven.swing.TextField();
         txtPass = new com.raven.swing.PasswordField();
+        Exit = new javax.swing.JButton();
         panelBody = new com.raven.swing.PanelTransparent();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -154,19 +104,30 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        Exit.setText("X");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
         panelLogin.setLayout(panelLoginLayout);
         panelLoginLayout.setHorizontalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLoginLayout.createSequentialGroup()
+            .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap(430, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(368, 368, 368))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLoginLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Exit))
         );
         panelLoginLayout.setVerticalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLoginLayout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(Exit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(233, Short.MAX_VALUE))
         );
@@ -236,10 +197,12 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInActionPerformed
-//        if (!animatorLogin.isRunning()) {
+
             signIn = true;
             String user = txtUser.getText().trim();
             String pass = String.valueOf(txtPass.getPassword());
+            NhanVienAccDAO nhanvienAcc = new NhanVienAccDAO();
+            boolean isLogin = nhanvienAcc.checkLogin(user,pass);
             boolean action = true;
             if (user.equals("")) {
                 txtUser.setHelperText("Please enter user name");
@@ -254,10 +217,10 @@ public class Main extends javax.swing.JFrame {
                 action = false;
             }
             if (action) {
-//                animatorLogin.start();
+
                 enableLogin(false);
             }
-//        }
+
     }//GEN-LAST:event_SignInActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -273,6 +236,10 @@ public class Main extends javax.swing.JFrame {
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
        
     }//GEN-LAST:event_txtPassActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    System.exit(0);
+    }//GEN-LAST:event_ExitActionPerformed
 
     private void enableLogin(boolean action) {
         txtUser.setEditable(action);
@@ -320,6 +287,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Exit;
     private com.raven.swing.Button SignIn;
     private com.raven.swing.Background background1;
     private com.raven.component.Header header1;
