@@ -3,64 +3,52 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Date;
 import java.util.Objects;
 /**
  *
  * @author locmi
  */
 public class GoiTap {
-    private String Id_GT;
-    private String TenGoi;
-    private String MoTa;
-    private Date NgayBD;
-    private Date NgayHH;
-    private float GiaTien;
-
-    public GoiTap(String Id_GT, String TenGoi, String MoTa, Date NgayBD, Date NgayHH, float GiaTien) {
-        this.Id_GT = Id_GT;
-        this.TenGoi = TenGoi;
-        this.MoTa = MoTa;
-        this.NgayBD = NgayBD;
-        this.NgayHH = NgayHH;
-        this.GiaTien = GiaTien;
+    private String id_GT;
+    private String tenGoi;
+    private String moTa;
+    private double giaTien;
+    
+    public GoiTap(){};
+    
+    public GoiTap(String id_GT, String tenGoi, String moTa, double giaTien) {
+        this.id_GT = id_GT;
+        this.tenGoi = tenGoi;
+        this.moTa = moTa;
+        this.giaTien = giaTien;
     }
 
     public String getId_GT() {
-        return Id_GT;
+        return id_GT;
     }
 
     public String getTenGoi() {
-        return TenGoi;
+        return tenGoi;
     }
 
     public String getMoTa() {
-        return MoTa;
+        return moTa;
     }
 
-    public Date getNgayBD() {
-        return NgayBD;
-    }
-
-    public Date getNgayHH() {
-        return NgayHH;
-    }
-
-    public float getGiaTien() {
-        return GiaTien;
+    public double getGiaTien() {
+        return giaTien;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.Id_GT);
-        hash = 89 * hash + Objects.hashCode(this.TenGoi);
-        hash = 89 * hash + Objects.hashCode(this.MoTa);
-        hash = 89 * hash + Objects.hashCode(this.NgayBD);
-        hash = 89 * hash + Objects.hashCode(this.NgayHH);
-        hash = 89 * hash + Float.floatToIntBits(this.GiaTien);
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.id_GT);
+        hash = 17 * hash + Objects.hashCode(this.tenGoi);
+        hash = 17 * hash + Objects.hashCode(this.moTa);
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.giaTien) ^ (Double.doubleToLongBits(this.giaTien) >>> 32));
         return hash;
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -74,28 +62,21 @@ public class GoiTap {
             return false;
         }
         final GoiTap other = (GoiTap) obj;
-        if (Float.floatToIntBits(this.GiaTien) != Float.floatToIntBits(other.GiaTien)) {
+        if (Double.doubleToLongBits(this.giaTien) != Double.doubleToLongBits(other.giaTien)) {
             return false;
         }
-        if (!Objects.equals(this.Id_GT, other.Id_GT)) {
+        if (!Objects.equals(this.id_GT, other.id_GT)) {
             return false;
         }
-        if (!Objects.equals(this.TenGoi, other.TenGoi)) {
+        if (!Objects.equals(this.tenGoi, other.tenGoi)) {
             return false;
         }
-        if (!Objects.equals(this.MoTa, other.MoTa)) {
-            return false;
-        }
-        if (!Objects.equals(this.NgayBD, other.NgayBD)) {
-            return false;
-        }
-        return Objects.equals(this.NgayHH, other.NgayHH);
+        return Objects.equals(this.moTa, other.moTa);
     }
 
     @Override
     public String toString() {
-        return "GoiTap{" + "Id_GT=" + Id_GT + ", TenGoi=" + TenGoi + ", MoTa=" + MoTa + ", NgayBD=" + NgayBD + ", NgayHH=" + NgayHH + ", GiaTien=" + GiaTien + '}';
+        return "GoiTap{" + "id_GT=" + id_GT + ", tenGoi=" + tenGoi + ", moTa=" + moTa + ", giaTien=" + giaTien + '}';
     }
-    
     
 }

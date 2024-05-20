@@ -4,7 +4,7 @@
  */
 package model;
 import java.util.Objects;
-import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author locmi
@@ -14,12 +14,16 @@ public class Thue {
     private String id_HLV;
     private Date ngayBD;
     private Date ngayKT;
-
-    public Thue(String id_KH, String id_HLV, Date ngayBD, Date ngayKT) {
+    private int thoiGianThue;
+    
+    public Thue(){};
+    
+    public Thue(String id_KH, String id_HLV, Date ngayBD, Date ngayKT, int thoiGianThue) {
         this.id_KH = id_KH;
         this.id_HLV = id_HLV;
         this.ngayBD = ngayBD;
         this.ngayKT = ngayKT;
+        this.thoiGianThue = thoiGianThue;
     }
 
     public String getId_KH() {
@@ -38,13 +42,15 @@ public class Thue {
         return ngayKT;
     }
 
+    public int getThoiGianThue() {
+        return thoiGianThue;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id_KH);
-        hash = 29 * hash + Objects.hashCode(this.id_HLV);
-        hash = 29 * hash + Objects.hashCode(this.ngayBD);
-        hash = 29 * hash + Objects.hashCode(this.ngayKT);
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.id_KH);
+        hash = 23 * hash + Objects.hashCode(this.id_HLV);
         return hash;
     }
 
@@ -60,6 +66,9 @@ public class Thue {
             return false;
         }
         final Thue other = (Thue) obj;
+        if (this.thoiGianThue != other.thoiGianThue) {
+            return false;
+        }
         if (!Objects.equals(this.id_KH, other.id_KH)) {
             return false;
         }
@@ -74,7 +83,7 @@ public class Thue {
 
     @Override
     public String toString() {
-        return "Thue{" + "id_KH=" + id_KH + ", id_HLV=" + id_HLV + ", ngayBD=" + ngayBD + ", ngayKT=" + ngayKT + '}';
+        return "Thue{" + "id_KH=" + id_KH + ", id_HLV=" + id_HLV + ", ngayBD=" + ngayBD + ", ngayKT=" + ngayKT + ", thoiGianThue=" + thoiGianThue + '}';
     }
     
     

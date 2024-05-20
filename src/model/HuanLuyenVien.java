@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 /**
  *
@@ -19,8 +19,11 @@ public class HuanLuyenVien {
     private Date NgayVL;
     private String ChuyenMon;
     private String Email;
+    private double GiaThue;
+    
+    public HuanLuyenVien(){};
 
-    public HuanLuyenVien(String Id_HLV, String HoTen, Date NgaySinh, String GioiTinh, String DiaChi, String soDT, Date NgayVL, String ChuyenMon, String Email) {
+    public HuanLuyenVien(String Id_HLV, String HoTen, Date NgaySinh, String GioiTinh, String DiaChi, String soDT, Date NgayVL, String ChuyenMon, String Email, double GiaThue) {
         this.Id_HLV = Id_HLV;
         this.HoTen = HoTen;
         this.NgaySinh = NgaySinh;
@@ -30,6 +33,7 @@ public class HuanLuyenVien {
         this.NgayVL = NgayVL;
         this.ChuyenMon = ChuyenMon;
         this.Email = Email;
+        this.GiaThue = GiaThue;
     }
 
     public String getId_HLV() {
@@ -68,17 +72,21 @@ public class HuanLuyenVien {
         return Email;
     }
 
+    public double getGiaThue() {
+        return GiaThue;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 71 * hash + Objects.hashCode(this.Id_HLV);
         hash = 71 * hash + Objects.hashCode(this.HoTen);
         hash = 71 * hash + Objects.hashCode(this.soDT);
-        hash = 71 * hash + Objects.hashCode(this.NgayVL);
         hash = 71 * hash + Objects.hashCode(this.Email);
         return hash;
     }
 
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -91,6 +99,9 @@ public class HuanLuyenVien {
             return false;
         }
         final HuanLuyenVien other = (HuanLuyenVien) obj;
+        if (Double.doubleToLongBits(this.GiaThue) != Double.doubleToLongBits(other.GiaThue)) {
+            return false;
+        }
         if (!Objects.equals(this.Id_HLV, other.Id_HLV)) {
             return false;
         }
@@ -120,6 +131,8 @@ public class HuanLuyenVien {
 
     @Override
     public String toString() {
-        return "HuanLuyenVien{" + "Id_HLV=" + Id_HLV + ", HoTen=" + HoTen + ", NgaySinh=" + NgaySinh + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", soDT=" + soDT + ", NgayVL=" + NgayVL + ", ChuyenMon=" + ChuyenMon + ", Email=" + Email + '}';
+        return "HuanLuyenVien{" + "Id_HLV=" + Id_HLV + ", HoTen=" + HoTen + ", NgaySinh=" + NgaySinh + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", soDT=" + soDT + ", NgayVL=" + NgayVL + ", ChuyenMon=" + ChuyenMon + ", Email=" + Email + ", GiaThue=" + GiaThue + '}';
     }
+    
+    
 }

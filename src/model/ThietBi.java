@@ -15,7 +15,9 @@ public class ThietBi {
     private String loaiTB;
     private int SoLuong;
     private String TinhTrang;
-
+    
+    public ThietBi(){};
+    
     public ThietBi(String Id_TB, String tenTB, String loaiTB, int SoLuong, String TinhTrang) {
         this.Id_TB = Id_TB;
         this.tenTB = tenTB;
@@ -46,10 +48,9 @@ public class ThietBi {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 47 * hash + Objects.hashCode(this.Id_TB);
         hash = 47 * hash + Objects.hashCode(this.tenTB);
-        hash = 47 * hash + Objects.hashCode(this.TinhTrang);
         return hash;
     }
 

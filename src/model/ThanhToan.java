@@ -4,7 +4,7 @@
  */
 package model;
 import java.util.Objects;
-import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author locmi
@@ -15,16 +15,16 @@ public class ThanhToan {
     private double tongTien;
     private String trangThai;
     private String id_KH;
-    private String id_GT;
     private String id_NV;
+    
+    public ThanhToan(){};
 
-    public ThanhToan(String id_TTOAN, Date ngayLap, double tongTien, String trangThai, String id_KH, String id_GT, String id_NV) {
+    public ThanhToan(String id_TTOAN, Date ngayLap, double tongTien, String trangThai, String id_KH, String id_NV) {
         this.id_TTOAN = id_TTOAN;
         this.ngayLap = ngayLap;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
         this.id_KH = id_KH;
-        this.id_GT = id_GT;
         this.id_NV = id_NV;
     }
 
@@ -48,26 +48,20 @@ public class ThanhToan {
         return id_KH;
     }
 
-    public String getId_GT() {
-        return id_GT;
-    }
-
     public String getId_NV() {
         return id_NV;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.id_TTOAN);
-        hash = 83 * hash + Objects.hashCode(this.ngayLap);
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.tongTien) ^ (Double.doubleToLongBits(this.tongTien) >>> 32));
-        hash = 83 * hash + Objects.hashCode(this.trangThai);
-        hash = 83 * hash + Objects.hashCode(this.id_KH);
-        hash = 83 * hash + Objects.hashCode(this.id_GT);
-        hash = 83 * hash + Objects.hashCode(this.id_NV);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id_TTOAN);
+        hash = 23 * hash + Objects.hashCode(this.id_KH);
+        hash = 23 * hash + Objects.hashCode(this.id_NV);
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -93,9 +87,6 @@ public class ThanhToan {
         if (!Objects.equals(this.id_KH, other.id_KH)) {
             return false;
         }
-        if (!Objects.equals(this.id_GT, other.id_GT)) {
-            return false;
-        }
         if (!Objects.equals(this.id_NV, other.id_NV)) {
             return false;
         }
@@ -104,7 +95,7 @@ public class ThanhToan {
 
     @Override
     public String toString() {
-        return "ThanhToan{" + "id_TTOAN=" + id_TTOAN + ", ngayLap=" + ngayLap + ", tongTien=" + tongTien + ", trangThai=" + trangThai + ", id_KH=" + id_KH + ", id_GT=" + id_GT + ", id_NV=" + id_NV + '}';
+        return "ThanhToan{" + "id_TTOAN=" + id_TTOAN + ", ngayLap=" + ngayLap + ", tongTien=" + tongTien + ", trangThai=" + trangThai + ", id_KH=" + id_KH + ", id_NV=" + id_NV + '}';
     }
     
     

@@ -4,7 +4,7 @@
  */
 package model;
 import java.util.Objects;
-import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author locmi
@@ -19,8 +19,10 @@ public class NhanVien {
     private Date NgayVL;
     private String ChucVu;
     private String Email;
+    
+    public NhanVien(){};
 
-    public NhanVien(String Id_NV, String HoTen, Date NgaySinh, String GioiTinh, String DiaChi, String soDT, Date NgayVL, String ChucVu, String Email) {
+    public NhanVien(String Id_NV, String HoTen, Date NgaySinh, String GioiTinh, String DiaChi, String soDT, java.sql.Date NgayVL, String ChucVu, String Email) {
         this.Id_NV = Id_NV;
         this.HoTen = HoTen;
         this.NgaySinh = NgaySinh;
@@ -70,15 +72,15 @@ public class NhanVien {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.Id_NV);
-        hash = 29 * hash + Objects.hashCode(this.HoTen);
-        hash = 29 * hash + Objects.hashCode(this.soDT);
-        hash = 29 * hash + Objects.hashCode(this.NgayVL);
-        hash = 29 * hash + Objects.hashCode(this.ChucVu);
-        hash = 29 * hash + Objects.hashCode(this.Email);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.Id_NV);
+        hash = 67 * hash + Objects.hashCode(this.HoTen);
+        hash = 67 * hash + Objects.hashCode(this.soDT);
+        hash = 67 * hash + Objects.hashCode(this.Email);
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

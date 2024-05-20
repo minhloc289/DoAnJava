@@ -16,6 +16,8 @@ public class NhanVienAcc {
     private String matKhau;
     private String trangThai;
 
+    public NhanVienAcc(){};
+    
     public NhanVienAcc(String id_NV, String tenDN, String matKhau, String trangThai) {
         this.id_NV = id_NV;
         this.tenDN = tenDN;
@@ -41,13 +43,15 @@ public class NhanVienAcc {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
         hash = 97 * hash + Objects.hashCode(this.id_NV);
         hash = 97 * hash + Objects.hashCode(this.tenDN);
         hash = 97 * hash + Objects.hashCode(this.matKhau);
         hash = 97 * hash + Objects.hashCode(this.trangThai);
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -75,8 +79,8 @@ public class NhanVienAcc {
 
     @Override
     public String toString() {
-        return "NhanVienAcc{" + "id_NV=" + id_NV + ", tenDN=" + tenDN + ", matKhau=" + matKhau + ", trangThai=" + trangThai + '}';
+        return "NhanVienACC{" + "id_NV=" + id_NV + ", tenDN=" + tenDN + ", matKhau=" + matKhau + ", trangThai=" + trangThai + '}';
     }
-    
+
     
 }
