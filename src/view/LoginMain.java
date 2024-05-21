@@ -11,7 +11,7 @@ public class LoginMain extends javax.swing.JFrame {
     
     public LoginMain() {
         initComponents();
-        getContentPane().setBackground(new Color(245,245,245));
+        getContentPane().setBackground(new Color(255,255,255));
     }
 
     
@@ -59,6 +59,11 @@ public class LoginMain extends javax.swing.JFrame {
 
         jPassword.setToolTipText("");
         jPassword.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(243, 197, 192)));
+        jPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordFocusGained(evt);
+            }
+        });
         jPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordActionPerformed(evt);
@@ -67,6 +72,11 @@ public class LoginMain extends javax.swing.JFrame {
 
         jUser.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(243, 197, 192)));
         jUser.setDisabledTextColor(new java.awt.Color(243, 197, 192));
+        jUser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jUserFocusGained(evt);
+            }
+        });
         jUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUserActionPerformed(evt);
@@ -84,21 +94,20 @@ public class LoginMain extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Logo1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jUser, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jUser, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(62, 62, 62))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,26 +143,27 @@ public class LoginMain extends javax.swing.JFrame {
         String user = jUser.getText().trim();
         String pass = String.valueOf(jPassword.getPassword());
         
+        if (user.equals("") || pass.equals("")){
+            if (jUser.getText().trim().isEmpty()) {
+                jUser.setText("Please enter username");
+        }
+            if (pass.equals("")) {
+                jPassword.setText("Please enter password");
+        }
+            JOptionPane.showMessageDialog(this, "Không được để trống thông tin đăng nhập", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+    }
+        else{
+            
         NhanVienAccDAO nhanvienAcc = new NhanVienAccDAO();
         boolean isLogin = nhanvienAcc.checkLogin(user, pass);
-
-
-        if (user.equals("")) {
-        jUser.setText("Please enter username");
-    }
-        if (pass.equals("")) {
-        jPassword.setText("Please enter password");
-    }
-        if (user.equals("") || pass.equals("")){
-            JOptionPane.showMessageDialog(this, "Không được để trống thông tin đăng nhập", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            if (isLogin) {
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+                Dashboard dashboard = new Dashboard();
+                dashboard.setVisible(true);
+                dispose();
+            }   
+            else JOptionPane.showMessageDialog(this, "Đăng nhập thất bại", "Cảnh báo", JOptionPane.WARNING_MESSAGE); 
         }
-        else if (isLogin) {
-//            JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
-            Dashboard dashboard = new Dashboard();
-            dashboard.setVisible(true);
-            dispose();
-        }
-        else JOptionPane.showMessageDialog(this, "Đăng nhập thất bại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
@@ -163,6 +173,16 @@ public class LoginMain extends javax.swing.JFrame {
     private void jUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUserActionPerformed
        
     }//GEN-LAST:event_jUserActionPerformed
+
+    private void jUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jUserFocusGained
+        if(jUser.getText().equals("Please enter username"))
+            jUser.setText("");
+    }//GEN-LAST:event_jUserFocusGained
+
+    private void jPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFocusGained
+        if(new String(jPassword.getPassword()).equals("Please enter password"))
+            jPassword.setText("");
+    }//GEN-LAST:event_jPasswordFocusGained
 
     
     public static void main(String args[]) {
