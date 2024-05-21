@@ -45,7 +45,7 @@ public class LoginMain extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/logo.png"))); // NOI18N
+        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/logo.png"))); // NOI18N
 
         jButton2.setBackground(new java.awt.Color(243, 197, 192));
         jButton2.setForeground(new java.awt.Color(153, 153, 153));
@@ -117,9 +117,9 @@ public class LoginMain extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 57, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/background.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/backgroundtrang.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 444, 1101, -1));
 
         pack();
