@@ -1,38 +1,61 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package test;
+
 import database.JDBC;
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.*;
-/**
- *
- * @author locmi
- */
+
 public class test2 {
     public static void main(String[] args) {
-        Connection con = JDBC.getConnection();
-        int ketQua = 0;
-        try{
-            String sql = "INSERT INTO NHANVIEN(Id_NV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChucVu, Email) VALUES (?,?, TO_DATE('28-09-2024', 'dd-MM-RR'),?,?,?,TO_DATE('28-09-2004', 'dd-MM-RR'),?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, "NV01");
-            pst.setString(2, "Minh Loc");
-            pst.setString(3, "Nam");
-            pst.setString(4, "Ho Chi Minh");
-            pst.setString(5, "1209100391");
-            pst.setString(6, "Quan Ly");
-            pst.setString(7, "abc@gmail.com");
-            
-            ketQua = pst.executeUpdate();
-            JDBC.closeConnection(con);
+        int result = 0;
+        Connection conn = null;
+        CallableStatement cstmt = null;
+
+        try {
+            // Thiết lập kết nối tới cơ sở dữ liệu
+            conn = JDBC.getConnection();
+
+            // Câu lệnh SQL để gọi procedure
+            String sql = "{CALL ThemTaiKhoanNhanVien(?, ?, ?)}";
+            cstmt = conn.prepareCall(sql);
+
+            // Đặt các tham số cho procedure
+            cstmt.setString(1, "22520784");  // Mã nhân viên
+            cstmt.setString(2, "minhloc");   // Tên đăng nhập
+            cstmt.setString(3, "28092004");  // Mật khẩu
+
+            // Thực thi procedure
+            result = cstmt.executeUpdate();
+
+            // Kiểm tra kết quả
+            if (result > 0) {
+                System.out.println("Thêm tài khoản nhân viên thành công!");
+            } else {
+                System.out.println("Thêm tài khoản nhân viên thất bại.");
+            }
         } catch (SQLException e) {
-            if (e.getErrorCode() == 20001){
-                System.out.println("Ngày vào làm phải lớn hơn ngày sinh");
+            if (e.getErrorCode() == 20001) {
+                System.err.println("Nhân viên không tồn tại");
+            } else if (e.getErrorCode() == 20002) {
+                System.err.println("Tên đăng nhập đã tồn tại");
+            } else {
+                e.printStackTrace();
+            }
+        } finally {
+            // Đóng các tài nguyên
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
