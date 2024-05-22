@@ -46,10 +46,6 @@ public class Dashboard extends javax.swing.JFrame {
         switchScreen.setEvent(listItem);
     }
     
-    Color originColor = new Color(255,215,220); 
-    Color ori2 = new Color(255,239,237);
-    Color ori3 = new Color(255,224,225);
-    Color ori4 = new Color(243,197,192);
     
     /*
      * This method is called from within the constructor to initialize the form.
@@ -117,6 +113,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -142,6 +139,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelHome.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Home.png"))); // NOI18N
         jLabelHome.setText("    Home");
+        jLabelHome.setPreferredSize(new java.awt.Dimension(230, 0));
         jLabelHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelHomeMouseClicked(evt);
@@ -155,9 +153,7 @@ public class Dashboard extends javax.swing.JFrame {
         pn_Home.setLayout(pn_HomeLayout);
         pn_HomeLayout.setHorizontalGroup(
             pn_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_HomeLayout.createSequentialGroup()
-                .addComponent(jLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabelHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pn_HomeLayout.setVerticalGroup(
             pn_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,13 +174,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelGT.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelGT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_TrainProgram.png"))); // NOI18N
         jLabelGT.setText("    Gói tập");
+        jLabelGT.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_GTLayout = new javax.swing.GroupLayout(pn_GT);
         pn_GT.setLayout(pn_GTLayout);
         pn_GTLayout.setHorizontalGroup(
             pn_GTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_GTLayout.createSequentialGroup()
-                .addComponent(jLabelGT, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelGT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_GTLayout.setVerticalGroup(
@@ -206,13 +203,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelKhachHang.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Customer.png"))); // NOI18N
         jLabelKhachHang.setText("    Khách hàng");
+        jLabelKhachHang.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_KHLayout = new javax.swing.GroupLayout(pn_KH);
         pn_KH.setLayout(pn_KHLayout);
         pn_KHLayout.setHorizontalGroup(
             pn_KHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_KHLayout.createSequentialGroup()
-                .addComponent(jLabelKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_KHLayout.setVerticalGroup(
@@ -233,13 +231,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelHLV.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelHLV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_PT.png"))); // NOI18N
         jLabelHLV.setText("    Huấn luyện viên");
+        jLabelHLV.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_HLVLayout = new javax.swing.GroupLayout(pn_HLV);
         pn_HLV.setLayout(pn_HLVLayout);
         pn_HLVLayout.setHorizontalGroup(
             pn_HLVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_HLVLayout.createSequentialGroup()
-                .addComponent(jLabelHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelHLV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_HLVLayout.setVerticalGroup(
@@ -262,13 +261,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelThietBi.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelThietBi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Devices.png"))); // NOI18N
         jLabelThietBi.setText("    Thiết bị");
+        jLabelThietBi.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_TBLayout = new javax.swing.GroupLayout(pn_TB);
         pn_TB.setLayout(pn_TBLayout);
         pn_TBLayout.setHorizontalGroup(
             pn_TBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TBLayout.createSequentialGroup()
-                .addComponent(jLabelThietBi, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelThietBi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TBLayout.setVerticalGroup(
@@ -292,13 +292,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelThanhToan.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Payment.png"))); // NOI18N
         jLabelThanhToan.setText("    Thanh toán");
+        jLabelThanhToan.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_TTLayout = new javax.swing.GroupLayout(pn_TT);
         pn_TT.setLayout(pn_TTLayout);
         pn_TTLayout.setHorizontalGroup(
             pn_TTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TTLayout.createSequentialGroup()
-                .addComponent(jLabelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TTLayout.setVerticalGroup(
@@ -322,7 +323,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(pn_HelloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_HelloLayout.setVerticalGroup(
             pn_HelloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,13 +347,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelNhanVien.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Employees.png"))); // NOI18N
         jLabelNhanVien.setText("    Nhân viên");
+        jLabelNhanVien.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_NVLayout = new javax.swing.GroupLayout(pn_NV);
         pn_NV.setLayout(pn_NVLayout);
         pn_NVLayout.setHorizontalGroup(
             pn_NVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_NVLayout.createSequentialGroup()
-                .addComponent(jLabelNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_NVLayout.setVerticalGroup(
@@ -375,13 +377,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelTheTap.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelTheTap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_TrainCard.png"))); // NOI18N
         jLabelTheTap.setText("    Thẻ tập");
+        jLabelTheTap.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_TrainCardLayout = new javax.swing.GroupLayout(pn_TrainCard);
         pn_TrainCard.setLayout(pn_TrainCardLayout);
         pn_TrainCardLayout.setHorizontalGroup(
             pn_TrainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TrainCardLayout.createSequentialGroup()
-                .addComponent(jLabelTheTap, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTheTap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TrainCardLayout.setVerticalGroup(
@@ -404,13 +407,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelThue.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelThue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/contract (1).png"))); // NOI18N
         jLabelThue.setText("    Thuê ");
+        jLabelThue.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_ThueLayout = new javax.swing.GroupLayout(pn_Thue);
         pn_Thue.setLayout(pn_ThueLayout);
         pn_ThueLayout.setHorizontalGroup(
             pn_ThueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_ThueLayout.createSequentialGroup()
-                .addComponent(jLabelThue, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelThue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_ThueLayout.setVerticalGroup(
@@ -435,13 +439,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelThongKe.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/test.png"))); // NOI18N
         jLabelThongKe.setText("    Thống kê");
+        jLabelThongKe.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_TKLayout = new javax.swing.GroupLayout(pn_TK);
         pn_TK.setLayout(pn_TKLayout);
         pn_TKLayout.setHorizontalGroup(
             pn_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TKLayout.createSequentialGroup()
-                .addComponent(jLabelThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TKLayout.setVerticalGroup(
@@ -462,13 +467,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelTaiKhoan.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/user (1).png"))); // NOI18N
         jLabelTaiKhoan.setText("    Tài khoản");
+        jLabelTaiKhoan.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_TaiKhoanLayout = new javax.swing.GroupLayout(pn_TaiKhoan);
         pn_TaiKhoan.setLayout(pn_TaiKhoanLayout);
         pn_TaiKhoanLayout.setHorizontalGroup(
             pn_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TaiKhoanLayout.createSequentialGroup()
-                .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TaiKhoanLayout.setVerticalGroup(
@@ -552,6 +558,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         jLabel20.setText("Log - out");
+        jLabel20.setPreferredSize(new java.awt.Dimension(230, 0));
 
         javax.swing.GroupLayout pn_LogOutLayout = new javax.swing.GroupLayout(pn_LogOut);
         pn_LogOut.setLayout(pn_LogOutLayout);
@@ -560,8 +567,8 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(pn_LogOutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel19)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_LogOutLayout.setVerticalGroup(
