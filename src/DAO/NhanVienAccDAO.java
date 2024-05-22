@@ -78,7 +78,18 @@ public class NhanVienAccDAO implements DAOInterface<NhanVienAcc> {
 
     @Override
     public int delete(NhanVienAcc t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int ketQua = 0;
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "DELETE FROM NHANVIENACC WHERE Id_NV = ?";
+            PreparedStatement pst = conn.prepareCall(sql);
+            pst.setString(1, t.getId_NV());
+            ketQua = pst.executeUpdate();
+            JDBC.closeConnection(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ketQua;
     }
 
     @Override
@@ -156,63 +167,62 @@ public class NhanVienAccDAO implements DAOInterface<NhanVienAcc> {
         }
          return false;
     }
-    public boolean checkIfAccountExists(String id_NV) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            // Thiết lập kết nối tới cơ sở dữ liệu
-            conn = JDBC.getConnection();
-
-            // Câu lệnh SQL để kiểm tra tài khoản
-            String sql = "SELECT COUNT(*) FROM NHANVIENACC WHERE Id_NV = ?";
-            pstmt = conn.prepareStatement(sql);
-
-            // Đặt tham số cho câu lệnh SQL
-            pstmt.setString(1, id_NV);
-
-            // Thực thi câu lệnh SQL và lấy kết quả
-            rs = pstmt.executeQuery();
-
-            // Kiểm tra kết quả
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                if (count > 0) {
-                    // Nếu count > 0, có nghĩa là đã có tài khoản với Id_NV này
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Đóng các tài nguyên
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        // Nếu không tìm thấy tài khoản với Id_NV này, trả về false
-        return false;
-}
+    
+//    public boolean checkIfAccountExists(String id_NV) {
+//        Connection conn = null;
+//        PreparedStatement pstmt = null;
+//        ResultSet rs = null;
+//
+//        try {
+//            // Thiết lập kết nối tới cơ sở dữ liệu
+//            conn = JDBC.getConnection();
+//
+//            // Câu lệnh SQL để kiểm tra tài khoản
+//            String sql = "SELECT COUNT(*) FROM NHANVIENACC WHERE Id_NV = ?";
+//            pstmt = conn.prepareStatement(sql);
+//
+//            // Đặt tham số cho câu lệnh SQL
+//            pstmt.setString(1, id_NV);
+//
+//            // Thực thi câu lệnh SQL và lấy kết quả
+//            rs = pstmt.executeQuery();
+//
+//            // Kiểm tra kết quả
+//            if (rs.next()) {
+//                int count = rs.getInt(1);
+//                if (count > 0) {
+//                    // Nếu count > 0, có nghĩa là đã có tài khoản với Id_NV này
+//                    return true;
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            // Đóng các tài nguyên
+//            if (rs != null) {
+//                try {
+//                    rs.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if (pstmt != null) {
+//                try {
+//                    pstmt.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        return false;
+//}
 
 
 }
