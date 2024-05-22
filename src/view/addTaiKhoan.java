@@ -8,7 +8,6 @@ import DAO.NhanVienAccDAO;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.*;
 import model.NhanVienAcc;
 
 /**
@@ -16,10 +15,13 @@ import model.NhanVienAcc;
  * @author ADMIN
  */
 public class addTaiKhoan extends javax.swing.JFrame {
+    private TaiKhoan panel;
     /**
      * Creates new form addTaiKhoan
+     * @param panel
      */
-    public addTaiKhoan() {
+    public addTaiKhoan(TaiKhoan panel) {
+        this.panel = panel;
         initComponents();
         setSize(390, 579);
         setLocationRelativeTo(null);
@@ -58,7 +60,7 @@ public class addTaiKhoan extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         back.setBackground(new java.awt.Color(255, 239, 237));
 
@@ -183,6 +185,7 @@ public class addTaiKhoan extends javax.swing.JFrame {
             try {
             NhanVienAcc newAcc = new NhanVienAcc(id_nv, tenDN, matKhau, "Hoạt động");
             NhanVienAccDAO.getInstance().insert(newAcc);
+            panel.loadDataToTable(NhanVienAccDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Thêm tài khoản thành công!");
             } catch (RuntimeException e) {
                 String errorMessage = e.getMessage();
@@ -213,7 +216,8 @@ public class addTaiKhoan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addTaiKhoan().setVisible(true);
+                TaiKhoan panel = new TaiKhoan();
+                new addTaiKhoan(panel).setVisible(true);
             }
         });
     }

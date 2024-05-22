@@ -16,31 +16,27 @@ public class test2 {
             conn = JDBC.getConnection();
 
             // Câu lệnh SQL để gọi procedure
-            String sql = "{CALL ThemTaiKhoanNhanVien(?, ?, ?)}";
+            String sql = "{CALL CapNhatTaiKhoanNhanVien(?, ?, ?)}";
             cstmt = conn.prepareCall(sql);
 
             // Đặt các tham số cho procedure
-            cstmt.setString(1, "22520784");  // Mã nhân viên
-            cstmt.setString(2, "minhloc");   // Tên đăng nhập
-            cstmt.setString(3, "28092004");  // Mật khẩu
+            cstmt.setString(1, "22520784");
+            cstmt.setString(2, "abc");
+            cstmt.setString(3, "28092004");
 
             // Thực thi procedure
             result = cstmt.executeUpdate();
 
-            // Kiểm tra kết quả
-            if (result > 0) {
-                System.out.println("Thêm tài khoản nhân viên thành công!");
-            } else {
-                System.out.println("Thêm tài khoản nhân viên thất bại.");
-            }
+            // Commit nếu thực thi thành công
+            conn.commit();
         } catch (SQLException e) {
-            if (e.getErrorCode() == 20001) {
-                System.err.println("Nhân viên không tồn tại");
-            } else if (e.getErrorCode() == 20002) {
-                System.err.println("Tên đăng nhập đã tồn tại");
-            } else {
+            if (e.getErrorCode() == 20002) {
+                System.out.println("Tên đăng nhập đã tồn tại!");
+            }
+            else {
                 e.printStackTrace();
             }
+            
         } finally {
             // Đóng các tài nguyên
             if (cstmt != null) {
