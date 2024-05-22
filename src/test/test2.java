@@ -18,7 +18,7 @@ public class test2 {
         Connection con = JDBC.getConnection();
         int ketQua = 0;
         try{
-            String sql = "INSERT INTO NHANVIEN(Id_NV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChucVu, Email) VALUES (?,?, TO_DATE('28-09-2024', 'dd-MM-RR'),?,?,?,TO_DATE('28-09-2004', 'dd-MM-RR'),?,?)";
+            String sql = "INSERT INTO NHANVIEN(Id_NV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChucVu, Email) VALUES (?,?, TO_DATE('28-09-2004', 'dd-MM-RR'),?,?,?,TO_DATE('28-09-2024', 'dd-MM-RR'),?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, "NV01");
             pst.setString(2, "Minh Loc");
@@ -26,14 +26,12 @@ public class test2 {
             pst.setString(4, "Ho Chi Minh");
             pst.setString(5, "1209100391");
             pst.setString(6, "Quan Ly");
-            pst.setString(7, "abc@gmail.com");
+            pst.setString(7, "locminh.2809@gmail.com");
             
             ketQua = pst.executeUpdate();
             JDBC.closeConnection(con);
         } catch (SQLException e) {
-            if (e.getErrorCode() == 20001){
-                System.out.println("Ngày vào làm phải lớn hơn ngày sinh");
-            }
+            System.out.println(e.getErrorCode());
         }
     }
 }
