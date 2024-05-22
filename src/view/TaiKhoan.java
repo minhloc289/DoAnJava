@@ -4,6 +4,10 @@
  */
 package view;
 
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author locmi
@@ -15,8 +19,11 @@ public class TaiKhoan extends javax.swing.JPanel {
      */
     public TaiKhoan() {
         initComponents();
+        setSize(860, 760);
+        setBackground(new Color(255, 239, 237));
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +33,174 @@ public class TaiKhoan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        back = new javax.swing.JPanel();
+        top = new javax.swing.JPanel();
+        tf_SearchBar = new javax.swing.JTextField();
+        lb_icSearch = new javax.swing.JLabel();
+        lb_icAdd = new javax.swing.JLabel();
+        lb_icDelete = new javax.swing.JLabel();
+        lb_icUpdate = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_TAIKHOAN = new javax.swing.JTable();
+
+        setPreferredSize(new java.awt.Dimension(860, 760));
+
+        back.setBackground(new java.awt.Color(255, 255, 255));
+
+        top.setBackground(new java.awt.Color(251, 129, 54));
+        top.setPreferredSize(new java.awt.Dimension(100, 180));
+
+        tf_SearchBar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tf_SearchBar.setText("Tìm kiếm...");
+        tf_SearchBar.setToolTipText("");
+
+        lb_icSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Search.png"))); // NOI18N
+
+        lb_icAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Insert.png"))); // NOI18N
+        lb_icAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_icAddMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lb_icAddMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lb_icAddMouseExited(evt);
+            }
+        });
+
+        lb_icDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Delete.png"))); // NOI18N
+
+        lb_icUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Update.png"))); // NOI18N
+
+        javax.swing.GroupLayout topLayout = new javax.swing.GroupLayout(top);
+        top.setLayout(topLayout);
+        topLayout.setHorizontalGroup(
+            topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_icSearch)
+                .addGap(133, 133, 133)
+                .addComponent(lb_icAdd)
+                .addGap(44, 44, 44)
+                .addComponent(lb_icDelete)
+                .addGap(46, 46, 46)
+                .addComponent(lb_icUpdate)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        topLayout.setVerticalGroup(
+            topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
+                        .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
+                        .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lb_icUpdate)
+                            .addComponent(lb_icDelete)
+                            .addComponent(lb_icSearch)
+                            .addComponent(lb_icAdd))
+                        .addContainerGap())))
+        );
+
+        tb_TAIKHOAN.setBackground(new java.awt.Color(255, 239, 237));
+        tb_TAIKHOAN.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        tb_TAIKHOAN.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã nhân viên", "Tên đăng nhập", "Mật khẩu", "Trạng thái"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tb_TAIKHOAN.setGridColor(new java.awt.Color(255, 255, 255));
+        tb_TAIKHOAN.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(tb_TAIKHOAN);
+        if (tb_TAIKHOAN.getColumnModel().getColumnCount() > 0) {
+            tb_TAIKHOAN.getColumnModel().getColumn(0).setResizable(false);
+            tb_TAIKHOAN.getColumnModel().getColumn(1).setResizable(false);
+            tb_TAIKHOAN.getColumnModel().getColumn(2).setResizable(false);
+            tb_TAIKHOAN.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
+        back.setLayout(backLayout);
+        backLayout.setHorizontalGroup(
+            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(top, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+        );
+        backLayout.setVerticalGroup(
+            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backLayout.createSequentialGroup()
+                .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
+        addTaiKhoan click = new addTaiKhoan();
+        click.setVisible(true);
+        
+     
+    }//GEN-LAST:event_lb_icAddMouseClicked
+
+    private void lb_icAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseEntered
+        lb_icAdd.setBackground(Color.white);
+    }//GEN-LAST:event_lb_icAddMouseEntered
+
+    private void lb_icAddMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseExited
+        lb_icAdd.setBackground(new Color(251,129,54));
+    }//GEN-LAST:event_lb_icAddMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel back;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb_icAdd;
+    private javax.swing.JLabel lb_icDelete;
+    private javax.swing.JLabel lb_icSearch;
+    private javax.swing.JLabel lb_icUpdate;
+    private javax.swing.JTable tb_TAIKHOAN;
+    private javax.swing.JTextField tf_SearchBar;
+    private javax.swing.JPanel top;
     // End of variables declaration//GEN-END:variables
 }
