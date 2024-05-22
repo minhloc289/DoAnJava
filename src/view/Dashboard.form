@@ -35,6 +35,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
     <Property name="locationByPlatform" type="boolean" value="true"/>
     <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
@@ -167,10 +170,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelHome" min="-2" pref="174" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelHome" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -189,6 +189,9 @@
                       <Image iconType="3" name="/view/icons/ic_Home.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Home"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelHomeMouseClicked"/>
@@ -215,7 +218,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelGT" min="-2" pref="168" max="-2" attributes="0"/>
+                          <Component id="jLabelGT" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -236,6 +239,9 @@
                       <Image iconType="3" name="/view/icons/ic_TrainProgram.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    G&#xf3;i t&#x1ead;p"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -258,7 +264,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelKhachHang" min="-2" pref="184" max="-2" attributes="0"/>
+                          <Component id="jLabelKhachHang" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -279,6 +285,9 @@
                       <Image iconType="3" name="/view/icons/ic_Customer.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Kh&#xe1;ch h&#xe0;ng"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -303,7 +312,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelHLV" min="-2" pref="202" max="-2" attributes="0"/>
+                          <Component id="jLabelHLV" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -327,6 +336,9 @@
                       <Image iconType="3" name="/view/icons/ic_PT.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Hu&#x1ea5;n luy&#x1ec7;n vi&#xea;n"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -346,7 +358,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelThietBi" min="-2" pref="174" max="-2" attributes="0"/>
+                          <Component id="jLabelThietBi" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -370,6 +382,9 @@
                       <Image iconType="3" name="/view/icons/ic_Devices.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Thi&#x1ebf;t b&#x1ecb;"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -392,7 +407,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelThanhToan" min="-2" pref="177" max="-2" attributes="0"/>
+                          <Component id="jLabelThanhToan" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -417,6 +432,9 @@
                       <Image iconType="3" name="/view/icons/ic_Payment.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Thanh to&#xe1;n"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -434,7 +452,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" pref="199" max="-2" attributes="0"/>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -478,7 +496,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelNhanVien" min="-2" pref="185" max="-2" attributes="0"/>
+                          <Component id="jLabelNhanVien" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -499,6 +517,9 @@
                       <Image iconType="3" name="/view/icons/ic_Employees.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Nh&#xe2;n vi&#xea;n"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -521,7 +542,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelTheTap" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jLabelTheTap" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -548,6 +569,9 @@
                       <Image iconType="3" name="/view/icons/ic_TrainCard.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Th&#x1ebb; t&#x1ead;p"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -567,7 +591,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelThue" min="-2" pref="184" max="-2" attributes="0"/>
+                          <Component id="jLabelThue" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -592,6 +616,9 @@
                       <Image iconType="3" name="/view/icon/contract (1).png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Thu&#xea; "/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -611,7 +638,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelThongKe" min="-2" pref="167" max="-2" attributes="0"/>
+                          <Component id="jLabelThongKe" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -635,6 +662,9 @@
                       <Image iconType="3" name="/view/icon/test.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    Th&#x1ed1;ng k&#xea;"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -657,7 +687,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelTaiKhoan" min="-2" pref="197" max="-2" attributes="0"/>
+                          <Component id="jLabelTaiKhoan" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -681,6 +711,9 @@
                       <Image iconType="3" name="/view/icon/user (1).png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="    T&#xe0;i kho&#x1ea3;n"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[230, 0]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -718,7 +751,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -750,6 +783,9 @@
                   <Font name="Montserrat" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Log - out"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[230, 0]"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
