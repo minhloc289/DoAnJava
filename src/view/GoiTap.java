@@ -1,20 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package view;
 
-/**
- *
- * @author locmi
- */
-public class GoiTap extends javax.swing.JPanel {
+import java.awt.Color;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
+import javax.swing.JOptionPane;
 
-    /**
-     * Creates new form GoiTap
-     */
+
+public class GoiTap extends javax.swing.JPanel {
+    model.GOITAP gt = new model.GOITAP();
+    DefaultTableColumnModel defaultTableModel;
+    
+    
+    
+    
     public GoiTap() {
         initComponents();
+        setBackground(new Color(255,255,255));
+        setSize(860,760);
+        
+        
+        jTableGoiTap.getColumnModel().getColumn(0).setPreferredWidth(70);
+        jTableGoiTap.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTableGoiTap.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTableGoiTap.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTableGoiTap.getColumnModel().getColumn(4).setPreferredWidth(100);
+        jTableGoiTap.getColumnModel().getColumn(5).setPreferredWidth(90);
+
+        
+//        defaultTableModel = new DefaultTableColumnModel() { 
+//            @Override
+//                public boolean isCellEditable(int row, int column) {
+//                    return false;
+//                }   
+//        };
+//        
+//        jTableGoiTap.setModel(defaultTableModel);
+//        
+        
     }
 
     /**
@@ -26,30 +49,68 @@ public class GoiTap extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableGoiTap = new javax.swing.JTable();
 
-        jButton1.setText("jButton1");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(860, 760));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 118, Short.MAX_VALUE)
+        );
+
+        jTableGoiTap.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã gói tập", "Tên gói", "Mô tả", "Ngày bắt đầu", "Ngày hét hạn", "Giá tiền"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableGoiTap);
+        if (jTableGoiTap.getColumnModel().getColumnCount() > 0) {
+            jTableGoiTap.getColumnModel().getColumn(0).setPreferredWidth(70);
+            jTableGoiTap.getColumnModel().getColumn(1).setPreferredWidth(190);
+            jTableGoiTap.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTableGoiTap.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTableGoiTap.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTableGoiTap.getColumnModel().getColumn(5).setPreferredWidth(100);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(jButton1)
-                .addContainerGap(182, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jButton1)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableGoiTap;
     // End of variables declaration//GEN-END:variables
 }

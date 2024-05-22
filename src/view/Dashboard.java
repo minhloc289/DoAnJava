@@ -70,7 +70,6 @@ public class Dashboard extends javax.swing.JFrame {
         pn_GT = new javax.swing.JPanel();
         jLabelGT = new javax.swing.JLabel();
         pn_KH = new javax.swing.JPanel();
-        jLabelKhachHang = new javax.swing.JLabel();
         pn_HLV = new javax.swing.JPanel();
         jLabelHLV = new javax.swing.JLabel();
         pn_TB = new javax.swing.JPanel();
@@ -81,14 +80,15 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         pn_NV = new javax.swing.JPanel();
         jLabelNhanVien = new javax.swing.JLabel();
+        pn_TaiKhoan = new javax.swing.JPanel();
+        jLabelTaiKhoan = new javax.swing.JLabel();
         pn_TrainCard = new javax.swing.JPanel();
         jLabelTheTap = new javax.swing.JLabel();
         pn_Thue = new javax.swing.JPanel();
         jLabelThue = new javax.swing.JLabel();
         pn_TK = new javax.swing.JPanel();
         jLabelThongKe = new javax.swing.JLabel();
-        pn_TaiKhoan = new javax.swing.JPanel();
-        jLabelTaiKhoan = new javax.swing.JLabel();
+        jLabelKhachHang = new javax.swing.JLabel();
         pn_LogOut = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -128,7 +128,7 @@ public class Dashboard extends javax.swing.JFrame {
         side.setBackground(new java.awt.Color(243, 197, 192));
         side.setPreferredSize(new java.awt.Dimension(200, 500));
 
-        pn_Home.setBackground(new java.awt.Color(243, 197, 192));
+        pn_Home.setBackground(new java.awt.Color(255, 204, 204));
         pn_Home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pn_Home.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -156,15 +156,16 @@ public class Dashboard extends javax.swing.JFrame {
         pn_HomeLayout.setHorizontalGroup(
             pn_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_HomeLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_HomeLayout.setVerticalGroup(
             pn_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabelHome, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
         );
 
-        pn_GT.setBackground(new java.awt.Color(243, 197, 192));
+        pn_GT.setBackground(new java.awt.Color(255, 204, 204));
         pn_GT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pn_GT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -184,8 +185,9 @@ public class Dashboard extends javax.swing.JFrame {
         pn_GTLayout.setHorizontalGroup(
             pn_GTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_GTLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelGT, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_GTLayout.setVerticalGroup(
             pn_GTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,21 +205,15 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jLabelKhachHang.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jLabelKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Customer.png"))); // NOI18N
-        jLabelKhachHang.setText("    Khách hàng");
-
         javax.swing.GroupLayout pn_KHLayout = new javax.swing.GroupLayout(pn_KH);
         pn_KH.setLayout(pn_KHLayout);
         pn_KHLayout.setHorizontalGroup(
             pn_KHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_KHLayout.createSequentialGroup()
-                .addComponent(jLabelKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pn_KHLayout.setVerticalGroup(
             pn_KHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+            .addGap(0, 44, Short.MAX_VALUE)
         );
 
         pn_HLV.setBackground(new java.awt.Color(243, 197, 192));
@@ -239,8 +235,9 @@ public class Dashboard extends javax.swing.JFrame {
         pn_HLVLayout.setHorizontalGroup(
             pn_HLVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_HLVLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_HLVLayout.setVerticalGroup(
             pn_HLVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +246,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pn_TB.setBackground(new java.awt.Color(243, 197, 192));
+        pn_TB.setBackground(new java.awt.Color(255, 204, 204));
         pn_TB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pn_TBMouseEntered(evt);
@@ -268,14 +265,13 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TBLayout.setHorizontalGroup(
             pn_TBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TBLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelThietBi, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_TBLayout.setVerticalGroup(
             pn_TBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_TBLayout.createSequentialGroup()
-                .addComponent(jLabelThietBi, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabelThietBi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
 
         pn_TT.setBackground(new java.awt.Color(243, 197, 192));
@@ -298,15 +294,13 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TTLayout.setHorizontalGroup(
             pn_TTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TTLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_TTLayout.setVerticalGroup(
             pn_TTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_TTLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabelThanhToan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
 
         pn_Hello.setBackground(new java.awt.Color(243, 197, 192));
@@ -322,14 +316,13 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(pn_HelloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_HelloLayout.setVerticalGroup(
             pn_HelloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_HelloLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addContainerGap(9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_HelloLayout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel2))
         );
 
         pn_NV.setBackground(new java.awt.Color(243, 197, 192));
@@ -347,20 +340,54 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Employees.png"))); // NOI18N
         jLabelNhanVien.setText("    Nhân viên");
 
+        pn_TaiKhoan.setBackground(new java.awt.Color(255, 204, 204));
+        pn_TaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_TaiKhoanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_TaiKhoanMouseExited(evt);
+            }
+        });
+
+        jLabelTaiKhoan.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabelTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/user (1).png"))); // NOI18N
+        jLabelTaiKhoan.setText("    Tài khoản");
+
+        javax.swing.GroupLayout pn_TaiKhoanLayout = new javax.swing.GroupLayout(pn_TaiKhoan);
+        pn_TaiKhoan.setLayout(pn_TaiKhoanLayout);
+        pn_TaiKhoanLayout.setHorizontalGroup(
+            pn_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_TaiKhoanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pn_TaiKhoanLayout.setVerticalGroup(
+            pn_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pn_NVLayout = new javax.swing.GroupLayout(pn_NV);
         pn_NV.setLayout(pn_NVLayout);
         pn_NVLayout.setHorizontalGroup(
             pn_NVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pn_TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pn_NVLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_NVLayout.setVerticalGroup(
             pn_NVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_NVLayout.createSequentialGroup()
+                .addComponent(jLabelNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pn_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        pn_TrainCard.setBackground(new java.awt.Color(243, 197, 192));
+        pn_TrainCard.setBackground(new java.awt.Color(255, 204, 204));
         pn_TrainCard.setPreferredSize(new java.awt.Dimension(176, 150));
         pn_TrainCard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -381,14 +408,15 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TrainCardLayout.setHorizontalGroup(
             pn_TrainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TrainCardLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelTheTap, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_TrainCardLayout.setVerticalGroup(
             pn_TrainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_TrainCardLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabelTheTap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pn_TrainCardLayout.createSequentialGroup()
+                .addComponent(jLabelTheTap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pn_Thue.setBackground(new java.awt.Color(243, 197, 192));
@@ -404,24 +432,25 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelThue.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelThue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/contract (1).png"))); // NOI18N
         jLabelThue.setText("    Thuê ");
+        jLabelThue.setPreferredSize(new java.awt.Dimension(80, 30));
 
         javax.swing.GroupLayout pn_ThueLayout = new javax.swing.GroupLayout(pn_Thue);
         pn_Thue.setLayout(pn_ThueLayout);
         pn_ThueLayout.setHorizontalGroup(
             pn_ThueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_ThueLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelThue, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_ThueLayout.setVerticalGroup(
             pn_ThueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_ThueLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabelThue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        pn_TK.setBackground(new java.awt.Color(243, 197, 192));
+        pn_TK.setBackground(new java.awt.Color(255, 204, 204));
         pn_TK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pn_TKMouseEntered(evt);
@@ -441,78 +470,58 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TKLayout.setHorizontalGroup(
             pn_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TKLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_TKLayout.setVerticalGroup(
             pn_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabelThongKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
         );
 
-        pn_TaiKhoan.setBackground(new java.awt.Color(243, 197, 192));
-        pn_TaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pn_TaiKhoanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pn_TaiKhoanMouseExited(evt);
-            }
-        });
-
-        jLabelTaiKhoan.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jLabelTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/user (1).png"))); // NOI18N
-        jLabelTaiKhoan.setText("    Tài khoản");
-
-        javax.swing.GroupLayout pn_TaiKhoanLayout = new javax.swing.GroupLayout(pn_TaiKhoan);
-        pn_TaiKhoan.setLayout(pn_TaiKhoanLayout);
-        pn_TaiKhoanLayout.setHorizontalGroup(
-            pn_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_TaiKhoanLayout.createSequentialGroup()
-                .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pn_TaiKhoanLayout.setVerticalGroup(
-            pn_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_TaiKhoanLayout.createSequentialGroup()
-                .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabelKhachHang.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabelKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Customer.png"))); // NOI18N
+        jLabelKhachHang.setText("    Khách hàng");
 
         javax.swing.GroupLayout sideLayout = new javax.swing.GroupLayout(side);
         side.setLayout(sideLayout);
         sideLayout.setHorizontalGroup(
             sideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pn_Hello, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sideLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(pn_Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_KH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_GT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_HLV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_TrainCard, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+            .addComponent(pn_TrainCard, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
             .addComponent(pn_Thue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_TB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_TT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_TK, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_NV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(sideLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pn_KH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         sideLayout.setVerticalGroup(
             sideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sideLayout.createSequentialGroup()
                 .addComponent(pn_Hello, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(pn_Home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_KH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(sideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pn_KH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pn_GT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pn_HLV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pn_TrainCard, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pn_Thue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -524,14 +533,12 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(pn_TK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pn_NV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pn_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(74, 74, 74))
         );
 
         pn_HLV.getAccessibleContext().setAccessibleParent(side);
 
-        back.add(side, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 700));
+        back.add(side, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 660));
 
         pn_LogOut.setBackground(new java.awt.Color(255, 239, 237));
         pn_LogOut.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
