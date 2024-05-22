@@ -4,25 +4,24 @@
  */
 package test;
 import DAO.KhachHangDAO;
+import DAO.NhanVienAccDAO;
 import java.sql.Date;
 import model.KhachHang;
+import model.NhanVienAcc;
 /**
  *
  * @author locmi
  */
 public class test {
     public static void main(String[] args) {
-        KhachHang khachHang = new KhachHang(
-                "KH002",
-                "Tran Van B",
-                Date.valueOf("1992-05-12"),
-                "Nam",
-                "456 Đường XYZ, Quận 2, TP.HCM",
-                "0987654321",
-                "tranvanb@example.com"
+        NhanVienAcc nv = new NhanVienAcc(
+                "22520784",
+                "minhloc",
+                "28092004",
+                "Hoạt động"
         );
-        KhachHangDAO khachHangDAO = KhachHangDAO.getInstance();
-        int result = khachHangDAO.insert(khachHang);
+        NhanVienAccDAO acc = NhanVienAccDAO.getInstance();
+        int result = acc.insert(nv);
 
         if (result > 0) {
             System.out.println("Chèn dữ liệu thành công!");
