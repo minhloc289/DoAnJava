@@ -73,7 +73,51 @@ public class NhanVienAccDAO implements DAOInterface<NhanVienAcc> {
 
     @Override
     public int update(NhanVienAcc t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        Connection conn = null;
+        CallableStatement cstmt = null;
+        try {
+            // Thiết lập kết nối tới cơ sở dữ liệu
+            conn = JDBC.getConnection();
+
+            // Câu lệnh SQL để gọi procedure
+            String sql = "{CALL CapNhatTaiKhoanNhanVien(?, ?, ?)}";
+            cstmt = conn.prepareCall(sql);
+
+            // Đặt các tham số cho procedure
+            cstmt.setString(1, t.getId_NV());
+            cstmt.setString(2, t.getTenDN());
+            cstmt.setString(3, t.getMatKhau());
+
+            // Thực thi procedure
+            result = cstmt.executeUpdate();
+
+            // Commit nếu thực thi thành công
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 20002) {
+                throw new RuntimeException("Tên đăng nhập đã tồn tại", e);
+            }
+            else {
+                e.printStackTrace();
+            }
+        } finally {
+            // Đóng các tài nguyên
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 
     @Override

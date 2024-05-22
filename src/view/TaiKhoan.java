@@ -9,8 +9,10 @@ import model.NhanVienAcc;
 import DAO.NhanVienAccDAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -52,6 +54,19 @@ public class TaiKhoan extends javax.swing.JPanel {
                 acc.getId_NV(), acc.getTenDN(), acc.getMatKhau(), acc.getTrangThai()
             });
         }
+    }
+    
+    private NhanVienAcc getNhanVienAccSelected() {
+        int selectedRow = tb_TAIKHOAN.getSelectedRow();
+        if (selectedRow == -1) {
+            return null;
+        }
+        String id_NV = tb_TAIKHOAN.getValueAt(selectedRow, 0).toString();
+        String tenDN = tb_TAIKHOAN.getValueAt(selectedRow, 1).toString();
+        String matKhau = tb_TAIKHOAN.getValueAt(selectedRow, 2).toString();
+        String trangThai = tb_TAIKHOAN.getValueAt(selectedRow, 3).toString();
+
+        return new NhanVienAcc(id_NV, tenDN, matKhau, trangThai);
     }
     
 //    private DefaultTableModel createDefaultTableModel() {
@@ -114,8 +129,12 @@ public class TaiKhoan extends javax.swing.JPanel {
         top.setPreferredSize(new java.awt.Dimension(100, 180));
 
         tf_SearchBar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        tf_SearchBar.setText("Tìm kiếm...");
         tf_SearchBar.setToolTipText("");
+        tf_SearchBar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_SearchBarKeyReleased(evt);
+            }
+        });
 
         lb_icSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Search.png"))); // NOI18N
 
@@ -248,7 +267,7 @@ public class TaiKhoan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
-        addTaiKhoan click = new addTaiKhoan();
+        addTaiKhoan click = new addTaiKhoan(this);
         click.setVisible(true);
     }//GEN-LAST:event_lb_icAddMouseClicked
 
@@ -285,26 +304,32 @@ public class TaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icDeleteMouseClicked
 
     private void lb_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_UpdateMouseClicked
-        
+        NhanVienAcc select = getNhanVienAccSelected();
+        if (select != null) {
+            updateTaiKhoan update = new updateTaiKhoan(select, this);
+            update.setVisible(true);
+        }
+        else {
+           JOptionPane.showMessageDialog(this, "Vui lòng chọn một tài khoản để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_lb_UpdateMouseClicked
+
+    private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
+        String searchText = tf_SearchBar.getText().trim().toLowerCase();
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_TAIKHOAN.getModel());
+        tb_TAIKHOAN.setRowSorter(sorter);
+        
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
+        sorter.setRowFilter(rowFilter);  
+    }//GEN-LAST:event_tf_SearchBarKeyReleased
     
     public void refreshTable() {
         ArrayList<NhanVienAcc> acc = NhanVienAccDAO.getInstance().selectAll(); // Gọi hàm lấy tất cả khách hàng không bị xóa
         loadDataToTable(acc);
     }
     
-    private NhanVienAcc getNhanVienAccSelected() {
-        int selectedRow = tb_TAIKHOAN.getSelectedRow();
-        if (selectedRow == -1) {
-            return null;
-        }
-        String id_NV = tb_TAIKHOAN.getValueAt(selectedRow, 0).toString();
-        String tenDN = tb_TAIKHOAN.getValueAt(selectedRow, 1).toString();
-        String matKhau = tb_TAIKHOAN.getValueAt(selectedRow, 2).toString();
-        String trangThai = tb_TAIKHOAN.getValueAt(selectedRow, 3).toString();
-
-        return new NhanVienAcc(id_NV, tenDN, matKhau, trangThai);
-    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
