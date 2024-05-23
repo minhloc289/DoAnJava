@@ -1,43 +1,20 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
 package view;
 
-import java.awt.Color;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.TableColumn;
-import javax.swing.JOptionPane;
-
-
+/**
+ *
+ * @author locmi
+ */
 public class GoiTap extends javax.swing.JPanel {
-    model.GoiTap gt = new model.GoiTap();
-    DefaultTableColumnModel defaultTableModel;
-    
-    
-    
-    
+
+    /**
+     * Creates new form GoiTap
+     */
     public GoiTap() {
         initComponents();
-        setBackground(new Color(255,255,255));
-        setSize(860,760);
-        
-        
-        jTableGoiTap.getColumnModel().getColumn(0).setPreferredWidth(70);
-        jTableGoiTap.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTableGoiTap.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTableGoiTap.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jTableGoiTap.getColumnModel().getColumn(4).setPreferredWidth(100);
-        jTableGoiTap.getColumnModel().getColumn(5).setPreferredWidth(90);
-
-        
-//        defaultTableModel = new DefaultTableColumnModel() { 
-//            @Override
-//                public boolean isCellEditable(int row, int column) {
-//                    return false;
-//                }   
-//        };
-//        
-//        jTableGoiTap.setModel(defaultTableModel);
-//        
-        
     }
 
     /**
@@ -49,142 +26,19 @@ public class GoiTap extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextTimKiem = new javax.swing.JTextField();
-        LabelSearch = new javax.swing.JLabel();
-        labelInsert = new javax.swing.JLabel();
-        labelDelete = new javax.swing.JLabel();
-        labelPencil = new javax.swing.JLabel();
-        labelReset = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableGoiTap = new javax.swing.JTable();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(860, 760));
-
-        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("                                                          CÁC GÓI TẬP");
-
-        jTextTimKiem.setText("Tìm kiếm ...");
-        jTextTimKiem.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextTimKiemFocusGained(evt);
-            }
-        });
-        jTextTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextTimKiemActionPerformed(evt);
-            }
-        });
-
-        LabelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Search.png"))); // NOI18N
-
-        labelInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Insert.png"))); // NOI18N
-
-        labelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Delete.png"))); // NOI18N
-
-        labelPencil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/pencil (1) (1).png"))); // NOI18N
-
-        labelReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Update.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jTextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LabelSearch)
-                .addGap(77, 77, 77)
-                .addComponent(labelInsert)
-                .addGap(82, 82, 82)
-                .addComponent(labelDelete)
-                .addGap(93, 93, 93)
-                .addComponent(labelPencil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelReset)
-                .addGap(81, 81, 81))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LabelSearch)
-                    .addComponent(labelPencil)
-                    .addComponent(labelReset, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelInsert)
-                        .addComponent(labelDelete)))
-                .addGap(16, 16, 16))
-        );
-
-        jTableGoiTap.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã gói tập", "Tên gói", "Mô tả", "Ngày bắt đầu", "Ngày hét hạn", "Giá tiền"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableGoiTap);
-        if (jTableGoiTap.getColumnModel().getColumnCount() > 0) {
-            jTableGoiTap.getColumnModel().getColumn(0).setPreferredWidth(70);
-            jTableGoiTap.getColumnModel().getColumn(1).setPreferredWidth(190);
-            jTableGoiTap.getColumnModel().getColumn(2).setPreferredWidth(200);
-            jTableGoiTap.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jTableGoiTap.getColumnModel().getColumn(4).setPreferredWidth(100);
-            jTableGoiTap.getColumnModel().getColumn(5).setPreferredWidth(100);
-        }
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextTimKiemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextTimKiemActionPerformed
-
-    private void jTextTimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextTimKiemFocusGained
-        if(jTextTimKiem.getText().equals("Tìm kiếm ..."))
-            jTextTimKiem.setText("");
-    }//GEN-LAST:event_jTextTimKiemFocusGained
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelSearch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableGoiTap;
-    private javax.swing.JTextField jTextTimKiem;
-    private javax.swing.JLabel labelDelete;
-    private javax.swing.JLabel labelInsert;
-    private javax.swing.JLabel labelPencil;
-    private javax.swing.JLabel labelReset;
     // End of variables declaration//GEN-END:variables
 }
