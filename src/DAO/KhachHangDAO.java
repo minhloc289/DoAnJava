@@ -31,35 +31,146 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
             pst.setString(5, t.getDiaChi());
             pst.setString(6, t.getSoDT());
             pst.setString(7, t.getEmail());
+
+            ketQua = pst.executeUpdate();
+            JDBC.closeConnection(conn);
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 1) {
+                throw new RuntimeException("Email đã tồn tại!",e);
+            }
+            else {
+                e.printStackTrace();
+            }
+        }
+        return ketQua;
+    }
+
+
+    @Override
+    public int update(KhachHang t) {
+        int ketQua = 0;
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "UPDATE KHACHHANG SET Id_KH = ?, HoTen = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, Email = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, t.getId_KH());
+            pst.setString(2, t.getHoTen());
+            pst.setDate(3, t.getNgaySinh());
+            pst.setString(4, t.getGioiTinh());
+            pst.setString(5, t.getDiaChi());
+            pst.setString(6, t.getSoDT());
+            pst.setString(7, t.getEmail());
             
             ketQua = pst.executeUpdate();
             JDBC.closeConnection(conn);
         } catch (SQLException e) {
-            
+            e.printStackTrace();
         }
         return ketQua;
     }
 
     @Override
-    public int update(KhachHang t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public int delete(KhachHang t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int ketQua = 0;
+        Connection conn = null;
+        CallableStatement stmt = null;
+        try {
+            conn = JDBC.getConnection();
+            String sqlCall = "{call XoaKhachHang(?)}";
+            stmt = conn.prepareCall(sqlCall);
+            stmt.setString(1, t.getId_KH());
+            stmt.execute();
+            ketQua = 1;
+            
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 20001) {
+                throw new RuntimeException("Không thể xóa khách hàng. Khách hàng đang có thẻ tập!", e);
+            }
+            else if (e.getErrorCode() == 20002) {
+                throw new RuntimeException("Không thể xóa khách hàng. Khách hàng đang thuê huấn luyện viên!, e");
+            }
+            else e.printStackTrace();
+        }
+        finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ketQua;
     }
 
     @Override
     public ArrayList<KhachHang> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<KhachHang> khList = new ArrayList<>();
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "SELECT * FROM KHACHHANG WHERE isDeleted = 0";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                String id_KH = rs.getString("Id_KH");
+                String HoTen = rs.getString("HoTen");
+                Date NgaySinh = rs.getDate("NgaySinh");
+                String GioiTinh = rs.getString("GioiTinh");
+                String DiaChi = rs.getString("DiaChi");
+                String SDT = rs.getString("SoDT");
+                String email = rs.getString("Email");
+                KhachHang kh = new KhachHang(id_KH, HoTen, NgaySinh, GioiTinh, DiaChi, SDT, email);
+                khList.add(kh);
+            }
+            JDBC.closeConnection(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return khList;
     }
 
     @Override
     public KhachHang selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        KhachHang kh = null;
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "SELECT * FROM KHACHHANG WHERE Id_KH = ? WHERE isDeleted = 0";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                String id_KH = rs.getString("Id_KH");
+                String HoTen = rs.getString("HoTen");
+                Date NgaySinh = rs.getDate("NgaySinh");
+                String GioiTinh = rs.getString("GioiTinh");
+                String DiaChi = rs.getString("DiaChi");
+                String SDT = rs.getString("SoDT");
+                String email = rs.getString("Email");
+                kh = new KhachHang(id_KH, HoTen, NgaySinh, GioiTinh, DiaChi, SDT, email);
+            }
+            JDBC.closeConnection(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return kh;
     }
     
-    
+    public boolean isEmailExist(String email) {
+        boolean exist = false;
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "SELECT * FROM KHACHHANG WHERE Email = ? AND isDeleted = 0";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                exist = true;
+            }
+            JDBC.closeConnection(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Lỗi khi kiểm tra email!", e);
+        }
+        return exist;
+    }
     
 }

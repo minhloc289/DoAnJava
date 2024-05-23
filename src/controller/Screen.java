@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controller;
 import List.ListDM;
 import view.GoiTap;
 import view.Home;
 import view.HuanLuyenVien;
-import view.KhachHang;
+import view.KhachHangForm;
 import view.NhanVien;
 import view.TaiKhoan;
 import view.ThanhToan;
@@ -34,7 +31,7 @@ public class Screen {
         this.root = jpnRoot;
     }
 
-    public void setView(JPanel jpnItem, JLabel jblItem){
+    public void setView(JPanel jpnItem, JLabel jblItem) {
         kindSelected="Home";
         jpnItem.setBackground(Color.white);
         jblItem.setBackground(Color.white);
@@ -46,22 +43,22 @@ public class Screen {
     }
 
     
-    public void setEvent(List<ListDM> listItem){
+    public void setEvent(List<ListDM> listItem) {
             this.listItem=listItem;
         for(ListDM item: listItem){
-            item.getJlb().addMouseListener(new LableEnvent(item.getKind(),item.getJpn(),item.getJlb()));
+            item.getJlb().addMouseListener(new LabelEvent(item.getKind(),item.getJpn(),item.getJlb()));
         }
     }
 
 
-    class LableEnvent implements MouseListener{
+    class LabelEvent implements MouseListener {
         private JPanel node;
         
         private  String kind;
         private JPanel jpnItem;
         private JLabel jlbItem;
 
-        public LableEnvent(String kind, JPanel jpnItem, JLabel jlbItem) {
+        public LabelEvent(String kind, JPanel jpnItem, JLabel jlbItem) {
             this.kind = kind;
             this.jpnItem = jpnItem;
             this.jlbItem = jlbItem;
@@ -75,7 +72,7 @@ public class Screen {
                     node = new Home();
                     break;
                 case "KhachHang":
-                    node = new KhachHang();
+                    node = new KhachHangForm();
                     break;
                 case "GoiTap":
                     node = new GoiTap();
@@ -123,7 +120,7 @@ public class Screen {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            // Not supported yet
+            
         }
 
         @Override
@@ -144,8 +141,8 @@ public class Screen {
     private void setChangeBackground(String kind) {
         for (ListDM item : listItem) {
             if (item.getKind().equalsIgnoreCase(kind)) {
-                item.getJpn().setBackground(new Color(0, 204, 204));
-                item.getJlb().setBackground(new Color(0, 204, 204));
+                item.getJpn().setBackground(new Color(255, 255, 255));
+                item.getJlb().setBackground(new Color(255, 255, 255));
             } else {
                 item.getJpn().setBackground(new Color(243, 197, 192));
                 item.getJlb().setBackground(new Color(243, 197, 192));
@@ -153,4 +150,3 @@ public class Screen {
         }
     }
 }
-
