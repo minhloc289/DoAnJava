@@ -29,7 +29,7 @@ public class TaiKhoan extends javax.swing.JPanel {
         setSize(860, 760);
         setBackground(new Color(255, 239, 237));
         UIManager.put("Table.showVerticalLines", true);
-        
+        tb_TAIKHOAN.setDefaultEditor(Object.class, null);
         initTable();
         acc = NhanVienAccDAO.getInstance().selectAll();
         loadDataToTable(acc);

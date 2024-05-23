@@ -116,7 +116,7 @@ public class TestKhachHang extends javax.swing.JFrame {
         btnTimKiem = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Reload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -192,10 +192,10 @@ public class TestKhachHang extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Reload.setText("Reload");
+        Reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ReloadActionPerformed(evt);
             }
         });
 
@@ -248,7 +248,7 @@ public class TestKhachHang extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))))
+                                .addComponent(Reload, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -292,7 +292,7 @@ public class TestKhachHang extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Reload, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,13 +346,20 @@ public class TestKhachHang extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Xóa khách hàng thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (RuntimeException e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    String errorMessage = e.getMessage();
+                    if (errorMessage.contains("Khách hàng đang có thẻ tập")) {
+                        JOptionPane.showMessageDialog(this, "Không thể xóa khách hàng. Khách hàng đang có thẻ tập!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else if (errorMessage.contains("Khách hàng đang thuê huấn luyện viên")) {
+                        JOptionPane.showMessageDialog(this, "Không thể xóa khách hàng. Khách hàng đang thuê huấn luyện viên!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Lấy dữ liệu từ các trường nhập liệu
         String id_KH = txtMaKH.getText();
         String hoTen = txtHoTen.getText();
         String ngaySinhStr = txtNgaySinh.getText();
@@ -361,13 +368,15 @@ public class TestKhachHang extends javax.swing.JFrame {
         String soDT = txtSDT.getText();
         String email = txtEmail.getText();
 
+        // Kiểm tra các trường không được để trống
         if (id_KH.isEmpty() || hoTen.isEmpty() || ngaySinhStr.isEmpty() || gioiTinh.isEmpty() || diaChi.isEmpty() || soDT.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Không được để trống thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
-    
+
+        // Chuyển đổi ngày sinh
         Date ngaySinh = null;
-        try { 
+        try {
             ngaySinh = ConvertDate.convertStringToDate(ngaySinhStr);
         } catch (ParseException ex) {
             Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -375,12 +384,39 @@ public class TestKhachHang extends javax.swing.JFrame {
             return; // Dừng lại nếu ngày sinh không hợp lệ
         }
 
+        // Kiểm tra nếu khách hàng đã tồn tại theo Id_KH
+        if (KhachHangDAO.getInstance().selectById(id_KH) != null) {
+            JOptionPane.showMessageDialog(this, "Khách hàng đã tồn tại", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
+        // Kiểm tra định dạng email
+        if (!isValid(email)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Email đúng định dạng!", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Tạo đối tượng KhachHang
+        KhachHang kh = new KhachHang(id_KH, hoTen, ngaySinh, gioiTinh, diaChi, soDT, email);
+
+        try {
+            // Gọi phương thức insert để thêm khách hàng
+            KhachHangDAO.getInstance().insert(kh);
+            loadDataToTable(KhachHangDAO.getInstance().selectAll());
+            JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công!");
+        } catch (RuntimeException e) {
+            String errorMessage = e.getMessage();
+            if (e.getMessage().contains("Email đã tồn tại!")) { 
+                JOptionPane.showMessageDialog(this, "Email đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReloadActionPerformed
         refreshTableData();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ReloadActionPerformed
     
     static boolean isValid(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -404,11 +440,11 @@ public class TestKhachHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Reload;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

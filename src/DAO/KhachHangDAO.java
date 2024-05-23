@@ -35,7 +35,12 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
             ketQua = pst.executeUpdate();
             JDBC.closeConnection(conn);
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (e.getErrorCode() == 1) {
+                throw new RuntimeException("Email đã tồn tại!",e);
+            }
+            else {
+                e.printStackTrace();
+            }
         }
         return ketQua;
     }
@@ -128,7 +133,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
         KhachHang kh = null;
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM KHACHHANG WHERE Id_KH = ? AND isDeleted = 0";
+            String sql = "SELECT * FROM KHACHHANG WHERE Id_KH = ? WHERE isDeleted = 0";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
