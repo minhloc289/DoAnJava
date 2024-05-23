@@ -4,19 +4,20 @@
  */
 package model;
 import java.util.Objects;
+
 /**
  *
  * @author locmi
  */
-public class GoiTap {
+public class GOITAP {
     private String id_GT;
     private String tenGoi;
     private String moTa;
     private double giaTien;
     
-    public GoiTap(){};
+    public GOITAP(){};
     
-    public GoiTap(String id_GT, String tenGoi, String moTa, double giaTien) {
+    public GOITAP(String id_GT, String tenGoi, String moTa, double giaTien) {
         this.id_GT = id_GT;
         this.tenGoi = tenGoi;
         this.moTa = moTa;
@@ -61,7 +62,7 @@ public class GoiTap {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GoiTap other = (GoiTap) obj;
+        final GOITAP other = (GOITAP) obj;
         if (Double.doubleToLongBits(this.giaTien) != Double.doubleToLongBits(other.giaTien)) {
             return false;
         }

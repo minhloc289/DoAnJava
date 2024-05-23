@@ -4,16 +4,24 @@
  */
 package view;
 
+import DAO.NhanVienAccDAO;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import model.NhanVienAcc;
+
 /**
  *
  * @author ADMIN
  */
 public class addTaiKhoan extends javax.swing.JFrame {
-
+    private TaiKhoan panel;
     /**
      * Creates new form addTaiKhoan
+     * @param panel
      */
-    public addTaiKhoan() {
+    public addTaiKhoan(TaiKhoan panel) {
+        this.panel = panel;
         initComponents();
         setSize(390, 579);
         setLocationRelativeTo(null);
@@ -52,7 +60,7 @@ public class addTaiKhoan extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         back.setBackground(new java.awt.Color(255, 239, 237));
 
@@ -89,6 +97,11 @@ public class addTaiKhoan extends javax.swing.JFrame {
         bt_AddTAIKHOAN.setForeground(new java.awt.Color(255, 255, 255));
         bt_AddTAIKHOAN.setText("Thêm");
         bt_AddTAIKHOAN.setPreferredSize(new java.awt.Dimension(64, 22));
+        bt_AddTAIKHOAN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_AddTAIKHOANMouseClicked(evt);
+            }
+        });
 
         bt_Huy.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
         bt_Huy.setForeground(new java.awt.Color(251, 129, 54));
@@ -158,40 +171,53 @@ public class addTaiKhoan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_HuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_HuyActionPerformed
-            this.dispose();
+        this.dispose();
     }//GEN-LAST:event_bt_HuyActionPerformed
+
+    private void bt_AddTAIKHOANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AddTAIKHOANMouseClicked
+        String id_nv = tf_MANV.getText();
+        String tenDN = tf_TENDN.getText();
+        String matKhau = tf_MATKHAU.getText();
+        if (id_nv.isEmpty() || tenDN.isEmpty() || matKhau.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        } 
+        if (NhanVienAccDAO.getInstance().selectById(id_nv) == null) {
+            try {
+            NhanVienAcc newAcc = new NhanVienAcc(id_nv, tenDN, matKhau, "Hoạt động");
+            NhanVienAccDAO.getInstance().insert(newAcc);
+            panel.loadDataToTable(NhanVienAccDAO.getInstance().selectAll());
+            JOptionPane.showMessageDialog(this, "Thêm tài khoản thành công!");
+            } catch (RuntimeException e) {
+                String errorMessage = e.getMessage();
+                if (errorMessage.contains("Nhân viên không tồn tại")) {
+                    JOptionPane.showMessageDialog(this, "Nhân viên không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                } else if (errorMessage.contains("Tên đăng nhập đã tồn tại")) {
+                    JOptionPane.showMessageDialog(this, "Tên đăng nhập đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + errorMessage, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        else {
+           JOptionPane.showMessageDialog(this, "Nhân viên đã có tài khoản", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_bt_AddTAIKHOANMouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addTaiKhoan().setVisible(true);
+                TaiKhoan panel = new TaiKhoan();
+                new addTaiKhoan(panel).setVisible(true);
             }
         });
     }
