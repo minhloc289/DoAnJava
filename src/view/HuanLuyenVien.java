@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.Color;
+
 /**
  *
  * @author locmi
@@ -15,6 +17,8 @@ public class HuanLuyenVien extends javax.swing.JPanel {
      */
     public HuanLuyenVien() {
         initComponents();
+        setBackground(new Color(255,255,255));
+        setSize(860,760);
     }
 
     /**
@@ -26,19 +30,148 @@ public class HuanLuyenVien extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        TextTimKiem = new javax.swing.JTextField();
+        labelSearch = new javax.swing.JLabel();
+        labelInsert = new javax.swing.JLabel();
+        labelDelete = new javax.swing.JLabel();
+        labelPencil = new javax.swing.JLabel();
+        labelReset = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        TextTimKiem.setText("Tìm kiếm ...");
+        TextTimKiem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TextTimKiemFocusGained(evt);
+            }
+        });
+        TextTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextTimKiemActionPerformed(evt);
+            }
+        });
+
+        labelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Search.png"))); // NOI18N
+
+        labelInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Insert.png"))); // NOI18N
+
+        labelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Delete.png"))); // NOI18N
+
+        labelPencil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/pencil (1) (1).png"))); // NOI18N
+
+        labelReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Update.png"))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("                                              Huấn luyện viên");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(TextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelSearch)
+                .addGap(58, 58, 58)
+                .addComponent(labelInsert)
+                .addGap(77, 77, 77)
+                .addComponent(labelDelete)
+                .addGap(56, 56, 56)
+                .addComponent(labelPencil)
+                .addGap(62, 62, 62)
+                .addComponent(labelReset)
+                .addContainerGap(85, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPencil)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(labelInsert)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelSearch)
+                            .addComponent(labelReset))
+                        .addComponent(labelDelete)))
+                .addGap(15, 15, 15))
+        );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã HLV", "Họ và tên ", "NS", "GT", "Địa chỉ", "Số điện thoại", "Ngày VL", "Chuyên môn", "Email", "Giá thuê"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(130);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(60);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(50);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void TextTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextTimKiemActionPerformed
+
+    private void TextTimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextTimKiemFocusGained
+       if(TextTimKiem.getText().equals("Tìm kiếm ..."))
+            TextTimKiem.setText("");
+    }//GEN-LAST:event_TextTimKiemFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TextTimKiem;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel labelDelete;
+    private javax.swing.JLabel labelInsert;
+    private javax.swing.JLabel labelPencil;
+    private javax.swing.JLabel labelReset;
+    private javax.swing.JLabel labelSearch;
     // End of variables declaration//GEN-END:variables
 }

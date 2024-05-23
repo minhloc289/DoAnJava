@@ -9,15 +9,15 @@ import java.util.Objects;
  *
  * @author locmi
  */
-public class GOITAP {
+public class GoiTap {
     private String id_GT;
     private String tenGoi;
     private String moTa;
     private double giaTien;
     
-    public GOITAP(){};
+    public GoiTap(){};
     
-    public GOITAP(String id_GT, String tenGoi, String moTa, double giaTien) {
+    public GoiTap(String id_GT, String tenGoi, String moTa, double giaTien) {
         this.id_GT = id_GT;
         this.tenGoi = tenGoi;
         this.moTa = moTa;
@@ -62,7 +62,7 @@ public class GOITAP {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GOITAP other = (GOITAP) obj;
+        final GoiTap other = (GoiTap) obj;
         if (Double.doubleToLongBits(this.giaTien) != Double.doubleToLongBits(other.giaTien)) {
             return false;
         }
