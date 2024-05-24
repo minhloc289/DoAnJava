@@ -7,7 +7,7 @@ import view.HuanLuyenVien;
 import view.KhachHangForm;
 import view.NhanVien;
 import view.TaiKhoan;
-import view.ThanhToan;
+import view.ThanhToanForm;
 import view.TheTap;
 import view.ThietBi;
 import view.ThongKe;
@@ -90,7 +90,7 @@ public class Screen {
                     node = new ThietBi();
                     break;
                 case "ThanhToan":
-                    node = new ThanhToan();
+                    node = new ThanhToanForm();
                     break;
                 case "ThongKe":
                     node = new ThongKe();

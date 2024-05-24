@@ -17,6 +17,8 @@ public class KhachHang {
     private String DiaChi;
     private String soDT;
     private String Email;
+    
+    public KhachHang(){};
 
     public KhachHang(String Id_KH, String HoTen, Date NgaySinh, String GioiTinh, String DiaChi, String soDT, String Email) {
         this.Id_KH = Id_KH;

@@ -1,39 +1,39 @@
 
 package DAO;
 
-import model.GoiTap;
+import model.GOITAP;
 import database.JDBC;
 import java.sql.*;
 import java.util.ArrayList;
 
 
-public class GoiTapDAO implements DAOInterface<GoiTap> {
+public class GoiTapDAO implements DAOInterface<GOITAP> {
      public static GoiTapDAO getInstance(){
         return new GoiTapDAO();
     }
 
     @Override
-    public int insert(GoiTap t) {
+    public int insert(GOITAP t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int update(GoiTap t) {
+    public int update(GOITAP t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int delete(GoiTap t) {
+    public int delete(GOITAP t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<GoiTap> selectAll() {
+    public ArrayList<GOITAP> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public GoiTap selectById(String t) {
+    public GOITAP selectById(String t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

@@ -51,20 +51,25 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
         int ketQua = 0;
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "UPDATE KHACHHANG SET Id_KH = ?, HoTen = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, Email = ?";
+            String sql = "UPDATE KHACHHANG SET HoTen = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, Email = ? WHERE Id_KH = ? AND isDeleted = 0";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, t.getId_KH());
-            pst.setString(2, t.getHoTen());
-            pst.setDate(3, t.getNgaySinh());
-            pst.setString(4, t.getGioiTinh());
-            pst.setString(5, t.getDiaChi());
-            pst.setString(6, t.getSoDT());
-            pst.setString(7, t.getEmail());
+            pst.setString(1, t.getHoTen());
+            pst.setDate(2, t.getNgaySinh()); 
+            pst.setString(3, t.getGioiTinh());
+            pst.setString(4, t.getDiaChi());
+            pst.setString(5, t.getSoDT());
+            pst.setString(6, t.getEmail());
+            pst.setString(7, t.getId_KH());
             
             ketQua = pst.executeUpdate();
             JDBC.closeConnection(conn);
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (e.getErrorCode() == 1) {
+                throw new RuntimeException("Email đã tồn tại!", e);
+            }
+            else {
+                e.printStackTrace();
+            }
         }
         return ketQua;
     }
@@ -107,7 +112,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
         ArrayList<KhachHang> khList = new ArrayList<>();
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM KHACHHANG WHERE isDeleted = 0";
+            String sql = "SELECT * FROM KHACHHANG WHERE isDeleted = 0 ORDER BY Id_KH ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -133,7 +138,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
         KhachHang kh = null;
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM KHACHHANG WHERE Id_KH = ? WHERE isDeleted = 0";
+            String sql = "SELECT * FROM KHACHHANG WHERE Id_KH = ? AND isDeleted = 0";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
@@ -154,23 +159,5 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
         return kh;
     }
     
-    public boolean isEmailExist(String email) {
-        boolean exist = false;
-        try {
-            Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM KHACHHANG WHERE Email = ? AND isDeleted = 0";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, email);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                exist = true;
-            }
-            JDBC.closeConnection(conn);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Lỗi khi kiểm tra email!", e);
-        }
-        return exist;
-    }
     
 }

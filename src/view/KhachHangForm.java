@@ -8,8 +8,11 @@ import DAO.KhachHangDAO;
 import java.awt.Color;
 import java.sql.Date;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 /**
@@ -231,11 +234,18 @@ public class KhachHangForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
+        String searchText = tf_SearchBar.getText().trim().toLowerCase();
         
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_KHACHHANG.getModel());
+        tb_KHACHHANG.setRowSorter(sorter);
+        
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
+        sorter.setRowFilter(rowFilter);  
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
-        
+        addKhachHang add = new addKhachHang(this);
+        add.setVisible(true);
     }//GEN-LAST:event_lb_icAddMouseClicked
 
     private void lb_icAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseEntered
@@ -247,21 +257,58 @@ public class KhachHangForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icAddMouseExited
 
     private void lb_icDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icDeleteMouseClicked
-        
+        if (tb_KHACHHANG.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng cần xoá !");
+        }
+        else {
+            KhachHang select = getKhachHangSelect();
+            int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn khách hàng khoản này ?", "Xác nhận xóa tài khoản", JOptionPane.YES_NO_OPTION);
+            if (chk == JOptionPane.YES_OPTION) {
+                try {
+                    int res = KhachHangDAO.getInstance().delete(select);
+                    if (res > 0) {
+                        JOptionPane.showMessageDialog(this, "Xoá khách hàng thành công!");
+                        loadDataToTable(KhachHangDAO.getInstance().selectAll());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Xóa khách hàng thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (RuntimeException e) {
+                    String errorMessage = e.getMessage();
+                    if (errorMessage.contains("Khách hàng đang có thẻ tập")) {
+                        JOptionPane.showMessageDialog(this, "Không thể xóa khách hàng. Khách hàng đang có thẻ tập!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else if (errorMessage.contains("Khách hàng đang thuê huấn luyện viên")) {
+                        JOptionPane.showMessageDialog(this, "Không thể xóa khách hàng. Khách hàng đang thuê huấn luyện viên!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_lb_icDeleteMouseClicked
 
     private void lb_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_UpdateMouseClicked
-        
+        KhachHang select = getKhachHangSelect();
+        if (select != null) {
+            updateKhachHang update = new updateKhachHang(select, this);
+            update.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_lb_UpdateMouseClicked
 
     private void lb_icResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icResetMouseClicked
-        
+        refreshTable();
     }//GEN-LAST:event_lb_icResetMouseClicked
 
     private void tf_SearchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_SearchBarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_SearchBarActionPerformed
-
+    
+    public void refreshTable() {
+        ArrayList<KhachHang> kh = KhachHangDAO.getInstance().selectAll(); // Gọi hàm lấy tất cả khách hàng không bị xóa
+        loadDataToTable(kh);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Top;
