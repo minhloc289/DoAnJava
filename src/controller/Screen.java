@@ -9,7 +9,7 @@ import view.NhanVien;
 import view.TaiKhoan;
 import view.ThanhToanForm;
 import view.TheTap;
-import view.ThietBi;
+import view.ThietBiForm;
 import view.ThongKe;
 import view.Thue;
 import javax.swing.*;
@@ -87,7 +87,7 @@ public class Screen {
                     node = new Thue();
                     break;
                 case "ThietBi":
-                    node = new ThietBi();
+                    node = new ThietBiForm();
                     break;
                 case "ThanhToan":
                     node = new ThanhToanForm();
