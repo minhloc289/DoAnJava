@@ -166,7 +166,7 @@ public class TaiKhoan extends javax.swing.JPanel {
         });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("QUẢN LÝ TÀI KHOẢN");

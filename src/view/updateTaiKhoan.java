@@ -59,6 +59,7 @@ public class updateTaiKhoan extends javax.swing.JFrame {
         bt_Huy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 239, 237));
 
         jPanel1.setBackground(new java.awt.Color(251, 129, 54));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
