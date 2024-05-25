@@ -4,10 +4,10 @@ import List.ListDM;
 import view.GoiTap;
 import view.Home;
 import view.HuanLuyenVien;
-import view.KhachHang;
+import view.KhachHangForm;
 import view.NhanVien;
 import view.TaiKhoan;
-import view.ThanhToan;
+import view.ThanhToanForm;
 import view.TheTap;
 import view.ThietBiForm;
 import view.ThongKe;
@@ -72,7 +72,7 @@ public class Screen {
                     node = new Home();
                     break;
                 case "KhachHang":
-                    node = new KhachHang();
+                    node = new KhachHangForm();
                     break;
                 case "GoiTap":
                     node = new GoiTap();
@@ -90,7 +90,7 @@ public class Screen {
                     node = new ThietBiForm();
                     break;
                 case "ThanhToan":
-                    node = new ThanhToan();
+                    node = new ThanhToanForm();
                     break;
                 case "ThongKe":
                     node = new ThongKe();

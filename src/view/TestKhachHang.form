@@ -78,7 +78,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtTimKiem" min="-2" pref="338" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton2" pref="101" max="32767" attributes="0"/>
+                              <Component id="Reload" pref="101" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -138,7 +138,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="Reload" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnXoa" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="btnSua" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -318,12 +318,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="Reload">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton2"/>
+        <Property name="text" type="java.lang.String" value="Reload"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReloadActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -20,8 +20,11 @@ public class JDBC {
             
             //thong so
             String url = "jdbc:oracle:thin:@localhost:1521:orcl21";
+
             String username = "C##KHANH";
             String password = "1";
+
+
             
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Ket noi thanh cong");
