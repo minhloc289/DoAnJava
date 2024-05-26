@@ -159,5 +159,4 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
         return kh;
     }
     
-    
 }

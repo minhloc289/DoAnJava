@@ -10,12 +10,12 @@ import java.awt.Color;
  *
  * @author locmi
  */
-public class HuanLuyenVien extends javax.swing.JPanel {
+public class HuanLuyenVienForm extends javax.swing.JPanel {
 
     /**
      * Creates new form HuanLuyenVien
      */
-    public HuanLuyenVien() {
+    public HuanLuyenVienForm() {
         initComponents();
         setBackground(new Color(255,255,255));
         setSize(860,760);

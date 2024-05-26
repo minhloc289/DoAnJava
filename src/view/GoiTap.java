@@ -39,6 +39,11 @@ public class GoiTap extends javax.swing.JPanel {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         TextTimKiem.setText("Tìm kiếm ...");
+        TextTimKiem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TextTimKiemFocusGained(evt);
+            }
+        });
 
         labelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Search.png"))); // NOI18N
 
@@ -79,13 +84,14 @@ public class GoiTap extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelSearch)
-                    .addComponent(labelInsert)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelInsert, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelDelete)
                     .addComponent(labelReset)
-                    .addComponent(labelUpdate))
+                    .addComponent(labelUpdate, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelSearch)))
                 .addGap(16, 16, 16))
         );
 
@@ -117,6 +123,11 @@ public class GoiTap extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TextTimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextTimKiemFocusGained
+        if(TextTimKiem.getText().equals("Tìm kiếm ..."))
+            TextTimKiem.setText("");
+    }//GEN-LAST:event_TextTimKiemFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
