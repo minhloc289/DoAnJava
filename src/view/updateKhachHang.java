@@ -97,6 +97,11 @@ public class updateKhachHang extends javax.swing.JFrame {
                 bt_AddKHACHHANGMouseClicked(evt);
             }
         });
+        bt_AddKHACHHANG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_AddKHACHHANGActionPerformed(evt);
+            }
+        });
 
         bt_Huy.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
         bt_Huy.setForeground(new java.awt.Color(251, 129, 54));
@@ -298,6 +303,10 @@ public class updateKhachHang extends javax.swing.JFrame {
     private void bt_HuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_HuyActionPerformed
         this.dispose();
     }//GEN-LAST:event_bt_HuyActionPerformed
+
+    private void bt_AddKHACHHANGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_AddKHACHHANGActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_AddKHACHHANGActionPerformed
     
     static boolean isValid(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";

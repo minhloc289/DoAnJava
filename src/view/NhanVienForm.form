@@ -90,6 +90,7 @@
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextTimKiemFocusGained"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TextTimKiemKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelSearch">
@@ -105,6 +106,9 @@
               <Image iconType="3" name="/view/icons/ic_Insert.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelInsertMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelDelete">
           <Properties>
@@ -112,6 +116,9 @@
               <Image iconType="3" name="/view/icons/ic_Delete.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelDeleteMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelUpdate">
           <Properties>
@@ -119,6 +126,9 @@
               <Image iconType="3" name="/view/icons/pencil (1) (1).png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelUpdateMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelResert">
           <Properties>
@@ -126,6 +136,9 @@
               <Image iconType="3" name="/view/icons/ic_Update.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelResertMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

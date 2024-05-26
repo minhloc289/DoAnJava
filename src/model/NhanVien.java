@@ -5,10 +5,7 @@
 package model;
 import java.util.Objects;
 import java.sql.Date;
-/**
- *
- * @author locmi
- */
+
 public class NhanVien {
     private String Id_NV;
     private String HoTen;
