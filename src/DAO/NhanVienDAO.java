@@ -33,10 +33,9 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
             pst.setString(9, t.getEmail());
             
             ketQua = pst.executeUpdate();
-            JDBC.closeConnection(conn);
+            
         }
         catch(SQLException e) {
-            
                 e.printStackTrace();
             
         }
@@ -61,7 +60,7 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
             pst.setString(9, t.getEmail());
             
             ketQua = pst.executeUpdate();
-            JDBC.closeConnection(conn);
+            
         } catch (SQLException e) {
             
                 e.printStackTrace();
@@ -72,15 +71,33 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
 
     @Override
     public int delete(NhanVien t) {
-        String sql = "DELETE FROM THIETBI WHERE Id_NV = ?";
-        try (Connection con = JDBC.getConnection();
-            PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setString(1, t.getId_NV());
-            return pstm.executeUpdate();
+        int ketQua = 0;
+        Connection conn = null;
+        CallableStatement stmt = null;
+        try {
+            conn = JDBC.getConnection();
+            String sqlCall = "{call XoaNhanVien(?)}";
+            stmt = conn.prepareCall(sqlCall);
+            stmt.setString(1, t.getId_NV());
+            stmt.execute();
+            ketQua = 1;
+            
         } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
+            if (e.getErrorCode() == 20001) {
+                throw new RuntimeException("Không thể xóa nhân viên. Nhân viên đang có tài khoản", e);
+            }
+           
+            else e.printStackTrace();
         }
+        finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ketQua;
     }
 
     @Override
@@ -104,7 +121,7 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
                 NhanVien nv = new NhanVien(Id_NV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChucVu, Email);
                 nvList.add(nv);
             }
-            JDBC.closeConnection(conn);
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,7 +149,7 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
                 String Email = rs.getString("Email");
                 nv = new NhanVien(Id_NV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChucVu, Email);
             }
-            JDBC.closeConnection(conn);
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
