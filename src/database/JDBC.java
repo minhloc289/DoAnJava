@@ -21,8 +21,8 @@ public class JDBC {
             //thong so
             String url = "jdbc:oracle:thin:@localhost:1521:orcl21";
 
-            String username = "C##DOAN";
-            String password = "28092004";
+            String username = "C##doan_ck";
+            String password = "phamhuy2002";
 
 
             

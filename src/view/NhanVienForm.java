@@ -244,8 +244,9 @@ public class NhanVienForm extends javax.swing.JPanel {
     
     private void labelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDeleteMouseClicked
         if (jTable1.getSelectedRow() == -1) {
-        JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xóa!");
-        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xóa!");
+        } 
+        else {
         NhanVien select = getNhanVienSelect();
         int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhân viên này?", "Xác nhận xóa nhân viên", JOptionPane.YES_NO_OPTION);
         
@@ -254,7 +255,9 @@ public class NhanVienForm extends javax.swing.JPanel {
                 int res = NhanVienDAO.getInstance().delete(select);
                 if (res > 0) {
                     JOptionPane.showMessageDialog(this, "Xóa nhân viên thành công!");
-                    loadDataToTable(NhanVienDAO.getInstance().selectAll());
+                        // Tải lại danh sách nhân viên trên table
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.removeRow(jTable1.getSelectedRow());
                 } else {
                     JOptionPane.showMessageDialog(this, "Xóa nhân viên thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }

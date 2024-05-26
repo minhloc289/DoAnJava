@@ -81,15 +81,23 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
             stmt = conn.prepareCall(sqlCall);
             stmt.setString(1, t.getId_NV());
             stmt.execute();
-            
+            ArrayList<NhanVien> danhSachNhanVien = selectAll();
+            danhSachNhanVien.remove(t);
         ketQua = 1;
     } catch (SQLException e) {
             e.printStackTrace();
-
-    } 
-    return ketQua;
     }
-
+    finally {
+        try {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    return ketQua;
+}
+ 
     @Override
     public ArrayList<NhanVien> selectAll() {
         ArrayList<NhanVien> nvList = new ArrayList<>();
