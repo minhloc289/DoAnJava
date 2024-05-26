@@ -4,36 +4,35 @@
  */
 package view;
 
-import DAO.TheTapDAO;
+import DAO.ThueDAO;
 import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.TheTap;
-import java.sql.Date;
+import model.Thue;
+import controller.CurrencyUtils;
 
 /**
  *
  * @author locmi
  */
-public class TheTapForm extends javax.swing.JPanel {
+public class ThueForm extends javax.swing.JPanel {
     private DefaultTableModel tblModel;
-    private ArrayList<TheTap> ttap;
+    private ArrayList<Thue> thue;
     /**
-     * Creates new form TheTap
+     * Creates new form Thue
      */
-    public TheTapForm() {
+    public ThueForm() {
         initComponents();
         UIManager.put("Table.showVerticalLines", true);
         setSize(860, 760);
         setBackground(new Color(255, 239, 237));
-        tb_THETAP.setDefaultEditor(Object.class, null);
+        tb_THUE.setDefaultEditor(Object.class, null);
         initTable();
-        ttap = TheTapDAO.getInstance().selectAll();
-        loadDataToTable(ttap);
+        thue = ThueDAO.getInstance().selectAll();
+        loadDataToTable(thue);
     }
     
     public final void initTable() {
@@ -43,39 +42,25 @@ public class TheTapForm extends javax.swing.JPanel {
                 return false;
             }
         };
-        String[] headerTbl = new String[]{"Mã thẻ tập", "Mã khách hàng", "Mã gói tập", "Ngày bắt đầu", "Ngày kết thúc"};
+        String[] headerTbl = new String[]{"Mã khách hàng", "Mã huấn luyện viên", "Ngày bắt đầu", "Ngày kết thúc", "Thời gian thuê", "Tổng tiền thuê"};
         tblModel.setColumnIdentifiers(headerTbl);
-        tb_THETAP.setModel(tblModel);
+        tb_THUE.setModel(tblModel);
     }
     
-    public void loadDataToTable(ArrayList<TheTap> ttapList) {
+    public void loadDataToTable(ArrayList<Thue> thueList) {
         tblModel.setRowCount(0); 
-        for (TheTap ttap : ttapList) {
+        for (Thue thue : thueList) {
             tblModel.addRow(new Object[]{
-                ttap.getId_TTap(), ttap.getId_KH(), ttap.getId_GT(), ttap.getNgayBD(), ttap.getNgayHH()
+                thue.getId_KH(), thue.getId_HLV(), thue.getNgayBD(), thue.getNgayKT(), thue.getThoiGianThue(), CurrencyUtils.formatCurrency(thue.getTongTien())
             });
         }
     }
     
     public void refreshTableData() {
-        ArrayList<TheTap> ttap = TheTapDAO.getInstance().selectAll(); 
-        loadDataToTable(ttap); 
+        ArrayList<Thue> thue = ThueDAO.getInstance().selectAll(); 
+        loadDataToTable(thue); 
     }
-    
-    public TheTap getTheTapSelect() {
-        int selectedRow = tb_THETAP.getSelectedRow();
-        if (selectedRow == -1) {
-            return null;
-        }
 
-        String id_TTap = tb_THETAP.getValueAt(selectedRow, 0).toString();
-        String id_KH = tb_THETAP.getValueAt(selectedRow, 1).toString();
-        String id_GT = tb_THETAP.getValueAt(selectedRow, 2).toString();
-        Date ngayBD = (Date) tb_THETAP.getValueAt(selectedRow, 3);
-        Date ngayHH = (Date) tb_THETAP.getValueAt(selectedRow, 4);
-
-        return new TheTap(id_TTap, id_KH, id_GT, ngayBD, ngayHH);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,7 +80,7 @@ public class TheTapForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lb_Update = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_THETAP = new javax.swing.JTable();
+        tb_THUE = new javax.swing.JTable();
 
         top.setBackground(new java.awt.Color(251, 129, 54));
         top.setPreferredSize(new java.awt.Dimension(100, 180));
@@ -141,7 +126,7 @@ public class TheTapForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("QUẢN LÝ THẺ TẬP");
+        jLabel1.setText("QUẢN LÝ THUÊ HUẤN LUYỆN VIÊN");
 
         lb_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/pencil (1) (1).png"))); // NOI18N
         lb_Update.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,18 +179,18 @@ public class TheTapForm extends javax.swing.JPanel {
                         .addContainerGap())))
         );
 
-        tb_THETAP.setModel(new javax.swing.table.DefaultTableModel(
+        tb_THUE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã thẻ tập", "Mã khách hàng", "Mã gói tập", "Ngày bắt đầu", "Ngày kết thúc"
+                "Mã khách hàng", "Mã huấn luyện viên", "Ngày bắt đầu", "Ngày kết thúc", "Thời gian thuê", "Tổng tiền thuê"
             }
         ));
-        jScrollPane1.setViewportView(tb_THETAP);
+        jScrollPane1.setViewportView(tb_THUE);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -221,8 +206,8 @@ public class TheTapForm extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -241,15 +226,15 @@ public class TheTapForm extends javax.swing.JPanel {
     private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
         String searchText = tf_SearchBar.getText().trim().toLowerCase();
 
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THETAP.getModel());
-        tb_THETAP.setRowSorter(sorter);
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THUE.getModel());
+        tb_THUE.setRowSorter(sorter);
 
         RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
         sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
-        addTheTap click = new addTheTap(this);
+        addThue click = new addThue(this);
         click.setVisible(true);
     }//GEN-LAST:event_lb_icAddMouseClicked
 
@@ -262,23 +247,23 @@ public class TheTapForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icAddMouseExited
 
     private void lb_icDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icDeleteMouseClicked
-        if (tb_THETAP.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn thẻ tập cần xóa !");
-        }
-        else {
-            TheTap select = getTheTapSelect();
-            int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa thẻ tập này ?", "Xác nhận xóa thẻ tập", JOptionPane.YES_NO_OPTION);
-            if (chk == JOptionPane.YES_OPTION) {
-                int res = TheTapDAO.getInstance().delete(select);
-                if (res > 0) {
-                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                    loadDataToTable(TheTapDAO.getInstance().selectAll());
-                }
-                else {
-                    JOptionPane.showMessageDialog(this, "Xóa thẻ tập thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
+//        if (tb_THETAP.getSelectedRow() == -1) {
+//            JOptionPane.showMessageDialog(this, "Vui lòng chọn thẻ tập cần xóa !");
+//        }
+//        else {
+//            TheTap select = getTheTapSelect();
+//            int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa thẻ tập này ?", "Xác nhận xóa thẻ tập", JOptionPane.YES_NO_OPTION);
+//            if (chk == JOptionPane.YES_OPTION) {
+//                int res = TheTapDAO.getInstance().delete(select);
+//                if (res > 0) {
+//                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+//                    loadDataToTable(TheTapDAO.getInstance().selectAll());
+//                }
+//                else {
+//                    JOptionPane.showMessageDialog(this, "Xóa thẻ tập thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//                }
+//            }
+//        }
     }//GEN-LAST:event_lb_icDeleteMouseClicked
 
     private void lb_icResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icResetMouseClicked
@@ -286,14 +271,14 @@ public class TheTapForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icResetMouseClicked
 
     private void lb_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_UpdateMouseClicked
-        TheTap select = getTheTapSelect();
-        if (select != null) {
-            updateTheTap update = new updateTheTap(this, select);
-            update.setVisible(true);
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tài khoản để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        }
+//        TheTap select = getTheTapSelect();
+//        if (select != null) {
+//            updateTheTap update = new updateTheTap(this, select);
+//            update.setVisible(true);
+//        }
+//        else {
+//            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tài khoản để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+//        }
     }//GEN-LAST:event_lb_UpdateMouseClicked
 
 
@@ -306,7 +291,7 @@ public class TheTapForm extends javax.swing.JPanel {
     private javax.swing.JLabel lb_icDelete;
     private javax.swing.JLabel lb_icReset;
     private javax.swing.JLabel lb_icSearch;
-    private javax.swing.JTable tb_THETAP;
+    private javax.swing.JTable tb_THUE;
     private javax.swing.JTextField tf_SearchBar;
     private javax.swing.JPanel top;
     // End of variables declaration//GEN-END:variables

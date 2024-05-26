@@ -11,7 +11,7 @@ import view.ThanhToanForm;
 import view.TheTapForm;
 import view.ThietBiForm;
 import view.ThongKe;
-import view.Thue;
+import view.ThueForm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -84,7 +84,7 @@ public class Screen {
                     node = new TheTapForm();
                     break;
                 case "Thue":
-                    node = new Thue();
+                    node = new ThueForm();
                     break;
                 case "ThietBi":
                     node = new ThietBiForm();

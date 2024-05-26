@@ -68,12 +68,60 @@ public class TheTapDAO implements DAOInterface<TheTap> {
 
     @Override
     public int update(TheTap t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int ketQua = 0;
+        Connection conn = null;
+        CallableStatement stmt = null;
+        try {
+            conn = JDBC.getConnection();
+            String sqlCall = "{call SuaTheTap(?,?)}";
+            stmt = conn.prepareCall(sqlCall);
+
+            stmt.setString(1, t.getId_TTap());
+            stmt.setString(2, t.getId_GT());
+
+            stmt.execute();
+            ketQua = 1; 
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 20001) {
+                throw new RuntimeException("Không tìm thấy hoặc gói tập đã bị xóa.", e);
+            } else if (e.getErrorCode() == 20002) {
+                throw new RuntimeException("Gói tập không hợp lệ.", e);
+            } else if (e.getErrorCode() == 20003) {
+                throw new RuntimeException("Không tìm thấy thẻ tập.", e);
+            } else if (e.getErrorCode() == 20004) {
+                throw new RuntimeException("Đã xảy ra lỗi: " + e.getMessage(), e);
+            } else {
+                throw new RuntimeException("Lỗi SQL xảy ra: " + e.getMessage(), e);
+            }
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ketQua;
     }
+
 
     @Override
     public int delete(TheTap t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int ketQua = 0;
+        Connection conn = null;
+        try {
+            conn = JDBC.getConnection();
+            String sql = "DELETE FROM THETAP WHERE Id_TTap = ?";
+            PreparedStatement pst = conn.prepareCall(sql);
+            pst.setString(1, t.getId_TTap());
+            
+            ketQua = pst.executeUpdate();
+            JDBC.closeConnection(conn);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ketQua;
     }
 
     @Override

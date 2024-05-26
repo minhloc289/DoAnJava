@@ -4,50 +4,25 @@
  */
 package view;
 
-import DAO.TheTapDAO;
-import java.util.ArrayList;
+import DAO.ThueDAO;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import javax.swing.JOptionPane;
-import model.TheTap;
+import javax.swing.UIManager;
+import model.Thue;
 
 /**
  *
  * @author locmi
  */
-public class addTheTap extends javax.swing.JFrame {
-    private TheTapForm panel;
+public class addThue extends javax.swing.JFrame {
+    private ThueForm panel;
     /**
-     * Creates new form addTheTap
+     * Creates new form addThue
      */
-    public addTheTap(TheTapForm panel) {
+    public addThue(ThueForm panel) {
         initComponents();
         this.panel = panel;
-        tf_MATTAP.setEditable(false);
         setLocationRelativeTo(null);
-        tf_MATTAP.setText(generateIdTTap());
-    }
-    
-    public String generateIdTTap() {
-        // Lấy danh sách tất cả các thẻ tập
-        ArrayList<TheTap> ttapAll = TheTapDAO.getInstance().selectAll();
-
-        // Nếu danh sách trống, bắt đầu từ TT001
-        if (ttapAll.isEmpty()) {
-            return "TT001";
-        }
-
-        int maxId = 0;
-        // Tìm ID lớn nhất
-        for (TheTap ttap : ttapAll) {
-            String id = ttap.getId_TTap().substring(2); // Bỏ "TT" ở đầu
-            int idNumber = Integer.parseInt(id);
-            if (idNumber > maxId) {
-                maxId = idNumber;
-            }
-        }
-
-        // Tạo ID mới lớn hơn ID lớn nhất một đơn vị
-        int newIdNumber = maxId + 1;
-        return String.format("TT%03d", newIdNumber);
     }
 
     /**
@@ -63,11 +38,11 @@ public class addTheTap extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lb_MATB = new javax.swing.JLabel();
-        tf_MATTAP = new javax.swing.JTextField();
-        lb_TENTB = new javax.swing.JLabel();
         tf_MAKH = new javax.swing.JTextField();
-        lb_SOLUONG = new javax.swing.JLabel();
-        tf_MAGT = new javax.swing.JTextField();
+        lb_MATB1 = new javax.swing.JLabel();
+        tf_MAHLV = new javax.swing.JTextField();
+        lb_MATB2 = new javax.swing.JLabel();
+        tf_TGIANTHUE = new javax.swing.JTextField();
         bt_Them = new javax.swing.JButton();
         bt_Huy = new javax.swing.JButton();
 
@@ -81,7 +56,7 @@ public class addTheTap extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THÊM THÔNG TIN THẺ TẬP");
+        jLabel1.setText("THUÊ HUẤN LUYỆN VIÊN");
         jLabel1.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -92,20 +67,11 @@ public class addTheTap extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
         );
 
         lb_MATB.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
-        lb_MATB.setText("Mã thẻ tập");
-
-        tf_MATTAP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_MATTAPActionPerformed(evt);
-            }
-        });
-
-        lb_TENTB.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
-        lb_TENTB.setText("Mã khách hàng");
+        lb_MATB.setText("Mã khách hàng");
 
         tf_MAKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,12 +79,21 @@ public class addTheTap extends javax.swing.JFrame {
             }
         });
 
-        lb_SOLUONG.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
-        lb_SOLUONG.setText("Mã gói tập");
+        lb_MATB1.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
+        lb_MATB1.setText("Mã huấn luyện viên");
 
-        tf_MAGT.addActionListener(new java.awt.event.ActionListener() {
+        tf_MAHLV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_MAGTActionPerformed(evt);
+                tf_MAHLVActionPerformed(evt);
+            }
+        });
+
+        lb_MATB2.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
+        lb_MATB2.setText("Thời gian thuê");
+
+        tf_TGIANTHUE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_TGIANTHUEActionPerformed(evt);
             }
         });
 
@@ -147,41 +122,42 @@ public class addTheTap extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bt_Huy, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_MATB2)
+                    .addComponent(lb_MATB1)
+                    .addComponent(tf_MAHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_MATB)
-                    .addComponent(tf_MATTAP)
-                    .addComponent(lb_TENTB)
-                    .addComponent(tf_MAKH, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_MAGT)
-                    .addComponent(lb_SOLUONG))
+                    .addComponent(tf_MAKH, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bt_Huy, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tf_TGIANTHUE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(49, 49, 49)
                 .addComponent(lb_MATB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tf_MATTAP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lb_TENTB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tf_MAKH, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lb_SOLUONG)
+                .addComponent(lb_MATB1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tf_MAGT, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addComponent(tf_MAHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lb_MATB2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tf_TGIANTHUE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_Huy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(48, 48, 48))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,57 +174,55 @@ public class addTheTap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_MATTAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_MATTAPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_MATTAPActionPerformed
-
     private void tf_MAKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_MAKHActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_MAKHActionPerformed
 
-    private void tf_MAGTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_MAGTActionPerformed
+    private void tf_MAHLVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_MAHLVActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_MAGTActionPerformed
+    }//GEN-LAST:event_tf_MAHLVActionPerformed
+
+    private void tf_TGIANTHUEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TGIANTHUEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_TGIANTHUEActionPerformed
 
     private void bt_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ThemActionPerformed
-        String id_Ttap = tf_MATTAP.getText();
         String id_KH = tf_MAKH.getText();
-        String id_GT = tf_MAGT.getText();
-        
-        if (id_Ttap.isEmpty() || id_KH.isEmpty() || id_GT.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không được để trống thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        
-        if (TheTapDAO.getInstance().selectById(id_KH) != null) {
-            JOptionPane.showMessageDialog(this, "Khách hàng đã có thẻ tập!", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        TheTap ttap = new TheTap(id_Ttap, id_KH, id_GT, null, null);
+        String id_HLV = tf_MAHLV.getText();
+        int thoiGianThue;
         try {
-            TheTapDAO.getInstance().insert(ttap);
-            panel.loadDataToTable(TheTapDAO.getInstance().selectAll());
+            thoiGianThue = Integer.parseInt(tf_TGIANTHUE.getText());
+            if (thoiGianThue <= 0) {
+                JOptionPane.showMessageDialog(this, "Thời gian thuê phải là số nguyên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên dương", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (id_KH.isEmpty() || id_HLV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        Thue thue = new Thue(id_KH, id_HLV, null, null, thoiGianThue, 0);
+        try {
+            ThueDAO.getInstance().insert(thue);
+            panel.loadDataToTable(ThueDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Đăng ký gói tập thành công!");
             this.dispose();
-            
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
-            if (errorMessage.contains("Không tìm thấy hoặc khách hàng đã bị xóa.")) {
-                JOptionPane.showMessageDialog(this, "Khách hàng không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            if (errorMessage.contains("Khách hàng đã thuê huấn luyện viên này.")) {
+                JOptionPane.showMessageDialog(this, "Khách hàng đã thuê huấn luyện viên này!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
-            else if (errorMessage.contains("Không tìm thấy hoặc gói tập đã bị xóa.")) {
-                JOptionPane.showMessageDialog(this, "Gói tập không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-            else if (errorMessage.contains("Mỗi khách hàng chỉ được phép có 1 thẻ tập")) {
-                JOptionPane.showMessageDialog(this, "Khách hàng đã có thẻ tập rồi!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            else if (errorMessage.contains("Mỗi khách hàng chỉ được thuê 1 huấn luyện viên.")) {
+                JOptionPane.showMessageDialog(this, "Mỗi khách hàng chỉ được thuê 1 huấn luyện viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
             else {
                 JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + errorMessage, "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
-
         
     }//GEN-LAST:event_bt_ThemActionPerformed
 
@@ -260,12 +234,17 @@ public class addTheTap extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+        try {
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TheTapForm panel = new TheTapForm();
-                new addTheTap(panel).setVisible(true);
+                ThueForm panel = new ThueForm();
+                new addThue(panel).setVisible(true);
             }
         });
     }
@@ -277,10 +256,10 @@ public class addTheTap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb_MATB;
-    private javax.swing.JLabel lb_SOLUONG;
-    private javax.swing.JLabel lb_TENTB;
-    private javax.swing.JTextField tf_MAGT;
+    private javax.swing.JLabel lb_MATB1;
+    private javax.swing.JLabel lb_MATB2;
+    private javax.swing.JTextField tf_MAHLV;
     private javax.swing.JTextField tf_MAKH;
-    private javax.swing.JTextField tf_MATTAP;
+    private javax.swing.JTextField tf_TGIANTHUE;
     // End of variables declaration//GEN-END:variables
 }

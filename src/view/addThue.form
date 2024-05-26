@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,17 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="back" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="back" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="back">
+    <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ed" green="ef" red="ff" type="rgb"/>
@@ -43,66 +43,56 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="top" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lb_MATB2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_MATB1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="tf_MAHLV" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                       <Component id="lb_MATB" min="-2" max="-2" attributes="0"/>
-                      <Component id="tf_MATB" max="32767" attributes="0"/>
-                      <Component id="lb_TENTB" min="-2" max="-2" attributes="0"/>
-                      <Component id="tf_TENTB" pref="311" max="32767" attributes="0"/>
-                      <Component id="lb_LOAITB" min="-2" max="-2" attributes="0"/>
-                      <Component id="lb_SOLUONG" min="-2" max="-2" attributes="0"/>
-                      <Component id="tf_SOLUONG" pref="311" max="32767" attributes="0"/>
-                      <Component id="lb_TINHTRANG" min="-2" max="-2" attributes="0"/>
-                      <Component id="cb_TINHTRANG" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="bt_Them" min="-2" pref="120" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="bt_Huy" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="tf_MAKH" min="-2" pref="300" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="bt_Them" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="bt_Huy" min="-2" pref="120" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="tf_TGIANTHUE" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="cb_LOAITB" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="top" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="lb_MATB" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="tf_MATB" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="tf_MAKH" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="lb_TENTB" min="-2" max="-2" attributes="0"/>
+                  <Component id="lb_MATB1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="tf_TENTB" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="tf_MAHLV" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="lb_LOAITB" min="-2" max="-2" attributes="0"/>
+                  <Component id="lb_MATB2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cb_LOAITB" min="-2" pref="34" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="lb_SOLUONG" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="tf_SOLUONG" min="-2" pref="34" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="lb_TINHTRANG" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cb_TINHTRANG" min="-2" pref="34" max="-2" attributes="0"/>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="bt_Huy" max="32767" attributes="0"/>
-                      <Component id="bt_Them" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="tf_TGIANTHUE" min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="bt_Them" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="bt_Huy" alignment="3" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="top">
+        <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="36" green="81" red="fb" type="rgb"/>
@@ -117,7 +107,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="384" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -136,7 +126,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="TH&#xca;M TH&#xd4;NG TIN THI&#x1ebe;T B&#x1eca;"/>
+                <Property name="text" type="java.lang.String" value="THU&#xca; HU&#x1ea4;N LUY&#x1ec6;N VI&#xca;N"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -147,73 +137,39 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="M&#xe3; thi&#x1ebf;t b&#x1ecb;"/>
+            <Property name="text" type="java.lang.String" value="M&#xe3; kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tf_MATB">
+        <Component class="javax.swing.JTextField" name="tf_MAKH">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_MATBActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_MAKHActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_TENTB">
+        <Component class="javax.swing.JLabel" name="lb_MATB1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="M&#xe3; hu&#x1ea5;n luy&#x1ec7;n vi&#xea;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tf_TENTB">
+        <Component class="javax.swing.JTextField" name="tf_MAHLV">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_TENTBActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_MAHLVActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_LOAITB">
+        <Component class="javax.swing.JLabel" name="lb_MATB2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i thi&#x1ebf;t b&#x1ecb;"/>
+            <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian thu&#xea;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_SOLUONG">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Montserrat" size="16" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="tf_SOLUONG">
+        <Component class="javax.swing.JTextField" name="tf_TGIANTHUE">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_SOLUONGActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_TGIANTHUEActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lb_TINHTRANG">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Montserrat" size="16" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="T&#xec;nh tr&#x1ea1;ng"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cb_TINHTRANG">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Montserrat Medium" size="14" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="H&#x1ecf;ng"/>
-                <StringItem index="1" value="T&#x1ed1;t"/>
-                <StringItem index="2" value="B&#x1ea3;o tr&#xec;"/>
-                <StringItem index="3" value=" "/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="bt_Them">
           <Properties>
@@ -245,23 +201,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_HuyActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cb_LOAITB">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Montserrat Medium" size="14" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Cardio"/>
-                <StringItem index="1" value="Strength"/>
-                <StringItem index="2" value="Yoga"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
