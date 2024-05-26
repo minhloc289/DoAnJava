@@ -9,18 +9,45 @@ import model.ThanhToanDetail;
 
 public class test2 {
     public static void main(String[] args) {
-        ThanhToanDetail detail = ThanhToanDAO.getInstance().xemThongTinThanhToan("T002");
-        if (detail != null) {
-            System.out.println("Id_TToan: " + detail.getId_TTOAN());
-            System.out.println("Id_KH: " + detail.getId_KH());
-            System.out.println("Id_NV: " + detail.getId_NV());
-            System.out.println("NgayLap: " + detail.getNgayLap());
-            System.out.println("TongTien: " + detail.getTongTien());
-            System.out.println("NgayTT: " + detail.getNgayTT());
-            System.out.println("TenKH: " + detail.getTenKH());
-            System.out.println("TenNV: " + detail.getTenNV());
-        } else {
-            System.out.println("Không tìm thấy thông tin thanh toán.");
+        int ketQua = 0;
+        Connection conn = null;
+        CallableStatement stmt = null;
+        try {
+            conn = JDBC.getConnection();
+            String sqlCall = "{call DangKyTheTap(?,?,?)}";
+            stmt = conn.prepareCall(sqlCall);
+
+            stmt.setString(1, "TT005");
+            stmt.setString(2, "KH00124");
+            stmt.setString(3, "GT002");
+
+            stmt.execute();
+            ketQua = 1;
+
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 20001) {
+                throw new RuntimeException("Không tìm thấy hoặc khách hàng đã bị xóa.", e);
+            }
+            else if (e.getErrorCode() == 20002) {
+                throw new RuntimeException("Không tìm thấy hoặc gói tập đã bị xóa.", e);
+            }
+            else if (e.getErrorCode() == 20003) {
+                throw new RuntimeException("Mỗi khách hàng chỉ được phép có 1 thẻ tập",e);
+            }
+            else if (e.getErrorCode() == 20004) {
+                throw new RuntimeException("Ngày hết hạn phải lớn hơn ngày bắt đầu", e);
+            }
+            else {
+                throw new RuntimeException("Lỗi SQL xảy ra: " + e.getMessage(), e);
+            }
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        
     }
 }

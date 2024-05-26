@@ -39,7 +39,7 @@ public class NhanVienForm extends javax.swing.JPanel {
                 return false;
             }
         };
-        String[] headerTbl = new String[]{"Mã khách hàng", "Họ và tên", "Ngày sinh", "GT", "Địa chỉ", "SĐT","Ngày VL","Chức vụ", "Email"};
+        String[] headerTbl = new String[]{"Mã nhân viên", "Họ và tên", "Ngày sinh", "Giới tính", "Địa chỉ", "Số điện thoại","Ngày vào làm","Chức vụ", "Email"};
         tblModel.setColumnIdentifiers(headerTbl);
         jTable1.setModel(tblModel);
     }
@@ -157,7 +157,7 @@ public class NhanVienForm extends javax.swing.JPanel {
                 .addComponent(labelUpdate)
                 .addGap(65, 65, 65)
                 .addComponent(labelResert)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -213,7 +213,7 @@ public class NhanVienForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

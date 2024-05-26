@@ -172,6 +172,7 @@ public class updateTaiKhoan extends javax.swing.JFrame {
                 NhanVienAccDAO.getInstance().update(newAcc);
                 panel.loadDataToTable(NhanVienAccDAO.getInstance().selectAll());
                 JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thành công!");
+                this.dispose();
             } catch (RuntimeException e) {
                 String errorMessage = e.getMessage();
                 if (errorMessage.contains("Tên đăng nhập đã tồn tại")) {

@@ -254,6 +254,7 @@ public class addThietBi extends javax.swing.JFrame {
             panel.loadDataToTable(ThietBiDAO.getInstance().selectAll());
             // Hiển thị thông báo thành công
             JOptionPane.showMessageDialog(this, "Thêm thiết bị thành công");
+            this.dispose();
         } catch (Exception e) {
             // In ra stack trace để giúp tìm lỗi nếu có
             e.printStackTrace();

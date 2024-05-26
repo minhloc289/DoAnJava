@@ -61,7 +61,7 @@ public class addEmployee extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         tf_email = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(243, 197, 192));
 
         nen.setBackground(new java.awt.Color(243, 197, 192));
@@ -319,6 +319,7 @@ public class addEmployee extends javax.swing.JFrame {
             NhanVienDAO.getInstance().insert(nv);
             panel.loadDataToTable(NhanVienDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công!");
+            this.dispose();
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
             if (e.getMessage().contains("Email đã tồn tại!")) {

@@ -44,7 +44,7 @@ public class updateEmployee extends javax.swing.JFrame {
         
         String ngayVLStr = dateFormat.format(nv.getNgaySinh());
         tf_nvl.setText(ngayVLStr);
-        tf_cv.setText(nv.getSoDT());
+        tf_cv.setText(nv.getChucVu());
         tf_email.setText(nv.getEmail());
     }
 
@@ -79,7 +79,7 @@ public class updateEmployee extends javax.swing.JFrame {
         bt_xacnhan = new javax.swing.JButton();
         bt_huy = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(243, 197, 192));
 
@@ -300,7 +300,8 @@ public class updateEmployee extends javax.swing.JFrame {
             
             NhanVienDAO.getInstance().update(nv);
             panel.loadDataToTable(NhanVienDAO.getInstance().selectAll());
-            JOptionPane.showMessageDialog(this, "Cập nhật khách hàng thành công!");
+            JOptionPane.showMessageDialog(this, "Cập nhật nhân viên thành công!");
+            this.dispose();
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
             if (e.getMessage().contains("Email đã tồn tại!")) {
