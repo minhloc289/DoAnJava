@@ -39,7 +39,7 @@ public class NhanVienForm extends javax.swing.JPanel {
                 return false;
             }
         };
-        String[] headerTbl = new String[]{"Mã khách hàng", "Họ và tên", "Ngày sinh", "GT", "Địa chỉ", "SĐT","Ngày VL", "Email", "Giá thuê"};
+        String[] headerTbl = new String[]{"Mã khách hàng", "Họ và tên", "Ngày sinh", "GT", "Địa chỉ", "SĐT","Ngày VL","Chức vụ", "Email"};
         tblModel.setColumnIdentifiers(headerTbl);
         jTable1.setModel(tblModel);
     }
@@ -244,30 +244,31 @@ public class NhanVienForm extends javax.swing.JPanel {
     
     private void labelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDeleteMouseClicked
         if (jTable1.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng cần xoá !");
-        }
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xóa!");
+        } 
         else {
-            NhanVien select = getNhanVienSelect();
-            int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhân viên này ?", "Xác nhận xóa tài khoản", JOptionPane.YES_NO_OPTION);
-            if (chk == JOptionPane.YES_OPTION) {
-                try {
-                    int res = NhanVienDAO.getInstance().delete(select);
-                    if (res > 0) {
-                        JOptionPane.showMessageDialog(this, "Xoá nhân viên thành công!");
-                        loadDataToTable(NhanVienDAO.getInstance().selectAll());
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Xóa nhân viên thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (RuntimeException e) {
-                    String errorMessage = e.getMessage();
-                    if (errorMessage.contains("Nhân viên đang có tài khoản")){
-                        JOptionPane.showMessageDialog(this, "Không thể xóa nhân viên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-
-                    }
+        NhanVien select = getNhanVienSelect();
+        int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhân viên này?", "Xác nhận xóa nhân viên", JOptionPane.YES_NO_OPTION);
+        
+        if (chk == JOptionPane.YES_OPTION) {
+            try {
+                int res = NhanVienDAO.getInstance().delete(select);
+                if (res > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa nhân viên thành công!");
+                        // Tải lại danh sách nhân viên trên table
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.removeRow(jTable1.getSelectedRow());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa nhân viên thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (RuntimeException e) {
+                String errorMessage = e.getMessage();
+                if (errorMessage.contains("Nhân viên đang có tài khoản")) {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa nhân viên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
+    }
     }//GEN-LAST:event_labelDeleteMouseClicked
 
     private void labelResertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelResertMouseClicked

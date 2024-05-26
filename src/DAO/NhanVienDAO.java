@@ -69,6 +69,7 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
         return ketQua;
     }
 
+    
     @Override
     public int delete(NhanVien t) {
         int ketQua = 0;
@@ -80,26 +81,23 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
             stmt = conn.prepareCall(sqlCall);
             stmt.setString(1, t.getId_NV());
             stmt.execute();
-            ketQua = 1;
-            
-        } catch (SQLException e) {
-            if (e.getErrorCode() == 20001) {
-                throw new RuntimeException("Không thể xóa nhân viên. Nhân viên đang có tài khoản", e);
-            }
-           
-            else e.printStackTrace();
-        }
-        finally {
-            try {
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return ketQua;
+            ArrayList<NhanVien> danhSachNhanVien = selectAll();
+            danhSachNhanVien.remove(t);
+        ketQua = 1;
+    } catch (SQLException e) {
+            e.printStackTrace();
     }
-
+    finally {
+        try {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    return ketQua;
+}
+ 
     @Override
     public ArrayList<NhanVien> selectAll() {
         ArrayList<NhanVien> nvList = new ArrayList<>();
@@ -155,4 +153,30 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
         }
         return nv;
     }
+    public NhanVien selectByEmail(String t) {
+            NhanVien nv = null;
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "SELECT * FROM NHANVIEN WHERE email = ? AND isDeleted = 0";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                String Id_NV = rs.getString("Id_NV");
+                String HoTen = rs.getString("HoTen");
+                Date NgaySinh = rs.getDate("NgaySinh");
+                String GioiTinh = rs.getString("GioiTinh");
+                String DiaChi = rs.getString("DiaChi");
+                String SoDT = rs.getString("SoDT");
+                Date NgayVL = rs.getDate("NgayVL");
+                String ChucVu = rs.getString("ChucVu");
+                String Email = rs.getString("Email");
+                nv = new NhanVien(Id_NV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChucVu, Email);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nv;
+}
 }
