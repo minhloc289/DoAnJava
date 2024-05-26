@@ -282,7 +282,7 @@ public class updateEmployee extends javax.swing.JFrame {
             ngayVL = ConvertDate.convertStringToDate(ngayVLStr);
         } catch (ParseException ex) {
             Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ngày vào làm không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return; // Dừng lại nếu ngày sinh không hợp lệ
         }
 
@@ -351,6 +351,11 @@ public class updateEmployee extends javax.swing.JFrame {
             return; // Dừng lại nếu ngày sinh không hợp lệ
         }
 
+        if (ngaySinh.after(ngayVL)) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh phải nhỏ hơn ngày vào làm", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            return;
+            }    
+        
         // Kiểm tra định dạng email
         if (!isValid(email)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập Email đúng định dạng!", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);

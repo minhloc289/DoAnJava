@@ -8,6 +8,7 @@ import DAO.NhanVienDAO;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import controller.ConvertDate;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -124,6 +125,11 @@ public class addEmployee extends javax.swing.JFrame {
         bt_XacNhan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_XacNhanMouseClicked(evt);
+            }
+        });
+        bt_XacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_XacNhanActionPerformed(evt);
             }
         });
 
@@ -264,6 +270,8 @@ public class addEmployee extends javax.swing.JFrame {
             return;
         }
 
+        
+
         // Chuyển đổi ngày sinh
         Date ngaySinh = null;
         try {
@@ -278,30 +286,39 @@ public class addEmployee extends javax.swing.JFrame {
             ngayVL = ConvertDate.convertStringToDate(ngayVLStr);
         } catch (ParseException ex) {
             Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ngày vào làm không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return; // Dừng lại nếu ngày sinh không hợp lệ
         }
 
-        // Kiểm tra nếu khách hàng đã tồn tại theo Id_KH
+        
+        if (ngaySinh.after(ngayVL)) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh phải nhỏ hơn ngày vào làm", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            return;
+            }        
         if (NhanVienDAO.getInstance().selectById(id_NV) != null) {
-            JOptionPane.showMessageDialog(this, "Khách hàng đã tồn tại", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Nhân viên đã tồn tại", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        if (NhanVienDAO.getInstance().selectByEmail(email) != null) {
+            JOptionPane.showMessageDialog(this, "Email đã tồn tại", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         // Kiểm tra định dạng email
         if (!isValid(email)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập Email đúng định dạng!", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Tạo đối tượng KhachHang
+
+        
         NhanVien nv = new NhanVien(id_NV, hoTen, ngaySinh, gioiTinh, diaChi, soDT,ngayVL, chucVu, email);
 
         try {
-            // Gọi phương thức insert để thêm khách hàng
+            
             NhanVienDAO.getInstance().insert(nv);
             panel.loadDataToTable(NhanVienDAO.getInstance().selectAll());
-            JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công!");
+            JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công!");
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
             if (e.getMessage().contains("Email đã tồn tại!")) {
@@ -311,6 +328,10 @@ public class addEmployee extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bt_XacNhanMouseClicked
+
+    private void bt_XacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_XacNhanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_XacNhanActionPerformed
 
     static boolean isValid(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
