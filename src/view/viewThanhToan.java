@@ -6,20 +6,25 @@ package view;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import javax.swing.UIManager;
-import model.KhachHang;
-import model.ThanhToan;
+import java.sql.Date;
+import model.ThanhToanDetail;
+import controller.CurrencyUtils;
+import controller.ExportToPDF;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import javax.swing.JFileChooser;
+
 
 /**
  *
  * @author locmi
  */
 public class viewThanhToan extends javax.swing.JFrame {
-    private ThanhToan ttoan;
-    private KhachHang kh;
+    private ThanhToanDetail ttoan;
     /**
      * Creates new form viewThanhToan
      */
-    public viewThanhToan(ThanhToan ttoan) {
+    public viewThanhToan(ThanhToanDetail ttoan) {
         this.ttoan = ttoan;
         initComponents();
         setLocationRelativeTo(null);
@@ -31,11 +36,23 @@ public class viewThanhToan extends javax.swing.JFrame {
         tf_NGAYTT.setEditable(false);
         tf_TENNV.setEditable(false);
         tf_MANV.setEditable(false);
-        tf_MATTOAN.setText(ttoan.getId_TTOAN());
-        tf_MAKH.setText(ttoan.getId_KH());
-        tf_TENKH.setText(kh.getHoTen());
+        loadData();
     }
     
+    private void loadData() {
+        tf_MATTOAN.setText(ttoan.getId_TTOAN());
+        tf_MAKH.setText(ttoan.getId_KH());
+        tf_TENKH.setText(ttoan.getTenKH());
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        tf_NGAYLAP.setText(sdf.format(ttoan.getNgayLap()));
+        tf_NGAYTT.setText(sdf.format(ttoan.getNgayTT()));
+        
+        tf_TONGTIEN.setText(CurrencyUtils.formatCurrency(ttoan.getTongTien()));
+        tf_TENNV.setText(ttoan.getTenNV());
+        tf_MANV.setText(ttoan.getId_NV());
+
+    }
     
     
 
@@ -68,6 +85,7 @@ public class viewThanhToan extends javax.swing.JFrame {
         tf_TENNV = new javax.swing.JTextField();
         lb_MANV7 = new javax.swing.JLabel();
         tf_MANV = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -117,6 +135,14 @@ public class viewThanhToan extends javax.swing.JFrame {
         lb_MANV7.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
         lb_MANV7.setText("Nhân viên thực hiện");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/pdf (1).png"))); // NOI18N
+        jButton1.setText("Xuất PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -154,7 +180,8 @@ public class viewThanhToan extends javax.swing.JFrame {
                         .addComponent(lb_MANV6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lb_MANV7)
-                        .addGap(68, 68, 68)))
+                        .addGap(68, 68, 68))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(82, 82, 82))
         );
         jPanel1Layout.setVerticalGroup(
@@ -193,7 +220,9 @@ public class viewThanhToan extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_MANV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_TENNV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,6 +239,24 @@ public class viewThanhToan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Tạo một đối tượng của lớp ExportToPDF
+        ExportToPDF exporter = new ExportToPDF();
+
+        // Tạo và hiển thị hộp thoại chọn file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");   
+
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+        
+        // Xuất JFrame hiện tại ra file PDF
+        exporter.exportJFrame(this, fileToSave.getAbsolutePath());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,13 +270,14 @@ public class viewThanhToan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ThanhToan ttoan = new ThanhToan();
+                ThanhToanDetail ttoan = new ThanhToanDetail();
                 new viewThanhToan(ttoan).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

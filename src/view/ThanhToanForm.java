@@ -16,6 +16,8 @@ import java.text.ParseException;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
+import model.ThanhToanDetail;
+import view.viewThanhToan;
 
 /**
  *
@@ -318,9 +320,21 @@ public class ThanhToanForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_SuaThanhToanMouseClicked
 
     private void lb_ViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ViewMouseClicked
-        ThanhToan ttoan = this.getThanhToanSelect();
-        viewThanhToan view = new viewThanhToan(ttoan);
-        view.setVisible(true);
+        int selectedRow = tb_THANHTOAN.getSelectedRow();
+        if (selectedRow != -1) { 
+            String idTTOAN = tb_THANHTOAN.getValueAt(selectedRow, 0).toString(); 
+            ThanhToanDetail detail = ThanhToanDAO.getInstance().xemThongTinThanhToan(idTTOAN); 
+            if (detail != null) {
+                viewThanhToan detailFrame = new viewThanhToan(detail); 
+                detailFrame.setVisible(true); 
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin thanh toán cho ID: " + idTTOAN);
+            }
+        } else {
+            // Hiển thị thông báo nếu không có hàng nào được chọn
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng trong bảng để xem thông tin chi tiết!");
+        }
     }//GEN-LAST:event_lb_ViewMouseClicked
 
 

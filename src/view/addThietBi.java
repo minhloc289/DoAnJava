@@ -5,11 +5,8 @@
 package view;
 import DAO.ThietBiDAO;
 import model.ThietBi;
-import java.sql.*;
-import java.util.*;
 import javax.swing.*;
-import java.util.*;
-import java.lang.Integer;
+
 
 /**
  *
@@ -21,7 +18,7 @@ public class addThietBi extends javax.swing.JFrame {
     /**
      * Creates new form addThietBi
      */
-    public addThietBi() {
+    public addThietBi(ThietBiForm panel) {
         initComponents();
         this.panel = panel;
         setLocationRelativeTo(null);
@@ -52,7 +49,7 @@ public class addThietBi extends javax.swing.JFrame {
         bt_Huy = new javax.swing.JButton();
         cb_LOAITB = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         back.setBackground(new java.awt.Color(255, 239, 237));
 
@@ -223,6 +220,7 @@ public class addThietBi extends javax.swing.JFrame {
         String id_TB = tf_MATB.getText();
         String tenTB = tf_TENTB.getText();
         String loaiTB = cb_LOAITB.getSelectedItem().toString();
+        String tinhtrang = cb_TINHTRANG.getSelectedItem().toString();
         int soluong;
         try {
             soluong = Integer.parseInt(tf_SOLUONG.getText());
@@ -233,37 +231,35 @@ public class addThietBi extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên dương", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
-    }   
-    String tinhtrang = cb_TINHTRANG.getSelectedItem().toString();
+        }   
     
-    // Kiểm tra nếu các trường nhập liệu bị bỏ trống
-    if (id_TB.isEmpty() || tenTB.isEmpty() || loaiTB.isEmpty() || tinhtrang.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Không được để trống", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    // Kiểm tra nếu thiết bị đã tồn tại
-    if (ThietBiDAO.getInstance().selectById(id_TB) != null) {
-        JOptionPane.showMessageDialog(this, "Thiết bị đã tồn tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    ThietBi tb = new ThietBi(id_TB, tenTB, loaiTB, soluong, tinhtrang);
-    
-    try {
-        // Thêm thiết bị vào cơ sở dữ liệu
-        ThietBiDAO.getInstance().insert(tb);
-        // Tải lại dữ liệu vào bảng
-        panel.loadDataToTable(ThietBiDAO.getInstance().selectAll());
-        // Hiển thị thông báo thành công
-        JOptionPane.showMessageDialog(this, "Thêm thiết bị thành công");
-    } catch (Exception e) {
-        // In ra stack trace để giúp tìm lỗi nếu có
-        e.printStackTrace();
-        // Hiển thị thông báo lỗi chung
-        JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi thêm thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
-              
+        // Kiểm tra nếu các trường nhập liệu bị bỏ trống
+        if (id_TB.isEmpty() || tenTB.isEmpty() || loaiTB.isEmpty() || tinhtrang.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được để trống", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra nếu thiết bị đã tồn tại
+        if (ThietBiDAO.getInstance().selectById(id_TB) != null) {
+            JOptionPane.showMessageDialog(this, "Thiết bị đã tồn tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        ThietBi tb = new ThietBi(id_TB, tenTB, loaiTB, soluong, tinhtrang);
+
+        try {
+            // Thêm thiết bị vào cơ sở dữ liệu
+            ThietBiDAO.getInstance().insert(tb);
+            // Tải lại dữ liệu vào bảng
+            panel.loadDataToTable(ThietBiDAO.getInstance().selectAll());
+            // Hiển thị thông báo thành công
+            JOptionPane.showMessageDialog(this, "Thêm thiết bị thành công");
+        } catch (Exception e) {
+            // In ra stack trace để giúp tìm lỗi nếu có
+            e.printStackTrace();
+            // Hiển thị thông báo lỗi chung
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi thêm thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }      
     }//GEN-LAST:event_bt_ThemActionPerformed
 
     /**
@@ -296,7 +292,8 @@ public class addThietBi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addThietBi().setVisible(true);
+                ThietBiForm panel = new ThietBiForm();
+                new addThietBi(panel).setVisible(true);
             }
         });
     }

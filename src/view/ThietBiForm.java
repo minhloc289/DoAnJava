@@ -243,7 +243,7 @@ public class ThietBiForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
-        addThietBi click = new addThietBi();
+        addThietBi click = new addThietBi(this);
         click.setVisible(true);
     }//GEN-LAST:event_lb_icAddMouseClicked
 
@@ -269,7 +269,7 @@ public class ThietBiForm extends javax.swing.JPanel {
     private void lb_icUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icUpdateMouseClicked
         ThietBi get = getThietBi();
         if (get != null) {
-            updateThietBi update = new updateThietBi(get, this);
+            updateThietBi update = new updateThietBi(this, get);
             update.setVisible(true);
         }
         else JOptionPane.showMessageDialog(this, "Chọn 1 hàng để chỉnh sửa", "Thông báo", JOptionPane.WARNING_MESSAGE);
