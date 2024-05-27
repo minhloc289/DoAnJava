@@ -5,22 +5,76 @@
 package view;
 
 import java.awt.Color;
+import model.HuanLuyenVien;
+import DAO.HuanLuyenVienDAO;
+import java.sql.Date;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author locmi
- */
 public class HuanLuyenVienForm extends javax.swing.JPanel {
 
-    /**
-     * Creates new form HuanLuyenVien
-     */
+    private DefaultTableModel tblModel;
+    private ArrayList<HuanLuyenVien> hlv;  
+    
     public HuanLuyenVienForm() {
+        UIManager.put("Table.showVerticalLines", true);
         initComponents();
-        setBackground(new Color(255,255,255));
-        setSize(860,760);
+        setSize(860, 760);
+        setBackground(new Color(255, 239, 237));
+        jTable1.setDefaultEditor(Object.class, null);
+        initTable();
+        hlv = HuanLuyenVienDAO.getInstance().selectAll();
+        loadDataToTable(hlv);
     }
 
+    public final void initTable() {
+        tblModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        String[] headerTbl = new String[]{"Mã khách hàng", "Họ và tên", "Ngày sinh", "GT", "Địa chỉ", "SĐT","Ngày VL", "Chuyên môn", "Email", "Giá thuê"};
+        tblModel.setColumnIdentifiers(headerTbl);
+        jTable1.setModel(tblModel);
+    }
+    
+    public void loadDataToTable(ArrayList<HuanLuyenVien> hlvList) {
+        tblModel.setRowCount(0); 
+        for (HuanLuyenVien hlv : hlvList) {
+            tblModel.addRow(new Object[]{
+                hlv.getId_HLV(), hlv.getHoTen(), hlv.getNgaySinh(), hlv.getGioiTinh(), hlv.getDiaChi(), hlv.getSoDT(), hlv.getNgayVL(), hlv.getChuyenMon(), hlv.getEmail(), hlv.getGiaThue()
+            });
+        }
+    }
+    public void refreshTableData() {
+        ArrayList<HuanLuyenVien> hlvList = HuanLuyenVienDAO.getInstance().selectAll(); // Gọi hàm lấy tất cả khách hàng không bị xóa
+        loadDataToTable(hlvList); // Nạp dữ liệu vào bảng
+    }
+    
+    private HuanLuyenVien getHuanLuyenVienSelect() {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            return null;
+        }
+        String id_KH = jTable1.getValueAt(selectedRow, 0).toString();
+        String hoTen = jTable1.getValueAt(selectedRow, 1).toString();
+        Date ngaySinh = (Date) jTable1.getValueAt(selectedRow, 2);
+        String gioiTinh = jTable1.getValueAt(selectedRow, 3).toString();
+        String diaChi = jTable1.getValueAt(selectedRow, 4).toString();
+        String soDT = jTable1.getValueAt(selectedRow, 5).toString();
+        Date ngayVL = (Date) jTable1.getValueAt(selectedRow, 6);
+        String chuyenMon = jTable1.getValueAt(selectedRow, 7).toString();
+        String email = jTable1.getValueAt(selectedRow, 8).toString();
+        Double giaThue = (Double) jTable1.getValueAt(selectedRow, 9);
+
+        return new HuanLuyenVien(id_KH, hoTen, ngaySinh, gioiTinh, diaChi, soDT,ngayVL, chuyenMon, email,giaThue);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,16 +109,44 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
                 TextTimKiemActionPerformed(evt);
             }
         });
+        TextTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TextTimKiemKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextTimKiemKeyReleased(evt);
+            }
+        });
 
         labelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Search.png"))); // NOI18N
 
         labelInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Insert.png"))); // NOI18N
+        labelInsert.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelInsertMouseClicked(evt);
+            }
+        });
 
         labelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Delete.png"))); // NOI18N
+        labelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelDeleteMouseClicked(evt);
+            }
+        });
 
         labelPencil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/pencil (1) (1).png"))); // NOI18N
+        labelPencil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelPencilMouseClicked(evt);
+            }
+        });
 
         labelReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Update.png"))); // NOI18N
+        labelReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelResetMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,10 +239,77 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextTimKiemActionPerformed
 
+     private void refreshTable() {
+        ArrayList<HuanLuyenVien> nv = HuanLuyenVienDAO.getInstance().selectAll();
+        loadDataToTable(nv);
+    }
     private void TextTimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextTimKiemFocusGained
        if(TextTimKiem.getText().equals("Tìm kiếm ..."))
             TextTimKiem.setText("");
     }//GEN-LAST:event_TextTimKiemFocusGained
+
+    private void TextTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextTimKiemKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextTimKiemKeyPressed
+
+    private void TextTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextTimKiemKeyReleased
+        String searchText = TextTimKiem.getText().trim().toLowerCase();
+     
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) jTable1.getModel());
+        jTable1.setRowSorter(sorter);
+        
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
+        sorter.setRowFilter(rowFilter);
+    }//GEN-LAST:event_TextTimKiemKeyReleased
+
+    private void labelResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelResetMouseClicked
+            refreshTable();
+    }//GEN-LAST:event_labelResetMouseClicked
+
+    private void labelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDeleteMouseClicked
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn huấn luyện viên cần xóa!");
+        } 
+        else {
+        HuanLuyenVien select = getHuanLuyenVienSelect();
+        int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa huấn luyện viên này?", "Xác nhận xóa huấn luyện viên", JOptionPane.YES_NO_OPTION);
+        
+        if (chk == JOptionPane.YES_OPTION) {
+            try {
+                int res = HuanLuyenVienDAO.getInstance().delete(select);
+                if (res > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa huấn luyện viên thành công!");
+                        // Tải lại danh sách nhân viên trên table
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.removeRow(jTable1.getSelectedRow());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa huấn luyện viên thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (RuntimeException e) {
+                String errorMessage = e.getMessage();
+                if (errorMessage.contains("Huấn luyện viên đang được thuê")) {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa huấn luyện viên. Huấn luyện viên đang được thuê.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+        }
+    }//GEN-LAST:event_labelDeleteMouseClicked
+
+    private void labelInsertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelInsertMouseClicked
+        addPT add = new addPT(this);
+        add.setVisible(true);
+    }//GEN-LAST:event_labelInsertMouseClicked
+
+    private void labelPencilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelPencilMouseClicked
+        HuanLuyenVien select = getHuanLuyenVienSelect();
+        if (select != null) {
+            updatePT update = new updatePT(select, this);
+            update.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_labelPencilMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
