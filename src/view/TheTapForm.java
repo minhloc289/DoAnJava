@@ -20,12 +20,8 @@ import java.sql.Date;
  * @author locmi
  */
 public class TheTapForm extends javax.swing.JPanel {
-<<<<<<< Updated upstream
     private DefaultTableModel tblModel;
     private ArrayList<TheTap> ttap;
-=======
-
->>>>>>> Stashed changes
     /**
      * Creates new form TheTap
      */

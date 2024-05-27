@@ -157,11 +157,7 @@ public class NhanVienForm extends javax.swing.JPanel {
                 .addComponent(labelUpdate)
                 .addGap(65, 65, 65)
                 .addComponent(labelResert)
-<<<<<<< Updated upstream
                 .addContainerGap(198, Short.MAX_VALUE))
-=======
-                .addContainerGap(140, Short.MAX_VALUE))
->>>>>>> Stashed changes
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
