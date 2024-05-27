@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 
 public class GoiTapDAO implements DAOInterface<GOITAP> {
+    
+    
      public static GoiTapDAO getInstance(){
         return new GoiTapDAO();
     }
@@ -15,6 +17,7 @@ public class GoiTapDAO implements DAOInterface<GOITAP> {
     @Override
     public int insert(GOITAP t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import model.NhanVien;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +42,7 @@ public class updateEmployee extends javax.swing.JFrame {
         tf_dc.setText(nv.getDiaChi());
         tf_sdt.setText(nv.getSoDT());
         
-        String ngayVLStr = dateFormat.format(nv.getNgaySinh());
+        String ngayVLStr = dateFormat.format(nv.getNgayVL());
         tf_nvl.setText(ngayVLStr);
         tf_cv.setText(nv.getChucVu());
         tf_email.setText(nv.getEmail());
@@ -263,28 +263,32 @@ public class updateEmployee extends javax.swing.JFrame {
         String email = tf_email.getText();
 
         // Kiểm tra các trường không được để trống
-        if (id_NV.isEmpty() || hoTen.isEmpty() || ngaySinhStr.isEmpty() || gioiTinh.isEmpty() || diaChi.isEmpty() || soDT.isEmpty() ||  ngayVLStr.isEmpty() || email.isEmpty() || email.isEmpty()) {
+        if (id_NV.isEmpty() || hoTen.isEmpty() || ngaySinhStr.isEmpty() || gioiTinh.isEmpty() || diaChi.isEmpty() || soDT.isEmpty() ||  ngayVLStr.isEmpty() || email.isEmpty() || chucVu.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Không được để trống thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        //Chuyển đổi ngày sinh
-        Date ngaySinh = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date ngaySinh;
         try {
-            ngaySinh = ConvertDate.convertStringToDate(ngaySinhStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng lại nếu ngày sinh không hợp lệ
+            ngaySinh = sdf.parse(ngaySinhStr);
+        } catch (ParseException e) {
+            // Hiển thị thông báo lỗi nếu chuỗi ngaySinhStr không đúng định dạng
+            JOptionPane.showMessageDialog(this, "Định dạng ngày tháng không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+         return; // Thoát khỏi phương thức nếu xảy ra lỗi
         }
-        Date ngayVL = null;
+        
+        Date ngayVL;
         try {
-            ngayVL = ConvertDate.convertStringToDate(ngayVLStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày vào làm không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng lại nếu ngày sinh không hợp lệ
+            ngayVL = sdf.parse(ngayVLStr);
+        } catch (ParseException e) {
+            // Hiển thị thông báo lỗi nếu chuỗi ngaySinhStr không đúng định dạng
+            JOptionPane.showMessageDialog(this, "Định dạng ngày tháng không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+         return; // Thoát khỏi phương thức nếu xảy ra lỗi
         }
+        java.sql.Date sqlNgaySinh = new java.sql.Date(ngaySinh.getTime());
+        java.sql.Date sqlNgayVL = new java.sql.Date(ngayVL.getTime());
+        
 
         // Kiểm tra định dạng email
         if (!isValid(email)) {
@@ -293,7 +297,7 @@ public class updateEmployee extends javax.swing.JFrame {
         }
 
         
-        NhanVien nv = new NhanVien(id_NV, hoTen, ngaySinh, gioiTinh, diaChi, soDT,ngayVL, chucVu, email);
+        NhanVien nv = new NhanVien(id_NV, hoTen, sqlNgaySinh, gioiTinh, diaChi, soDT, sqlNgayVL, chucVu, email);
 
 
         try {
@@ -317,69 +321,7 @@ public class updateEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_dcActionPerformed
 
     private void bt_xacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_xacnhanActionPerformed
-        // Lấy dữ liệu từ các trường nhập liệu
-        String id_NV = tf_id.getText();
-        String hoTen = tf_ten.getText();
-        String ngaySinhStr = tf_ns.getText();
-        String gioiTinh = cb_gt.getSelectedItem().toString();
-        String diaChi = tf_dc.getText();
-        String soDT = tf_sdt.getText();
-        String ngayVLStr = tf_nvl.getText();
-        String chucVu = tf_cv.getText();
-        String email = tf_email.getText();
-
-        // Kiểm tra các trường không được để trống
-        if (id_NV.isEmpty() || hoTen.isEmpty() || ngaySinhStr.isEmpty() || gioiTinh.isEmpty() || diaChi.isEmpty() || soDT.isEmpty() ||  ngayVLStr.isEmpty() || email.isEmpty() || email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không được để trống thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        //Chuyển đổi ngày sinh
-        Date ngaySinh = null;
-        try {
-            ngaySinh = ConvertDate.convertStringToDate(ngaySinhStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng lại nếu ngày sinh không hợp lệ
-        }
-        Date ngayVL = null;
-        try {
-            ngayVL = ConvertDate.convertStringToDate(ngayVLStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng lại nếu ngày sinh không hợp lệ
-        }
-
-        if (ngaySinh.after(ngayVL)) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh phải nhỏ hơn ngày vào làm", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-            return;
-            }    
         
-        // Kiểm tra định dạng email
-        if (!isValid(email)) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập Email đúng định dạng!", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        
-        NhanVien nv = new NhanVien(id_NV, hoTen, ngaySinh, gioiTinh, diaChi, soDT,ngayVL, chucVu, email);
-
-
-        try {
-            
-            NhanVienDAO.getInstance().update(nv);
-            panel.loadDataToTable(NhanVienDAO.getInstance().selectAll());
-            JOptionPane.showMessageDialog(this, "Cập nhật khách hàng thành công!");
-        } catch (RuntimeException e) {
-            String errorMessage = e.getMessage();
-            if (e.getMessage().contains("Email đã tồn tại!")) {
-                JOptionPane.showMessageDialog(this, "Email đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        }
     }//GEN-LAST:event_bt_xacnhanActionPerformed
 
     /**

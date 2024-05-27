@@ -9,6 +9,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import controller.ConvertDate;
 import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -256,14 +257,16 @@ public class addKhachHang extends javax.swing.JFrame {
         }
 
         // Chuyển đổi ngày sinh
-        Date ngaySinh = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date ngaySinh;
         try {
-            ngaySinh = ConvertDate.convertStringToDate(ngaySinhStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng lại nếu ngày sinh không hợp lệ
+            ngaySinh = sdf.parse(ngaySinhStr);
+        } catch (ParseException e) {
+            // Hiển thị thông báo lỗi nếu chuỗi ngaySinhStr không đúng định dạng
+            JOptionPane.showMessageDialog(this, "Định dạng ngày tháng không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+         return; // Thoát khỏi phương thức nếu xảy ra lỗi
         }
+        java.sql.Date sqlNgaySinh = new java.sql.Date(ngaySinh.getTime());
 
         // Kiểm tra nếu khách hàng đã tồn tại theo Id_KH
         if (KhachHangDAO.getInstance().selectById(id_KH) != null) {
@@ -278,7 +281,7 @@ public class addKhachHang extends javax.swing.JFrame {
         }
 
         // Tạo đối tượng KhachHang
-        KhachHang kh = new KhachHang(id_KH, hoTen, ngaySinh, gioiTinh, diaChi, soDT, email);
+        KhachHang kh = new KhachHang(id_KH, hoTen, sqlNgaySinh, gioiTinh, diaChi, soDT, email);
 
         try {
             // Gọi phương thức insert để thêm khách hàng
