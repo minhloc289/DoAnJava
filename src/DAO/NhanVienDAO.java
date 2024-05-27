@@ -47,17 +47,17 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
         int ketQua = 0;
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "UPDATE KHACHHANG SET HoTen = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, NgayVL = ?,ChucVu = ?, Email = ? WHERE Id_NV = ? AND isDeleted = 0";
+            String sql = "UPDATE NHANVIEN SET HoTen = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, NgayVL = ?,ChucVu = ?, Email = ? WHERE Id_NV = ? AND isDeleted = 0";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, t.getId_NV());
-            pst.setString(2, t.getHoTen());
-            pst.setDate(3, t.getNgaySinh());
-            pst.setString(4, t.getGioiTinh());
-            pst.setString(5, t.getDiaChi());
-            pst.setString(6, t.getSoDT());
-            pst.setDate(7, t.getNgayVL());
-            pst.setString(8, t.getChucVu());
-            pst.setString(9, t.getEmail());
+            pst.setString(9, t.getId_NV());
+            pst.setString(1, t.getHoTen());
+            pst.setDate(2, t.getNgaySinh());
+            pst.setString(3, t.getGioiTinh());
+            pst.setString(4, t.getDiaChi());
+            pst.setString(5, t.getSoDT());
+            pst.setDate(6, t.getNgayVL());
+            pst.setString(7, t.getChucVu());
+            pst.setString(8, t.getEmail());
             
             ketQua = pst.executeUpdate();
             

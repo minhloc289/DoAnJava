@@ -39,7 +39,11 @@ public class NhanVienForm extends javax.swing.JPanel {
                 return false;
             }
         };
+<<<<<<< Updated upstream
         String[] headerTbl = new String[]{"Mã nhân viên", "Họ và tên", "Ngày sinh", "Giới tính", "Địa chỉ", "Số điện thoại","Ngày vào làm","Chức vụ", "Email"};
+=======
+        String[] headerTbl = new String[]{"Mã khách hàng", "Họ và tên", "Ngày sinh", "Giới tính", "Địa chỉ", "SĐT","Ngày vào làm", "Chức vụ", "Email"};
+>>>>>>> Stashed changes
         tblModel.setColumnIdentifiers(headerTbl);
         jTable1.setModel(tblModel);
     }
@@ -54,8 +58,8 @@ public class NhanVienForm extends javax.swing.JPanel {
     }
     
     public void refreshTableData() {
-        ArrayList<NhanVien> nvList = NhanVienDAO.getInstance().selectAll(); // Gọi hàm lấy tất cả khách hàng không bị xóa
-        loadDataToTable(nvList); // Nạp dữ liệu vào bảng
+        ArrayList<NhanVien> nvList = NhanVienDAO.getInstance().selectAll(); 
+        loadDataToTable(nvList); 
     }
     private NhanVien getNhanVienSelect() {
         int selectedRow = jTable1.getSelectedRow();
@@ -157,7 +161,11 @@ public class NhanVienForm extends javax.swing.JPanel {
                 .addComponent(labelUpdate)
                 .addGap(65, 65, 65)
                 .addComponent(labelResert)
+<<<<<<< Updated upstream
                 .addContainerGap(198, Short.MAX_VALUE))
+=======
+                .addContainerGap(140, Short.MAX_VALUE))
+>>>>>>> Stashed changes
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -247,6 +255,7 @@ public class NhanVienForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xóa!");
         } 
         else {
+<<<<<<< Updated upstream
         NhanVien select = getNhanVienSelect();
         int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhân viên này?", "Xác nhận xóa nhân viên", JOptionPane.YES_NO_OPTION);
         
@@ -266,6 +275,19 @@ public class NhanVienForm extends javax.swing.JPanel {
                 if (errorMessage.contains("Nhân viên đang có tài khoản")) {
                     JOptionPane.showMessageDialog(this, "Không thể xóa nhân viên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 }
+=======
+            NhanVien select = getNhanVienSelect();
+            int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhân viên này ?", "Xác nhận xóa tài khoản", JOptionPane.YES_NO_OPTION);
+            if (chk == JOptionPane.YES_OPTION) {
+                    int res = NhanVienDAO.getInstance().delete(select);
+                    if (res > 0) {
+                        JOptionPane.showMessageDialog(this, "Xoá nhân viên thành công!");
+                        loadDataToTable(NhanVienDAO.getInstance().selectAll());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Xóa nhân viên thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+>>>>>>> Stashed changes
             }
         }
     }
@@ -282,7 +304,7 @@ public class NhanVienForm extends javax.swing.JPanel {
             update.setVisible(true);
         }
         else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một nhân vi để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_labelUpdateMouseClicked
 

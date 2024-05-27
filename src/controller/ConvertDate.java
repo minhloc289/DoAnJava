@@ -11,6 +11,9 @@ import java.sql.Date;
  * @author locmi
  */
 public class ConvertDate {
+    public static ConvertDate getInstance() {
+        return new ConvertDate();
+    }
     public static Date convertStringToDate(String dateStr) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         java.util.Date date = sdf.parse(dateStr);

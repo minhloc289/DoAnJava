@@ -324,6 +324,8 @@ public class addEmployee extends javax.swing.JFrame {
             String errorMessage = e.getMessage();
             if (e.getMessage().contains("Email đã tồn tại!")) {
                 JOptionPane.showMessageDialog(this, "Email đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else if (errorMessage.contains("INVALID_DOB")) {
+                JOptionPane.showMessageDialog(this, "Ngày vào làm phải lớn hơn ngày sinh", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }

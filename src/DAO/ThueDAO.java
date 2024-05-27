@@ -44,6 +44,9 @@ public class ThueDAO implements DAOInterface<Thue> {
             if (e.getErrorCode() == 20001) {
                 throw new RuntimeException("Khách hàng đã thuê huấn luyện viên này.", e);
             }
+            else if (e.getErrorCode() == 20002) {
+                throw new RuntimeException("Thời gian thuê huấn luyện viên không được lớn hơn thời gian gói tập.", e);
+            }
             else if (e.getErrorCode() == 20003) {
                 throw new RuntimeException("Mỗi khách hàng chỉ được thuê 1 huấn luyện viên.",e);
             }
@@ -78,9 +81,12 @@ public class ThueDAO implements DAOInterface<Thue> {
             stmt.execute();
             ketQua = 1; 
         } catch (SQLException e) {
-            if (e.getErrorCode() == 20002) {
+            if (e.getErrorCode() == 20001) {
                 throw new RuntimeException("Khách hàng đã thuê huấn luyện viên này.", e);
-            } else {
+            } else if (e.getErrorCode() == 20002) {
+                throw new RuntimeException("Thời gian thuê huấn luyện viên không được lớn hơn thời gian gói tập.", e);
+            }
+            else {
                 throw new RuntimeException("Lỗi SQL xảy ra: " + e.getMessage(), e);
             }
         } finally {

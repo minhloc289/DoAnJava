@@ -5,24 +5,32 @@
 package view;
 
 import DAO.ThueDAO;
-import com.formdev.flatlaf.FlatIntelliJLaf;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import model.Thue;
 
 /**
  *
  * @author locmi
  */
-public class addThue extends javax.swing.JFrame {
+public class updateThue extends javax.swing.JFrame {
     private ThueForm panel;
+    private Thue thue;
     /**
-     * Creates new form addThue
+     * Creates new form updateThue
      */
-    public addThue(ThueForm panel) {
+    public updateThue(ThueForm panel, Thue thue) {
         initComponents();
-        this.panel = panel;
         setLocationRelativeTo(null);
+        this.panel = panel;
+        this.thue = thue;
+        tf_MAKH.setEditable(false);
+        loadData();
+    }
+    
+    private void loadData() {
+        tf_MAKH.setText(thue.getId_KH());
+        tf_MAHLV.setText(thue.getId_HLV());
+        tf_TGIANTHUE.setText(String.valueOf(thue.getThoiGianThue()));
     }
 
     /**
@@ -56,8 +64,7 @@ public class addThue extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THUÊ HUẤN LUYỆN VIÊN");
-        jLabel1.setToolTipText("");
+        jLabel1.setText("Cập nhật thuê huấn luyện viên");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -67,7 +74,7 @@ public class addThue extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
         lb_MATB.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
@@ -100,7 +107,7 @@ public class addThue extends javax.swing.JFrame {
         bt_Them.setBackground(new java.awt.Color(251, 129, 54));
         bt_Them.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
         bt_Them.setForeground(new java.awt.Color(255, 255, 255));
-        bt_Them.setText("Thêm");
+        bt_Them.setText("Cập nhật");
         bt_Them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_ThemActionPerformed(evt);
@@ -122,42 +129,47 @@ public class addThue extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_MATB2)
-                    .addComponent(lb_MATB1)
-                    .addComponent(tf_MAHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_MATB)
-                    .addComponent(tf_MAKH, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bt_Huy, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(tf_TGIANTHUE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bt_Huy, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(45, 45, 45)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lb_MATB2)
+                        .addComponent(lb_MATB1)
+                        .addComponent(tf_MAHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lb_MATB)
+                        .addComponent(tf_MAKH, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_TGIANTHUE, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(45, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(lb_MATB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tf_MAKH, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lb_MATB1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tf_MAHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lb_MATB2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tf_TGIANTHUE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 332, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_Huy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36))
+                    .addComponent(bt_Huy, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(119, 119, 119)
+                    .addComponent(lb_MATB)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(tf_MAKH, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(lb_MATB1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(tf_MAHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(lb_MATB2)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(tf_TGIANTHUE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(119, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,23 +213,20 @@ public class addThue extends javax.swing.JFrame {
             return;
         }
 
-        if (id_KH.isEmpty() || id_HLV.isEmpty()) {
+        if (id_HLV.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
-        
+
         Thue thue = new Thue(id_KH, id_HLV, null, null, thoiGianThue, 0);
         try {
-            ThueDAO.getInstance().insert(thue);
+            ThueDAO.getInstance().update(thue);
             panel.loadDataToTable(ThueDAO.getInstance().selectAll());
-            JOptionPane.showMessageDialog(this, "Đăng ký thuê huấn luyện viên thành công!");
+            JOptionPane.showMessageDialog(this, "Cập nhật thuê huấn luyện viên thành công!");
             this.dispose();
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
             if (errorMessage.contains("Khách hàng đã thuê huấn luyện viên này.")) {
                 JOptionPane.showMessageDialog(this, "Khách hàng đã thuê huấn luyện viên này!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-            else if (errorMessage.contains("Mỗi khách hàng chỉ được thuê 1 huấn luyện viên.")) {
-                JOptionPane.showMessageDialog(this, "Mỗi khách hàng chỉ được thuê 1 huấn luyện viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
             else if (errorMessage.contains("Thời gian thuê huấn luyện viên không được lớn hơn thời gian gói tập.")) {
                 JOptionPane.showMessageDialog(this, "Thuê quá thời gian gói tập!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -226,7 +235,7 @@ public class addThue extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + errorMessage, "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+
     }//GEN-LAST:event_bt_ThemActionPerformed
 
     private void bt_HuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_HuyActionPerformed
@@ -237,17 +246,35 @@ public class addThue extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
-            UIManager.setLookAndFeel(new FlatIntelliJLaf());
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(updateThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(updateThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(updateThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(updateThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ThueForm panel = new ThueForm();
-                new addThue(panel).setVisible(true);
+                Thue thue = new Thue();
+                new updateThue(panel, thue).setVisible(true);
             }
         });
     }

@@ -13,6 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.Thue;
 import controller.CurrencyUtils;
+import java.sql.Date;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,6 +62,26 @@ public class ThueForm extends javax.swing.JPanel {
     public void refreshTableData() {
         ArrayList<Thue> thue = ThueDAO.getInstance().selectAll(); 
         loadDataToTable(thue); 
+    }
+    
+    private Thue getThueSelect() {
+        int selectedRow = tb_THUE.getSelectedRow();
+        if (selectedRow == -1) return null;
+        String id_KH = tb_THUE.getValueAt(selectedRow, 0).toString();
+        String id_HLV = tb_THUE.getValueAt(selectedRow, 1).toString();
+        Date ngayBD = (Date) tb_THUE.getValueAt(selectedRow, 2);
+        Date ngayKT = (Date) tb_THUE.getValueAt(selectedRow, 3);
+        int thoiGianThue = Integer.parseInt(tb_THUE.getValueAt(selectedRow, 4).toString());
+        String tongTienStr = tb_THUE.getValueAt(selectedRow, 5).toString();
+        
+        double tongTien = 0;
+        try {
+            tongTien = CurrencyUtils.parseCurrency(tongTienStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        return new Thue(id_KH, id_HLV, ngayBD, ngayKT, thoiGianThue, tongTien);
     }
 
     /**
@@ -229,7 +252,7 @@ public class ThueForm extends javax.swing.JPanel {
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THUE.getModel());
         tb_THUE.setRowSorter(sorter);
 
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
         sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
@@ -247,23 +270,23 @@ public class ThueForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icAddMouseExited
 
     private void lb_icDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icDeleteMouseClicked
-//        if (tb_THETAP.getSelectedRow() == -1) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn thẻ tập cần xóa !");
-//        }
-//        else {
-//            TheTap select = getTheTapSelect();
-//            int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa thẻ tập này ?", "Xác nhận xóa thẻ tập", JOptionPane.YES_NO_OPTION);
-//            if (chk == JOptionPane.YES_OPTION) {
-//                int res = TheTapDAO.getInstance().delete(select);
-//                if (res > 0) {
-//                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
-//                    loadDataToTable(TheTapDAO.getInstance().selectAll());
-//                }
-//                else {
-//                    JOptionPane.showMessageDialog(this, "Xóa thẻ tập thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//                }
-//            }
-//        }
+        if (tb_THUE.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn thẻ tập cần xóa !");
+        }
+        else {
+            Thue select = getThueSelect();
+            int chk = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn việc thuê này ?", "Xác nhận xóa thuê ", JOptionPane.YES_NO_OPTION);
+            if (chk == JOptionPane.YES_OPTION) {
+                int res = ThueDAO.getInstance().delete(select);
+                if (res > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    loadDataToTable(ThueDAO.getInstance().selectAll());
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Xóa thuê thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_lb_icDeleteMouseClicked
 
     private void lb_icResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icResetMouseClicked
@@ -271,14 +294,14 @@ public class ThueForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icResetMouseClicked
 
     private void lb_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_UpdateMouseClicked
-//        TheTap select = getTheTapSelect();
-//        if (select != null) {
-//            updateTheTap update = new updateTheTap(this, select);
-//            update.setVisible(true);
-//        }
-//        else {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tài khoản để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
-//        }
+        Thue select = getThueSelect();
+        if (select != null) {
+            updateThue update = new updateThue(this, select);
+            update.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_lb_UpdateMouseClicked
 
 
