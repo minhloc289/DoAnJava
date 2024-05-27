@@ -78,6 +78,8 @@ public class KhachHangForm extends javax.swing.JPanel {
 
         return new KhachHang(id_KH, hoTen, ngaySinh, gioiTinh, diaChi, soDT, email);
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

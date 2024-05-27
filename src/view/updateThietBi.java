@@ -4,6 +4,8 @@
  */
 package view;
 
+import DAO.ThietBiDAO;
+import javax.swing.JOptionPane;
 import model.ThietBi;
 
 /**
@@ -13,18 +15,29 @@ import model.ThietBi;
 public class updateThietBi extends javax.swing.JFrame {
 
     private ThietBiForm panel;
+    private ThietBi tb;
 /**
      * Creates new form updateThietBi
      */
-        updateThietBi() {
-            initComponents();
-            setSize(390, 594);
-            setLocationRelativeTo(null);
+    updateThietBi(ThietBiForm panel, ThietBi tb) {
+        this.tb = tb;
+        this.panel = panel;
+        initComponents();
+        setSize(390, 594);
+        setLocationRelativeTo(null);
+        tf_MATB.setEditable(false);
+        loadData();
+    }
+    
+    private void loadData() {
+        tf_MATB.setText(tb.getId_TB());
+        tf_TENTB.setText(tb.getTenTB());
+        cb_LOAITB.setSelectedItem(tb.getLoaiTB());
+        tf_SOLUONG.setText(String.valueOf(tb.getSoLuong()));
+        cb_TINHTRANG.setSelectedItem(tb.getTinhTrang());
     }
 
-    updateThietBi(ThietBi get, ThietBiForm aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,11 +60,11 @@ public class updateThietBi extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tf_SOLUONG = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        tf_TINHTRANG = new javax.swing.JTextField();
         bt_Them = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        cb_TINHTRANG = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         back.setBackground(new java.awt.Color(255, 239, 237));
 
@@ -71,7 +84,7 @@ public class updateThietBi extends javax.swing.JFrame {
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
         );
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
@@ -97,16 +110,15 @@ public class updateThietBi extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
         jLabel6.setText("Tình trạng");
 
-        tf_TINHTRANG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_TINHTRANGActionPerformed(evt);
-            }
-        });
-
         bt_Them.setBackground(new java.awt.Color(251, 129, 54));
         bt_Them.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
         bt_Them.setForeground(new java.awt.Color(255, 255, 255));
         bt_Them.setText("Cập nhật");
+        bt_Them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_ThemMouseClicked(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(251, 129, 54));
@@ -116,6 +128,8 @@ public class updateThietBi extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        cb_TINHTRANG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tốt", "Hư", "Hỏng" }));
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -134,18 +148,18 @@ public class updateThietBi extends javax.swing.JFrame {
                     .addComponent(tf_TENTB, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                     .addComponent(cb_LOAITB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tf_SOLUONG)
-                    .addComponent(tf_TINHTRANG)
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_TINHTRANG, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tf_MATB, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,8 +178,8 @@ public class updateThietBi extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tf_TINHTRANG, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(cb_TINHTRANG, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bt_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,13 +204,50 @@ public class updateThietBi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_SOLUONGActionPerformed
 
-    private void tf_TINHTRANGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TINHTRANGActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_TINHTRANGActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bt_ThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_ThemMouseClicked
+        String id_TB = tf_MATB.getText();
+        String tenTB = tf_TENTB.getText();
+        String loaiTB = cb_LOAITB.getSelectedItem().toString();
+        String tinhtrang = cb_TINHTRANG.getSelectedItem().toString();
+        int soluong;
+        try {
+            soluong = Integer.parseInt(tf_SOLUONG.getText());
+            if (soluong <= 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên dương", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Kiểm tra nếu các trường nhập liệu bị bỏ trống
+        if (tenTB.isEmpty() || loaiTB.isEmpty() || tinhtrang.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được để trống", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ThietBi tb = new ThietBi(id_TB, tenTB, loaiTB, soluong, tinhtrang);
+
+        try {
+            // Thêm thiết bị vào cơ sở dữ liệu
+            ThietBiDAO.getInstance().update(tb);
+            // Tải lại dữ liệu vào bảng
+            panel.loadDataToTable(ThietBiDAO.getInstance().selectAll());
+            // Hiển thị thông báo thành công
+            JOptionPane.showMessageDialog(this, "Cập nhật thiết bị thành công");
+            this.dispose();
+        } catch (Exception e) {
+            // In ra stack trace để giúp tìm lỗi nếu có
+            e.printStackTrace();
+            // Hiển thị thông báo lỗi chung
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi thêm thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_bt_ThemMouseClicked
 
     /**
      * @param args the command line arguments
@@ -228,7 +279,9 @@ public class updateThietBi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updateThietBi().setVisible(true);
+                ThietBi tb = new ThietBi();
+                ThietBiForm panel = new ThietBiForm();
+                new updateThietBi(panel, tb).setVisible(true);
             }
         });
     }
@@ -237,6 +290,7 @@ public class updateThietBi extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.JButton bt_Them;
     private javax.swing.JComboBox<String> cb_LOAITB;
+    private javax.swing.JComboBox<String> cb_TINHTRANG;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -247,7 +301,6 @@ public class updateThietBi extends javax.swing.JFrame {
     private javax.swing.JTextField tf_MATB;
     private javax.swing.JTextField tf_SOLUONG;
     private javax.swing.JTextField tf_TENTB;
-    private javax.swing.JTextField tf_TINHTRANG;
     private javax.swing.JPanel top;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,15 +3,15 @@ package controller;
 import List.ListDM;
 import view.GoiTap;
 import view.Home;
-import view.HuanLuyenVien;
+import view.HuanLuyenVienForm;
 import view.KhachHangForm;
-import view.NhanVien;
+import view.NhanVienForm;
 import view.TaiKhoan;
 import view.ThanhToanForm;
-import view.TheTap;
+import view.TheTapForm;
 import view.ThietBiForm;
 import view.ThongKe;
-import view.Thue;
+import view.ThueForm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -78,13 +78,13 @@ public class Screen {
                     node = new GoiTap();
                     break;
                 case "HuanLuyenVien":
-                    node = new HuanLuyenVien();
+                    node = new HuanLuyenVienForm();
                     break;
                 case "TheTap":
-                    node = new TheTap();
+                    node = new TheTapForm();
                     break;
                 case "Thue":
-                    node = new Thue();
+                    node = new ThueForm();
                     break;
                 case "ThietBi":
                     node = new ThietBiForm();
@@ -96,7 +96,7 @@ public class Screen {
                     node = new ThongKe();
                     break;
                 case "NhanVien":
-                    node = new NhanVien();
+                    node = new NhanVienForm();
                     break;
                 case "TaiKhoan":
                     node = new TaiKhoan();

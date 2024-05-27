@@ -16,18 +16,18 @@ public class ThanhToan {
     private Date ngayLap;
     private double tongTien;
     private String trangThai;
-    
-    
-    
-    public ThanhToan(){};
+    private Date ngayTT;
 
-    public ThanhToan(String id_TTOAN, String id_KH, String id_NV, Date ngayLap, double tongTien, String trangThai) {
+    public ThanhToan(){};
+    
+    public ThanhToan(String id_TTOAN, String id_KH, String id_NV, Date ngayLap, double tongTien, String trangThai, Date ngayTT) {
         this.id_TTOAN = id_TTOAN;
         this.id_KH = id_KH;
         this.id_NV = id_NV;
         this.ngayLap = ngayLap;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
+        this.ngayTT = ngayTT;
     }
 
     public String getId_TTOAN() {
@@ -54,13 +54,18 @@ public class ThanhToan {
         return trangThai;
     }
 
+    public Date getNgayTT() {
+        return ngayTT;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 71 * hash + Objects.hashCode(this.id_TTOAN);
-        hash = 71 * hash + Objects.hashCode(this.id_KH);
-        hash = 71 * hash + Objects.hashCode(this.id_NV);
-        hash = 71 * hash + Objects.hashCode(this.ngayLap);
+        hash = 53 * hash + Objects.hashCode(this.id_TTOAN);
+        hash = 53 * hash + Objects.hashCode(this.id_KH);
+        hash = 53 * hash + Objects.hashCode(this.id_NV);
+        hash = 53 * hash + Objects.hashCode(this.ngayLap);
+        hash = 53 * hash + Objects.hashCode(this.ngayTT);
         return hash;
     }
 
@@ -91,15 +96,15 @@ public class ThanhToan {
         if (!Objects.equals(this.trangThai, other.trangThai)) {
             return false;
         }
-        return Objects.equals(this.ngayLap, other.ngayLap);
+        if (!Objects.equals(this.ngayLap, other.ngayLap)) {
+            return false;
+        }
+        return Objects.equals(this.ngayTT, other.ngayTT);
     }
 
     @Override
     public String toString() {
-        return "ThanhToan{" + "id_TTOAN=" + id_TTOAN + ", id_KH=" + id_KH + ", id_NV=" + id_NV + ", ngayLap=" + ngayLap + ", tongTien=" + tongTien + ", trangThai=" + trangThai + '}';
+        return "ThanhToan{" + "id_TTOAN=" + id_TTOAN + ", id_KH=" + id_KH + ", id_NV=" + id_NV + ", ngayLap=" + ngayLap + ", tongTien=" + tongTien + ", trangThai=" + trangThai + ", ngayTT=" + ngayTT + '}';
     }
 
-    
-    
-    
 }

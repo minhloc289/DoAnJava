@@ -5,6 +5,7 @@
 package view;
 
 import DAO.ThanhToanDAO;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.ThanhToan;
 
@@ -24,8 +25,34 @@ public class addThanhToan extends javax.swing.JFrame {
         initComponents();
         setSize(390, 579);
         setLocationRelativeTo(null);
+        tf_MATTOAN.setEditable(false);
+        tf_MATTOAN.setText(generateIdTTOAN());
     }
+    
+    public String generateIdTTOAN() {
+        // Lấy danh sách tất cả các thanh toán
+        ArrayList<ThanhToan> ttoanAll = ThanhToanDAO.getInstance().selectAll();
 
+        int i = ttoanAll.size();
+        String check = "check";
+
+        while (check.length() != 0) {
+            i++;
+            for (ThanhToan ttoan : ttoanAll) {
+                if (ttoan.getId_TTOAN().equals("T00" + i)) {
+                    check = "";
+                }
+            }
+            if (check.length() == 0) {
+                check = "check";
+            } else {
+                check = "";
+            }
+        }
+
+        return "T00" + i;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,10 +193,11 @@ public class addThanhToan extends javax.swing.JFrame {
         }
         if (ThanhToanDAO.getInstance().selectById(id_ttoan) == null) {
             try {
-                ThanhToan ttoan = new ThanhToan(id_ttoan, id_KH, id_NV, null, 0, "Chưa thanh toán");
+                ThanhToan ttoan = new ThanhToan(id_ttoan, id_KH, id_NV, null, 0, "Chưa thanh toán", null);
                 ThanhToanDAO.getInstance().insert(ttoan);
                 panel.loadDataToTable(ThanhToanDAO.getInstance().selectAll());
                 JOptionPane.showMessageDialog(this, "Thêm thanh toán thành công!");
+                this.dispose();
             } catch (RuntimeException e) {
                 String errorMessage = e.getMessage();
                 if (errorMessage.contains("Nhân viên không tồn tại")) {

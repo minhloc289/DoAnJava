@@ -187,6 +187,7 @@ public class addTaiKhoan extends javax.swing.JFrame {
             NhanVienAccDAO.getInstance().insert(newAcc);
             panel.loadDataToTable(NhanVienAccDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Thêm tài khoản thành công!");
+            this.dispose();
             } catch (RuntimeException e) {
                 String errorMessage = e.getMessage();
                 if (errorMessage.contains("Nhân viên không tồn tại")) {
