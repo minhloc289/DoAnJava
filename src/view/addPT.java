@@ -7,9 +7,10 @@ package view;
 import DAO.HuanLuyenVienDAO;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import controller.ConvertDate;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -289,23 +290,26 @@ public class addPT extends javax.swing.JFrame {
         }
 
         
-        // Chuyển đổi ngày sinh
-        Date ngaySinh = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date ngaySinh;
         try {
-            ngaySinh = ConvertDate.convertStringToDate(ngaySinhStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng lại nếu ngày sinh không hợp lệ
+            ngaySinh = sdf.parse(ngaySinhStr);
+        } catch (ParseException e) {
+            // Hiển thị thông báo lỗi nếu chuỗi ngaySinhStr không đúng định dạng
+            JOptionPane.showMessageDialog(this, "Định dạng ngày tháng không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+         return; // Thoát khỏi phương thức nếu xảy ra lỗi
         }
-        Date ngayVL = null;
+        
+        java.util.Date ngayVL;
         try {
-            ngayVL = ConvertDate.convertStringToDate(ngayVLStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ngày vào làm không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng lại nếu ngày sinh không hợp lệ
+            ngayVL = sdf.parse(ngayVLStr);
+        } catch (ParseException e) {
+            // Hiển thị thông báo lỗi nếu chuỗi ngaySinhStr không đúng định dạng
+            JOptionPane.showMessageDialog(this, "Định dạng ngày tháng không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+         return; // Thoát khỏi phương thức nếu xảy ra lỗi
         }
+        java.sql.Date sqlNgaySinh = new java.sql.Date(ngaySinh.getTime());
+        java.sql.Date sqlNgayVL = new java.sql.Date(ngayVL.getTime());
 
         if (ngaySinh.after(ngayVL)) {
             JOptionPane.showMessageDialog(this, "Ngày sinh phải nhỏ hơn ngày vào làm", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
@@ -334,13 +338,13 @@ public class addPT extends javax.swing.JFrame {
             return;
         }
 
-        HuanLuyenVien hlv = new HuanLuyenVien(id_HLV, hoTen, ngaySinh, gioiTinh, diaChi, soDT,ngayVL, chuyenMon, email, giaTh);
+        HuanLuyenVien hlv = new HuanLuyenVien(id_HLV, hoTen, sqlNgaySinh, gioiTinh, diaChi, soDT,sqlNgayVL, chuyenMon, email, giaTh);
 
         try {
 
             HuanLuyenVienDAO.getInstance().insert(hlv);
             panel.loadDataToTable(HuanLuyenVienDAO.getInstance().selectAll());
-            JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công!");
+            JOptionPane.showMessageDialog(this, "Thêm huấn luyện viên thành công!");
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
             if (e.getMessage().contains("Email đã tồn tại!")) {

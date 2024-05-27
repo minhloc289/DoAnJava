@@ -301,7 +301,14 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
     }//GEN-LAST:event_labelInsertMouseClicked
 
     private void labelPencilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelPencilMouseClicked
-        // TODO add your handling code here:
+        HuanLuyenVien select = getHuanLuyenVienSelect();
+        if (select != null) {
+            updatePT update = new updatePT(select, this);
+            update.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_labelPencilMouseClicked
 
 

@@ -42,9 +42,9 @@ public class updateEmployee extends javax.swing.JFrame {
         tf_dc.setText(nv.getDiaChi());
         tf_sdt.setText(nv.getSoDT());
         
-        String ngayVLStr = dateFormat.format(nv.getNgaySinh());
+        String ngayVLStr = dateFormat.format(nv.getNgayVL());
         tf_nvl.setText(ngayVLStr);
-        tf_cv.setText(nv.getSoDT());
+        tf_cv.setText(nv.getChucVu());
         tf_email.setText(nv.getEmail());
     }
 
@@ -263,7 +263,7 @@ public class updateEmployee extends javax.swing.JFrame {
         String email = tf_email.getText();
 
         // Kiểm tra các trường không được để trống
-        if (id_NV.isEmpty() || hoTen.isEmpty() || ngaySinhStr.isEmpty() || gioiTinh.isEmpty() || diaChi.isEmpty() || soDT.isEmpty() ||  ngayVLStr.isEmpty() || email.isEmpty() || email.isEmpty()) {
+        if (id_NV.isEmpty() || hoTen.isEmpty() || ngaySinhStr.isEmpty() || gioiTinh.isEmpty() || diaChi.isEmpty() || soDT.isEmpty() ||  ngayVLStr.isEmpty() || email.isEmpty() || chucVu.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Không được để trống thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }

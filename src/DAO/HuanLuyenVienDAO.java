@@ -20,7 +20,7 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
        int ketQua = 0;
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "INSERT INTO HUANLUYENVIEN (Id_HLV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChuyenMon, Email, GiaThue) Values (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO HUANLUYENVIEN (Id_HLV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChuyenMon, Email, GiaThue) Values (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, t.getId_HLV());
             pst.setString(2, t.getHoTen());
@@ -51,16 +51,16 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
             Connection conn = JDBC.getConnection();
             String sql = "UPDATE HUANLUYENVIEN SET HoTen = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, NgayVL = ?,ChuyenMon = ?, Email = ?, GiaThue = ? WHERE Id_HLV = ? AND isDeleted = 0";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, t.getId_HLV());
-            pst.setString(2, t.getHoTen());
-            pst.setDate(3, t.getNgaySinh());
-            pst.setString(4, t.getGioiTinh());
-            pst.setString(5, t.getDiaChi());
-            pst.setString(6, t.getSoDT());
-            pst.setDate(7, t.getNgayVL());
-            pst.setString(8, t.getChuyenMon());
-            pst.setString(9, t.getEmail());
-            pst.setDouble(10, t.getGiaThue());
+            pst.setString(10, t.getId_HLV());
+            pst.setString(1, t.getHoTen());
+            pst.setDate(2, t.getNgaySinh());
+            pst.setString(3, t.getGioiTinh());
+            pst.setString(4, t.getDiaChi());
+            pst.setString(5, t.getSoDT());
+            pst.setDate(6, t.getNgayVL());
+            pst.setString(7, t.getChuyenMon());
+            pst.setString(8, t.getEmail());
+            pst.setDouble(9, t.getGiaThue());
             ketQua = pst.executeUpdate();
             
         } catch (SQLException e) {
@@ -78,7 +78,7 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
         CallableStatement stmt = null;
         try {
             conn = JDBC.getConnection();
-            String sqlCall = "{call XoaNhanVien(?)}";
+            String sqlCall = "{call XoaHuanLuyenVien(?)}";
             stmt = conn.prepareCall(sqlCall);
             stmt.setString(1, t.getId_HLV());
             stmt.execute();
