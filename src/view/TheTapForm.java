@@ -282,7 +282,14 @@ public class TheTapForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icDeleteMouseClicked
 
     private void lb_icResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icResetMouseClicked
-        refreshTableData();
+        TheTap select = getTheTapSelect();
+        if (select != null) {
+            giaHanTheTap update = new giaHanTheTap(this, select);
+            update.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thẻ tập để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_lb_icResetMouseClicked
 
     private void lb_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_UpdateMouseClicked
@@ -292,7 +299,7 @@ public class TheTapForm extends javax.swing.JPanel {
             update.setVisible(true);
         }
         else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tài khoản để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thẻ tập để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_lb_UpdateMouseClicked
 

@@ -173,6 +173,34 @@ public class TheTapDAO implements DAOInterface<TheTap> {
         return ttap;
     }
     
-    
-    
+    public void giaHanTheTap(String id_TTap, String id_KH, String id_GT) {
+        Connection conn = null;
+        CallableStatement stmt = null;
+        try {
+            conn = JDBC.getConnection();
+            String sql = "{call GiaHanGoiTapVaXoaHLV(?,?,?)}";
+            stmt = conn.prepareCall(sql);
+            
+            stmt.setString(1, id_TTap);
+            stmt.setString(2, id_KH);
+            stmt.setString(3, id_GT);
+            
+            stmt.execute();
+            
+        } catch (SQLException e ) {
+            if (e.getErrorCode() == 20002) {
+                throw new RuntimeException("Không tìm thấy hoặc gói tập đã bị xóa.", e); 
+            }
+            else {
+                e.printStackTrace();
+            }
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }  
 }

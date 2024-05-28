@@ -273,7 +273,7 @@ public class addEmployee extends javax.swing.JFrame {
 
         
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date ngaySinh;
         try {
             ngaySinh = sdf.parse(ngaySinhStr);

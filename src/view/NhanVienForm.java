@@ -263,7 +263,7 @@ public class NhanVienForm extends javax.swing.JPanel {
                 }
             } catch (RuntimeException e) {
                 String errorMessage = e.getMessage();
-                if (errorMessage.contains("Nhân viên đang có tài khoản")) {
+                if (errorMessage.contains("Lỗi")) {
                     JOptionPane.showMessageDialog(this, "Không thể xóa nhân viên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 }
             }
