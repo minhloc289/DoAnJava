@@ -46,18 +46,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="TextTimKiem" min="-2" pref="189" max="-2" attributes="0"/>
+                  <Component id="TextTimKiem" min="-2" pref="201" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="labelSearch" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="labelInsert" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="73" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                   <Component id="labelDelete" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                   <Component id="labelUpdate" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Component id="labelReset" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                  <EmptySpace pref="122" max="32767" attributes="0"/>
               </Group>
               <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -69,12 +69,12 @@
                   <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="labelInsert" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelDelete" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelReset" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelDelete" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelReset" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="labelUpdate" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TextTimKiem" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="labelSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSearch" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -89,6 +89,7 @@
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextTimKiemFocusGained"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TextTimKiemKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelSearch">
@@ -104,6 +105,9 @@
               <Image iconType="3" name="/view/icons/ic_Insert.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelInsertMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelDelete">
           <Properties>
@@ -111,6 +115,9 @@
               <Image iconType="3" name="/view/icons/ic_Delete.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelDeleteMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelUpdate">
           <Properties>
@@ -118,6 +125,9 @@
               <Image iconType="3" name="/view/icons/pencil (1) (1).png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelUpdateMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelReset">
           <Properties>
@@ -125,6 +135,9 @@
               <Image iconType="3" name="/view/icons/ic_Update.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelResetMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

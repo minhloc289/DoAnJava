@@ -1,7 +1,7 @@
 
 package controller;
 import List.ListDM;
-import view.GoiTap;
+import view.GoiTapForm;
 import view.Home;
 import view.HuanLuyenVienForm;
 import view.KhachHangForm;
@@ -75,7 +75,7 @@ public class Screen {
                     node = new KhachHangForm();
                     break;
                 case "GoiTap":
-                    node = new GoiTap();
+                    node = new GoiTapForm();
                     break;
                 case "HuanLuyenVien":
                     node = new HuanLuyenVienForm();

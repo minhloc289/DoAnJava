@@ -129,7 +129,8 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return hlvList;    }
+        return hlvList;    
+    }
 
     @Override
     public HuanLuyenVien selectById(String t) {
