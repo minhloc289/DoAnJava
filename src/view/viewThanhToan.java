@@ -252,9 +252,15 @@ public class viewThanhToan extends javax.swing.JFrame {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
         
-        // Xuất JFrame hiện tại ra file PDF
-        exporter.exportJFrame(this, fileToSave.getAbsolutePath());
-        }
+            // Kiểm tra và thêm đuôi .pdf nếu người dùng chưa nhập
+            if (!fileToSave.getAbsolutePath().toLowerCase().endsWith(".pdf")) {
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".pdf");
+            }
+
+            // Xuất JFrame hiện tại ra file PDF
+            exporter.exportJFrame(this, fileToSave.getAbsolutePath());
+            }   
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

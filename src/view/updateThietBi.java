@@ -84,7 +84,7 @@ public class updateThietBi extends javax.swing.JFrame {
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
         );
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
@@ -159,7 +159,7 @@ public class updateThietBi extends javax.swing.JFrame {
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tf_MATB, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,6 +239,7 @@ public class updateThietBi extends javax.swing.JFrame {
             panel.loadDataToTable(ThietBiDAO.getInstance().selectAll());
             // Hiển thị thông báo thành công
             JOptionPane.showMessageDialog(this, "Cập nhật thiết bị thành công");
+            this.dispose();
         } catch (Exception e) {
             // In ra stack trace để giúp tìm lỗi nếu có
             e.printStackTrace();

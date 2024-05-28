@@ -288,6 +288,7 @@ public class updateKhachHang extends javax.swing.JFrame {
             KhachHangDAO.getInstance().update(kh);
             panel.loadDataToTable(KhachHangDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Cập nhật khách hàng thành công!");
+            this.dispose();
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
             if (e.getMessage().contains("Email đã tồn tại!")) {

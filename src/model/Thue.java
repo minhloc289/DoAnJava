@@ -15,15 +15,17 @@ public class Thue {
     private Date ngayBD;
     private Date ngayKT;
     private int thoiGianThue;
+    private double tongTien;
     
     public Thue(){};
     
-    public Thue(String id_KH, String id_HLV, Date ngayBD, Date ngayKT, int thoiGianThue) {
+    public Thue(String id_KH, String id_HLV, Date ngayBD, Date ngayKT, int thoiGianThue, double tongTien) {
         this.id_KH = id_KH;
         this.id_HLV = id_HLV;
         this.ngayBD = ngayBD;
         this.ngayKT = ngayKT;
         this.thoiGianThue = thoiGianThue;
+        this.tongTien = tongTien;
     }
 
     public String getId_KH() {
@@ -45,6 +47,12 @@ public class Thue {
     public int getThoiGianThue() {
         return thoiGianThue;
     }
+
+    public double getTongTien() {
+        return tongTien;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -69,6 +77,9 @@ public class Thue {
         if (this.thoiGianThue != other.thoiGianThue) {
             return false;
         }
+        if (Double.doubleToLongBits(this.tongTien) != Double.doubleToLongBits(other.tongTien)) {
+            return false;
+        }
         if (!Objects.equals(this.id_KH, other.id_KH)) {
             return false;
         }
@@ -81,10 +92,12 @@ public class Thue {
         return Objects.equals(this.ngayKT, other.ngayKT);
     }
 
+    
+    
+
     @Override
     public String toString() {
-        return "Thue{" + "id_KH=" + id_KH + ", id_HLV=" + id_HLV + ", ngayBD=" + ngayBD + ", ngayKT=" + ngayKT + ", thoiGianThue=" + thoiGianThue + '}';
+        return "Thue{" + "id_KH=" + id_KH + ", id_HLV=" + id_HLV + ", ngayBD=" + ngayBD + ", ngayKT=" + ngayKT + ", thoiGianThue=" + thoiGianThue + ", tongTien=" + tongTien + '}';
     }
-    
-    
+
 }

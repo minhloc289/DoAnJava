@@ -62,7 +62,7 @@ public class addEmployee extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         tf_email = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(243, 197, 192));
 
         nen.setBackground(new java.awt.Color(243, 197, 192));
@@ -273,7 +273,7 @@ public class addEmployee extends javax.swing.JFrame {
 
         
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date ngaySinh;
         try {
             ngaySinh = sdf.parse(ngaySinhStr);
@@ -324,10 +324,13 @@ public class addEmployee extends javax.swing.JFrame {
             NhanVienDAO.getInstance().insert(nv);
             panel.loadDataToTable(NhanVienDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công!");
+            this.dispose();
         } catch (RuntimeException e) {
             String errorMessage = e.getMessage();
             if (e.getMessage().contains("Email đã tồn tại!")) {
                 JOptionPane.showMessageDialog(this, "Email đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else if (errorMessage.contains("INVALID_DOB")) {
+                JOptionPane.showMessageDialog(this, "Ngày vào làm phải lớn hơn ngày sinh", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }

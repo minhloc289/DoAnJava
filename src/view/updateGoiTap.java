@@ -7,6 +7,7 @@ package view;
 import DAO.GoiTapDAO;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import controller.ConvertDate;
+import controller.CurrencyUtils;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -33,7 +34,7 @@ public class updateGoiTap extends javax.swing.JFrame {
         tf_id.setText(gt.getId_GT());
         tf_ten.setText(gt.getTenGoi());
         tf_mt.setText(gt.getMoTa());
-        tf_giat.setText(String.valueOf(gt.getGiaTien()));
+        tf_giat.setText(CurrencyUtils.formatCurrency(gt.getGiaTien()));
         
     }
 
@@ -60,7 +61,7 @@ public class updateGoiTap extends javax.swing.JFrame {
         bt_xacnhan = new javax.swing.JButton();
         bt_huy = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(243, 197, 192));
 
@@ -225,6 +226,7 @@ public class updateGoiTap extends javax.swing.JFrame {
             GoiTapDAO.getInstance().update(gt);
             panel.loadDataToTable(GoiTapDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Cập nhật gói tập thành công!");
+            this.dispose();
         } catch (RuntimeException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);

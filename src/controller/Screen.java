@@ -8,10 +8,10 @@ import view.KhachHangForm;
 import view.NhanVienForm;
 import view.TaiKhoan;
 import view.ThanhToanForm;
-import view.TheTap;
+import view.TheTapForm;
 import view.ThietBiForm;
 import view.ThongKe;
-import view.Thue;
+import view.ThueForm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -81,10 +81,10 @@ public class Screen {
                     node = new HuanLuyenVienForm();
                     break;
                 case "TheTap":
-                    node = new TheTap();
+                    node = new TheTapForm();
                     break;
                 case "Thue":
-                    node = new Thue();
+                    node = new ThueForm();
                     break;
                 case "ThietBi":
                     node = new ThietBiForm();

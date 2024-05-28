@@ -197,6 +197,7 @@ public class addThanhToan extends javax.swing.JFrame {
                 ThanhToanDAO.getInstance().insert(ttoan);
                 panel.loadDataToTable(ThanhToanDAO.getInstance().selectAll());
                 JOptionPane.showMessageDialog(this, "Thêm thanh toán thành công!");
+                this.dispose();
             } catch (RuntimeException e) {
                 String errorMessage = e.getMessage();
                 if (errorMessage.contains("Nhân viên không tồn tại")) {
