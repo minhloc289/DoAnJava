@@ -7,7 +7,9 @@ package view;
 import java.awt.Color;
 import model.HuanLuyenVien;
 import DAO.HuanLuyenVienDAO;
+import controller.CurrencyUtils;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -38,7 +40,7 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
                 return false;
             }
         };
-        String[] headerTbl = new String[]{"Mã khách hàng", "Họ và tên", "Ngày sinh", "GT", "Địa chỉ", "SĐT","Ngày VL", "Chuyên môn", "Email", "Giá thuê"};
+        String[] headerTbl = new String[]{"Mã huấn luyện viên", "Họ và tên", "Ngày sinh", "Giới tính", "Địa chỉ", "Số điện thoại","Ngày vào làm", "Chuyên môn", "Email", "Giá thuê"};
         tblModel.setColumnIdentifiers(headerTbl);
         jTable1.setModel(tblModel);
     }
@@ -47,7 +49,7 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
         tblModel.setRowCount(0); 
         for (HuanLuyenVien hlv : hlvList) {
             tblModel.addRow(new Object[]{
-                hlv.getId_HLV(), hlv.getHoTen(), hlv.getNgaySinh(), hlv.getGioiTinh(), hlv.getDiaChi(), hlv.getSoDT(), hlv.getNgayVL(), hlv.getChuyenMon(), hlv.getEmail(), hlv.getGiaThue()
+                hlv.getId_HLV(), hlv.getHoTen(), hlv.getNgaySinh(), hlv.getGioiTinh(), hlv.getDiaChi(), hlv.getSoDT(), hlv.getNgayVL(), hlv.getChuyenMon(), hlv.getEmail(), CurrencyUtils.formatCurrency(hlv.getGiaThue())
             });
         }
     }
@@ -70,7 +72,14 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
         Date ngayVL = (Date) jTable1.getValueAt(selectedRow, 6);
         String chuyenMon = jTable1.getValueAt(selectedRow, 7).toString();
         String email = jTable1.getValueAt(selectedRow, 8).toString();
-        Double giaThue = (Double) jTable1.getValueAt(selectedRow, 9);
+        String giaThueStr =  jTable1.getValueAt(selectedRow, 9).toString();
+        
+        double giaThue = 0;
+        try {
+            giaThue = CurrencyUtils.parseCurrency(giaThueStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         return new HuanLuyenVien(id_KH, hoTen, ngaySinh, gioiTinh, diaChi, soDT,ngayVL, chuyenMon, email,giaThue);
     }

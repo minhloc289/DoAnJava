@@ -48,7 +48,7 @@ public class addGoiTap extends javax.swing.JFrame {
         bt_XacNhan = new javax.swing.JButton();
         bt_Huy = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(243, 197, 192));
 
@@ -224,6 +224,7 @@ public class addGoiTap extends javax.swing.JFrame {
             GoiTapDAO.getInstance().insert(gt);
             panel.loadDataToTable(GoiTapDAO.getInstance().selectAll());
             JOptionPane.showMessageDialog(this, "Thêm gói tập thành công!");
+            this.dispose();
         } catch (RuntimeException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);

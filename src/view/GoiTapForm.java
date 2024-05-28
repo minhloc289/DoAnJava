@@ -8,7 +8,9 @@ import java.awt.Color;
 
 import model.GOITAP;
 import DAO.GoiTapDAO;
+import controller.CurrencyUtils;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -45,7 +47,7 @@ public class GoiTapForm extends javax.swing.JPanel {
         tblModel.setRowCount(0); 
         for (GOITAP gt : gtList) {
             tblModel.addRow(new Object[]{
-                gt.getId_GT(), gt.getTenGoi(), gt.getMoTa(), gt.getGiaTien()
+                gt.getId_GT(), gt.getTenGoi(), gt.getMoTa(), CurrencyUtils.formatCurrency(gt.getGiaTien())
             });
         }
     }
@@ -62,10 +64,16 @@ public class GoiTapForm extends javax.swing.JPanel {
         String Id_GT = jTable1.getValueAt(selectedRow, 0).toString();
         String TenGoi = jTable1.getValueAt(selectedRow, 1).toString();
         String MoTa = jTable1.getValueAt(selectedRow, 2).toString();
-        Double GiaTien = (Double) jTable1.getValueAt(selectedRow, 3);
+        String GiaTienStr =  jTable1.getValueAt(selectedRow, 3).toString();
         
-
-        return new GOITAP(Id_GT, TenGoi, MoTa, GiaTien);
+        double giaTien = 0;
+        try {
+            giaTien = CurrencyUtils.parseCurrency(GiaTienStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        return new GOITAP(Id_GT, TenGoi, MoTa, giaTien);
     }
     private void refreshTable() {
         ArrayList<GOITAP> gt = GoiTapDAO.getInstance().selectAll();
@@ -172,9 +180,8 @@ public class GoiTapForm extends javax.swing.JPanel {
                     .addComponent(labelDelete, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelReset, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelUpdate, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelSearch)))
+                    .addComponent(labelSearch)
+                    .addComponent(TextTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
