@@ -105,11 +105,16 @@ public class ThueForm extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_THUE = new javax.swing.JTable();
 
-        top.setBackground(new java.awt.Color(251, 129, 54));
+        top.setBackground(new java.awt.Color(255, 102, 102));
         top.setPreferredSize(new java.awt.Dimension(100, 180));
 
         tf_SearchBar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tf_SearchBar.setToolTipText("");
+        tf_SearchBar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_SearchBarFocusGained(evt);
+            }
+        });
         tf_SearchBar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_SearchBarKeyReleased(evt);
@@ -303,6 +308,11 @@ public class ThueForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_lb_UpdateMouseClicked
+
+    private void tf_SearchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_SearchBarFocusGained
+        if(tf_SearchBar.getText().equals("Tìm kiếm ..."))
+            tf_SearchBar.setText("");
+    }//GEN-LAST:event_tf_SearchBarFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

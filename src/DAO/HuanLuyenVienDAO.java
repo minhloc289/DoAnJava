@@ -73,7 +73,7 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
 
     @Override
     public int delete(HuanLuyenVien t) {
-         int ketQua = 0;
+        int ketQua = 0;
         Connection conn = null;
         CallableStatement stmt = null;
         try {
@@ -84,22 +84,21 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
             stmt.execute();
             
         ketQua = 1;
-    } catch (SQLException e) {
-        
-            if (e.getErrorCode() == 20003) {
-                throw new RuntimeException("Không thể xóa huấn luyện viên. Huấn luyện viên đang được thuê.", e);
-            }
-            e.printStackTrace();
-    }
-    finally {
-        try {
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+                if (e.getErrorCode() == 20003) {
+                    throw new RuntimeException("Không thể xóa huấn luyện viên. Huấn luyện viên đang được thuê.", e);
+                }
+                e.printStackTrace();
         }
-    }
-    return ketQua;
+        finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return ketQua;
     }
 
     @Override
@@ -185,6 +184,39 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
             e.printStackTrace();
         }
         return hlv;
-}
+    }
+    
+    public ArrayList<HuanLuyenVien> selectAll(Date ngayBD, Date ngayKT) {
+        ArrayList<HuanLuyenVien> hlvList = new ArrayList<>();
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "SELECT * FROM HUANLUYENVIEN "
+                    + "WHERE isDeleted = 0 AND NgayVL BETWEEN ? AND ? "
+                    + "ORDER BY Id_HLV ASC";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setDate(1, ngayBD);
+            pst.setDate(2, ngayKT);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                String Id_HLV = rs.getString("Id_HLV");
+                String HoTen = rs.getString("HoTen");
+                Date NgaySinh = rs.getDate("NgaySinh");
+                String GioiTinh = rs.getString("GioiTinh");
+                String DiaChi = rs.getString("DiaChi");
+                String SoDT = rs.getString("SoDT");
+                Date NgayVL = rs.getDate("NgayVL");
+                String ChuyenMon = rs.getString("ChuyenMon");
+                String Email = rs.getString("Email");
+                Double GiaThue = rs.getDouble("GiaThue");
+                
+                HuanLuyenVien hlv = new HuanLuyenVien(Id_HLV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChuyenMon, Email, GiaThue);
+                hlvList.add(hlv);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hlvList;    
+    }
 }
 

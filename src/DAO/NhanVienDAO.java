@@ -178,5 +178,39 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
             e.printStackTrace();
         }
         return nv;
-}
+    }
+    
+    public ArrayList<NhanVien> selectAll(Date ngayBD, Date ngayKT) {
+        ArrayList<NhanVien> nvList = new ArrayList<>();
+        try {
+            Connection conn = JDBC.getConnection();
+            String sql = "SELECT * FROM NHANVIEN "
+                    + "WHERE isDeleted = 0 AND NgayVL BETWEEN ? AND ? "
+                    + "ORDER BY Id_NV ASC";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            
+            pst.setDate(1, ngayBD);
+            pst.setDate(2, ngayKT);
+            
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                String Id_NV = rs.getString("Id_NV");
+                String HoTen = rs.getString("HoTen");
+                Date NgaySinh = rs.getDate("NgaySinh");
+                String GioiTinh = rs.getString("GioiTinh");
+                String DiaChi = rs.getString("DiaChi");
+                String SoDT = rs.getString("SoDT");
+                Date NgayVL = rs.getDate("NgayVL");
+                String ChucVu = rs.getString("ChucVu");
+                String Email = rs.getString("Email");
+                NhanVien nv = new NhanVien(Id_NV, HoTen, NgaySinh, GioiTinh, DiaChi, SoDT, NgayVL, ChucVu, Email);
+                nvList.add(nv);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nvList;
+    }
+    
 }

@@ -122,7 +122,7 @@ public class ThanhToanForm extends javax.swing.JPanel {
 
         back.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        top.setBackground(new java.awt.Color(251, 129, 54));
+        top.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
@@ -132,6 +132,11 @@ public class ThanhToanForm extends javax.swing.JPanel {
 
         tf_SearchBar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tf_SearchBar.setToolTipText("");
+        tf_SearchBar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_SearchBarFocusGained(evt);
+            }
+        });
         tf_SearchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_SearchBarActionPerformed(evt);
@@ -336,6 +341,11 @@ public class ThanhToanForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng trong bảng để xem thông tin chi tiết!");
         }
     }//GEN-LAST:event_lb_ViewMouseClicked
+
+    private void tf_SearchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_SearchBarFocusGained
+        if(tf_SearchBar.getText().equals("Tìm kiếm ..."))
+            tf_SearchBar.setText("");
+    }//GEN-LAST:event_tf_SearchBarFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

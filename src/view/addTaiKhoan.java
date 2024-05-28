@@ -62,9 +62,9 @@ public class addTaiKhoan extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        back.setBackground(new java.awt.Color(255, 239, 237));
+        back.setBackground(new java.awt.Color(243, 197, 192));
 
-        top.setBackground(new java.awt.Color(251, 129, 54));
+        top.setBackground(new java.awt.Color(255, 102, 102));
         top.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N

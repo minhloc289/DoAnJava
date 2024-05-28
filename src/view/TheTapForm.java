@@ -92,16 +92,21 @@ public class TheTapForm extends javax.swing.JPanel {
         lb_icAdd = new javax.swing.JLabel();
         lb_icDelete = new javax.swing.JLabel();
         lb_icReset = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         lb_Update = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_THETAP = new javax.swing.JTable();
 
-        top.setBackground(new java.awt.Color(251, 129, 54));
+        top.setBackground(new java.awt.Color(255, 102, 102));
         top.setPreferredSize(new java.awt.Dimension(100, 180));
 
         tf_SearchBar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tf_SearchBar.setToolTipText("");
+        tf_SearchBar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_SearchBarFocusGained(evt);
+            }
+        });
         tf_SearchBar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_SearchBarKeyReleased(evt);
@@ -137,18 +142,18 @@ public class TheTapForm extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("QUẢN LÝ THẺ TẬP");
-
         lb_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/pencil (1) (1).png"))); // NOI18N
         lb_Update.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lb_UpdateMouseClicked(evt);
             }
         });
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("QUẢN LÝ THẺ TẬP");
 
         javax.swing.GroupLayout topLayout = new javax.swing.GroupLayout(top);
         top.setLayout(topLayout);
@@ -170,16 +175,16 @@ public class TheTapForm extends javax.swing.JPanel {
                         .addGap(73, 73, 73)
                         .addComponent(lb_icReset)
                         .addGap(109, 109, 109))
-                    .addGroup(topLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(34, 34, 34))))
+                        .addContainerGap())))
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
                         .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,6 +307,11 @@ public class TheTapForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một thẻ tập để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_lb_UpdateMouseClicked
+
+    private void tf_SearchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_SearchBarFocusGained
+        if(tf_SearchBar.getText().equals("Tìm kiếm ..."))
+            tf_SearchBar.setText("");
+    }//GEN-LAST:event_tf_SearchBarFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

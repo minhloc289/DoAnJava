@@ -104,10 +104,15 @@ public class KhachHangForm extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Top.setBackground(new java.awt.Color(251, 129, 54));
+        Top.setBackground(new java.awt.Color(255, 102, 102));
 
         tf_SearchBar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tf_SearchBar.setToolTipText("");
+        tf_SearchBar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_SearchBarFocusGained(evt);
+            }
+        });
         tf_SearchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_SearchBarActionPerformed(evt);
@@ -306,6 +311,11 @@ public class KhachHangForm extends javax.swing.JPanel {
     private void tf_SearchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_SearchBarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_SearchBarActionPerformed
+
+    private void tf_SearchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_SearchBarFocusGained
+        if(tf_SearchBar.getText().equals("Tìm kiếm ..."))
+            tf_SearchBar.setText("");
+    }//GEN-LAST:event_tf_SearchBarFocusGained
     
     public void refreshTable() {
         ArrayList<KhachHang> kh = KhachHangDAO.getInstance().selectAll(); // Gọi hàm lấy tất cả khách hàng không bị xóa

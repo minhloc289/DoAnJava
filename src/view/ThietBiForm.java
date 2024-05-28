@@ -90,8 +90,13 @@ public class ThietBiForm extends javax.swing.JPanel {
 
         back.setBackground(new java.awt.Color(255, 255, 255));
 
-        top.setBackground(new java.awt.Color(251, 129, 54));
+        top.setBackground(new java.awt.Color(255, 102, 102));
 
+        tf_SearchBar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_SearchBarFocusGained(evt);
+            }
+        });
         tf_SearchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_SearchBarActionPerformed(evt);
@@ -109,7 +114,7 @@ public class ThietBiForm extends javax.swing.JPanel {
         lb_Title.setFont(new java.awt.Font("Montserrat", 1, 36)); // NOI18N
         lb_Title.setForeground(new java.awt.Color(255, 255, 255));
         lb_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_Title.setText("QUẢN LÝ THÔNG TIN THIẾT BỊ");
+        lb_Title.setText("QUẢN LÝ THIẾT BỊ");
 
         lb_icAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Insert.png"))); // NOI18N
         lb_icAdd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,7 +139,6 @@ public class ThietBiForm extends javax.swing.JPanel {
         });
 
         lb_icReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Update.png"))); // NOI18N
-        lb_icReset.setPreferredSize(new java.awt.Dimension(32, 32));
         lb_icReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lb_icResetMouseClicked(evt);
@@ -148,27 +152,28 @@ public class ThietBiForm extends javax.swing.JPanel {
             .addGroup(topLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(topLayout.createSequentialGroup()
-                        .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(topLayout.createSequentialGroup()
+                        .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(lb_icSearch)
-                        .addGap(213, 213, 213)
+                        .addGap(97, 97, 97)
                         .addComponent(lb_icAdd)
-                        .addGap(45, 45, 45)
+                        .addGap(84, 84, 84)
                         .addComponent(lb_icDelete)
-                        .addGap(43, 43, 43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                         .addComponent(lb_icUpdate)
-                        .addGap(43, 43, 43)
-                        .addComponent(lb_icReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 120, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(79, 79, 79)
+                        .addComponent(lb_icReset)
+                        .addGap(36, 36, 36))))
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb_Title, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addComponent(lb_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -176,8 +181,9 @@ public class ThietBiForm extends javax.swing.JPanel {
                         .addComponent(lb_icSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lb_icAdd)
                     .addComponent(lb_icDelete)
-                    .addComponent(lb_icUpdate)
-                    .addComponent(lb_icReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lb_icReset)
+                        .addComponent(lb_icUpdate)))
                 .addContainerGap())
         );
 
@@ -278,6 +284,11 @@ public class ThietBiForm extends javax.swing.JPanel {
     private void lb_icResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icResetMouseClicked
         refreshTable();
     }//GEN-LAST:event_lb_icResetMouseClicked
+
+    private void tf_SearchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_SearchBarFocusGained
+        if(tf_SearchBar.getText().equals("Tìm kiếm ..."))
+            tf_SearchBar.setText("");
+    }//GEN-LAST:event_tf_SearchBarFocusGained
 
     
     

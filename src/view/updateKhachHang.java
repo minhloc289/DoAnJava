@@ -85,7 +85,7 @@ public class updateKhachHang extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(255, 239, 237));
+        jPanel2.setBackground(new java.awt.Color(243, 197, 192));
 
         bt_AddKHACHHANG.setBackground(new java.awt.Color(251, 129, 54));
         bt_AddKHACHHANG.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
@@ -141,7 +141,7 @@ public class updateKhachHang extends javax.swing.JFrame {
         lb_MAKH6.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
         lb_MAKH6.setText("Email");
 
-        jPanel1.setBackground(new java.awt.Color(251, 129, 54));
+        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

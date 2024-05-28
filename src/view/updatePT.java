@@ -51,8 +51,8 @@ public class updatePT extends javax.swing.JFrame {
         tf_ten = new javax.swing.JTextField();
         tf_ns = new javax.swing.JTextField();
         cb_gt = new javax.swing.JComboBox<>();
-        tf_dc = new javax.swing.JTextField();
         tf_sdt = new javax.swing.JTextField();
+        tf_dc = new javax.swing.JTextField();
         tf_nvl = new javax.swing.JTextField();
         tf_cm = new javax.swing.JTextField();
         tf_email = new javax.swing.JTextField();
@@ -100,7 +100,7 @@ public class updatePT extends javax.swing.JFrame {
         cb_gt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
         cb_gt.setSelectedItem("Nam");
 
-        tf_dc.setToolTipText("");
+        tf_sdt.setToolTipText("");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Mã huấn luyện viên");
@@ -168,11 +168,11 @@ public class updatePT extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tf_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tf_dc, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tf_dc, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tf_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -233,11 +233,11 @@ public class updatePT extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_dc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_dc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -285,8 +285,8 @@ public class updatePT extends javax.swing.JFrame {
         
         tf_ns.setText(ngaySinhStr);
         cb_gt.setSelectedItem(hlv.getGioiTinh());
-        tf_dc.setText(hlv.getDiaChi());
-        tf_sdt.setText(hlv.getSoDT());
+        tf_sdt.setText(hlv.getDiaChi());
+        tf_dc.setText(hlv.getSoDT());
         
         String ngayVLStr = dateFormat.format(hlv.getNgayVL());
         tf_nvl.setText(ngayVLStr);
@@ -304,8 +304,8 @@ public class updatePT extends javax.swing.JFrame {
         String hoTen = tf_ten.getText();
         String ngaySinhStr = tf_ns.getText();
         String gioiTinh = cb_gt.getSelectedItem().toString();
-        String diaChi = tf_dc.getText();
-        String soDT = tf_sdt.getText();
+        String diaChi = tf_sdt.getText();
+        String soDT = tf_dc.getText();
         String ngayVLStr = tf_nvl.getText();
         String chuyenMon = tf_cm.getText();
         String email = tf_email.getText();
@@ -346,6 +346,7 @@ public class updatePT extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Giá thuê nhập vào phải là kiểu số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return; 
         }
+        
         // Kiểm tra định dạng email
         if (!isValid(email)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập Email đúng định dạng!", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
