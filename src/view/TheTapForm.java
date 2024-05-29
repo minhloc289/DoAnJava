@@ -135,7 +135,7 @@ public class TheTapForm extends javax.swing.JPanel {
             }
         });
 
-        lb_icReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Update.png"))); // NOI18N
+        lb_icReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/contract (1).png"))); // NOI18N
         lb_icReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lb_icResetMouseClicked(evt);
@@ -168,7 +168,7 @@ public class TheTapForm extends javax.swing.JPanel {
                         .addComponent(lb_icSearch)
                         .addGap(79, 79, 79)
                         .addComponent(lb_icAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                         .addComponent(lb_icDelete)
                         .addGap(71, 71, 71)
                         .addComponent(lb_Update)
@@ -184,19 +184,22 @@ public class TheTapForm extends javax.swing.JPanel {
             .addGroup(topLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
-                        .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
-                        .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lb_icReset)
-                            .addComponent(lb_icDelete)
-                            .addComponent(lb_icSearch)
-                            .addComponent(lb_icAdd)
-                            .addComponent(lb_Update))
-                        .addContainerGap())))
+                    .addGroup(topLayout.createSequentialGroup()
+                        .addGap(0, 2, Short.MAX_VALUE)
+                        .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
+                                .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
+                                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lb_icDelete)
+                                    .addComponent(lb_icSearch)
+                                    .addComponent(lb_icAdd)
+                                    .addComponent(lb_Update))
+                                .addContainerGap())))
+                    .addComponent(lb_icReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         tb_THETAP.setModel(new javax.swing.table.DefaultTableModel(

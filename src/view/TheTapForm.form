@@ -73,7 +73,7 @@
                               <Component id="lb_icSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                               <Component id="lb_icAdd" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="74" max="32767" attributes="0"/>
+                              <EmptySpace pref="76" max="32767" attributes="0"/>
                               <Component id="lb_icDelete" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                               <Component id="lb_Update" min="-2" max="-2" attributes="0"/>
@@ -94,22 +94,27 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="tf_SearchBar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lb_icReset" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lb_icDelete" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lb_icSearch" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lb_icAdd" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lb_Update" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="tf_SearchBar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lb_icDelete" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lb_icSearch" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lb_icAdd" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lb_Update" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
+                          <Component id="lb_icReset" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -160,7 +165,7 @@
             <Component class="javax.swing.JLabel" name="lb_icReset">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/view/icons/ic_Update.png"/>
+                  <Image iconType="3" name="/view/icons/contract (1).png"/>
                 </Property>
               </Properties>
               <Events>

@@ -106,7 +106,7 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
         ArrayList<HuanLuyenVien> hlvList = new ArrayList<>();
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM HUANLUYENVIEN WHERE isDeleted = 0 ORDER BY Id_HLV ASC";
+            String sql = "SELECT * FROM HUANLUYENVIEN WHERE isDeleted = 0 ORDER BY TO_NUMBER(SUBSTR(Id_HLV, 4)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -192,7 +192,7 @@ public class HuanLuyenVienDAO implements DAOInterface<HuanLuyenVien> {
             Connection conn = JDBC.getConnection();
             String sql = "SELECT * FROM HUANLUYENVIEN "
                     + "WHERE isDeleted = 0 AND NgayVL BETWEEN ? AND ? "
-                    + "ORDER BY Id_HLV ASC";
+                    + "ORDER BY TO_NUMBER(SUBSTR(Id_HLV, 4)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setDate(1, ngayBD);
             pst.setDate(2, ngayKT);

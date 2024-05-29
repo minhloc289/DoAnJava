@@ -90,7 +90,7 @@ public class GoiTapDAO implements DAOInterface<GOITAP> {
         ArrayList<GOITAP> gtList = new ArrayList<>();
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM GOITAP WHERE isDeleted = 0 ORDER BY Id_GT ASC";
+            String sql = "SELECT * FROM GOITAP WHERE isDeleted = 0 ORDER BY TO_NUMBER(SUBSTR(Id_GT, 3)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

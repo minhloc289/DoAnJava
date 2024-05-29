@@ -106,7 +106,7 @@ public class ThanhToanDAO implements DAOInterface<ThanhToan> {
         ArrayList<ThanhToan> ttoanList = new ArrayList<>();
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM THANHTOAN ORDER BY Id_TTOAN ASC";
+            String sql = "SELECT * FROM THANHTOAN ORDER BY TO_NUMBER(SUBSTR(Id_TToan, 2)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {

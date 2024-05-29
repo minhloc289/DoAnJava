@@ -74,7 +74,7 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
     @Override
     public ArrayList<ThietBi> selectAll() {
         ArrayList<ThietBi> listTB = new ArrayList<>();
-        String sql = "SELECT * FROM THIETBI WHERE ISDELETED = 0 ORDER BY Id_TB ASC";
+        String sql = "SELECT * FROM THIETBI WHERE ISDELETED = 0 ORDER BY TO_NUMBER(SUBSTR(Id_TB, 3)) ASC";
         try (Connection con = JDBC.getConnection();
              PreparedStatement pstm = con.prepareStatement(sql);
              ResultSet rs = pstm.executeQuery()) {

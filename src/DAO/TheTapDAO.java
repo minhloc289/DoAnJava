@@ -129,7 +129,7 @@ public class TheTapDAO implements DAOInterface<TheTap> {
         ArrayList<TheTap> ttapList = new ArrayList<>();
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM THETAP ORDER BY Id_TTap ASC";
+            String sql = "SELECT * FROM THETAP ORDER BY TO_NUMBER(SUBSTR(Id_TTap, 3)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {

@@ -128,7 +128,7 @@ public class ThueDAO implements DAOInterface<Thue> {
 
         try {
             conn = JDBC.getConnection();
-            String sql = "SELECT Id_KH, Id_HLV, NGAYBD, NGAYKT, ThoiGianThue, TongTienThue FROM THUE WHERE isDeleted = 0 ORDER BY Id_KH ASC";
+            String sql = "SELECT Id_KH, Id_HLV, NGAYBD, NGAYKT, ThoiGianThue, TongTienThue FROM THUE WHERE isDeleted = 0 ORDER BY TO_NUMBER(SUBSTR(Id_KH, 3)) ASC";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 

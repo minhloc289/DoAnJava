@@ -11,9 +11,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import controller.ConvertDate;
 import controller.CurrencyUtils;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +28,15 @@ import model.HuanLuyenVien;
 import model.NhanVien;
 import model.ThietBi;
 import model.ThongKeTheTap;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import static org.apache.poi.ss.usermodel.TableStyleType.headerRow;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 
 /**
@@ -35,16 +49,21 @@ public class ThongKe extends javax.swing.JPanel {
     private DefaultTableModel tblModel3;
     private DefaultTableModel tblModel4;   
     private DefaultTableModel tblModel5;
+    double tongTien = 0;
     
     /**
      * Creates new form ThongKe
      */
     public ThongKe() {
         initComponents();
-        jDateChooserFromTT.setDateFormatString("dd/MM/yyyy");
-        jDateChooserToTT.setDateFormatString("dd/MM/yyyy");
-        jDateChooserFromTToan.setDateFormatString("dd/MM/yyyy");
-        jDateChooserToTToan.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserFromTT.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserToTT.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserFromTToan.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserToTToan.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserFromHLV.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserToHLV.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserFromNV.setDateFormatString("dd/MM/yyyy");
+//        jDateChooserToNV.setDateFormatString("dd/MM/yyyy");
 
         initTableDSKH();
         loadDataToTableDSKH(ThongKeDAO.getInstance().dsKhachHang());
@@ -99,7 +118,7 @@ public class ThongKe extends javax.swing.JPanel {
     
     private void loadDataToTableDSTTOAN(ArrayList<DoanhThu> doanhThuList) {
         tblModel2.setRowCount(0); 
-        double tongTien = 0;
+        tongTien = 0;
         for (DoanhThu dt : doanhThuList) {
             tblModel2.addRow(new Object[]{
                dt.getId_TToan(), dt.getId_KH(), dt.getTenKH(), dt.getNgayTT(), CurrencyUtils.formatCurrency(dt.getTongTien()), dt.getTenNV()
@@ -179,118 +198,155 @@ public class ThongKe extends javax.swing.JPanel {
     }
     
     public void timThongTinTheTap() throws ParseException {
-    ArrayList<ThongKeTheTap> tk = new ArrayList<>();
-        if (jDateChooserFromTT.getDate() != null || jDateChooserToTT.getDate() != null) {
-            Date from = null;
-            Date to = null;
-            if (jDateChooserFromTT.getDate() != null && jDateChooserToTT.getDate() == null) {
-                from = new Date(jDateChooserFromTT.getDate().getTime());
-                to = new Date(System.currentTimeMillis());
-            } else if (jDateChooserToTT.getDate() != null && jDateChooserFromTT.getDate() == null) {
-                String Date1 = "01/01/2024"; // Đây là ngày mặc định
-                from = ConvertDate.getInstance().convertStringToDate(Date1);
-                to = new Date(jDateChooserToTT.getDate().getTime());
-            } else {
-                from = new Date(jDateChooserFromTT.getDate().getTime());
-                to = new Date(jDateChooserToTT.getDate().getTime());
-                if (from.getTime() > to.getTime()) {
-                    JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                    jDateChooserFromTT.setCalendar(null);
-                    jDateChooserToTT.setCalendar(null);
-                    return; 
-                }
+        ArrayList<ThongKeTheTap> tk = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date from = null;
+        Date to = null;
+
+        if (jDateChooserFromTT.getDate() != null) {
+            String fromString = sdf.format(jDateChooserFromTT.getDate());
+            from = Date.valueOf(fromString);
+        }
+
+        if (jDateChooserToTT.getDate() != null) {
+            String toString = sdf.format(jDateChooserToTT.getDate());
+            to = Date.valueOf(toString);
+        }
+
+        if (from == null && to != null) {
+            from = Date.valueOf("2024-01-01"); // Ngày mặc định nếu không chọn "from"
+        }
+
+        if (from != null && to == null) {
+            to = new Date(System.currentTimeMillis()); // Hiện tại nếu không chọn "to"
+        } 
+        
+        if (from != null && to != null) {
+            if (from.after(to)) {
+                JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                jDateChooserFromTT.setCalendar(null);
+                jDateChooserToTT.setCalendar(null);
+                return;
             }
             tk = ThongKeDAO.getInstance().dsKhachHang(from, to);
         } else {
             tk = ThongKeDAO.getInstance().dsKhachHang();
         }
+
         loadDataToTableDSKH(tk);
     }
     
     public void timThanhToan() throws ParseException {
         ArrayList<DoanhThu> dtList = new ArrayList<>();
-        if (jDateChooserFromTToan.getDate() != null || jDateChooserToTToan.getDate() != null) {
-            Date from = null;
-            Date to = null;
-            if (jDateChooserFromTToan.getDate() != null && jDateChooserToTToan.getDate() == null) {
-                from = new Date(jDateChooserFromTToan.getDate().getTime());
-                to = new Date(System.currentTimeMillis());
-            } else if (jDateChooserToTToan.getDate() != null && jDateChooserFromTToan.getDate() == null) {
-                String Date1 = "01/01/2024"; // Đây là ngày mặc định
-                from = ConvertDate.getInstance().convertStringToDate(Date1);
-                to = new Date(jDateChooserToTToan.getDate().getTime());
-            } else {
-                from = new Date(jDateChooserFromTToan.getDate().getTime());
-                to = new Date(jDateChooserToTToan.getDate().getTime());
-                if (from.getTime() > to.getTime()) {
-                    JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                    jDateChooserFromTToan.setCalendar(null);
-                    jDateChooserToTToan.setCalendar(null);
-                    return; 
-                }
+        Date from = null;
+        Date to = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (jDateChooserFromTToan.getDate() != null) {
+            String fromString = sdf.format(jDateChooserFromTToan.getDate());
+            from = Date.valueOf(fromString);
+        }
+
+        if (jDateChooserToTToan.getDate() != null) {
+            String toString = sdf.format(jDateChooserToTToan.getDate());
+            to = Date.valueOf(toString);
+        }
+
+        if (from == null && to != null) {
+            from = Date.valueOf("2024-01-01"); // Ngày mặc định nếu không chọn "from"
+        }
+
+        if (from != null && to == null) {
+            to = new Date(System.currentTimeMillis()); // Hiện tại nếu không chọn "to"
+        } 
+        if (from != null && to != null) {
+            if (from.after(to)) {
+                JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                jDateChooserFromTToan.setCalendar(null);
+                jDateChooserToTToan.setCalendar(null);
+                return;
             }
             dtList = ThongKeDAO.getInstance().dsThanhToan(from, to);
         } else {
             dtList = ThongKeDAO.getInstance().dsThanhToan();
         }
+
         loadDataToTableDSTTOAN(dtList);
     }
     
     public void timHuanLuyenVien() throws ParseException {
         ArrayList<HuanLuyenVien> hlvList = new ArrayList<>();
-        if (jDateChooserFromHLV.getDate() != null || jDateChooserToHLV.getDate() != null) {
-            Date from = null;
-            Date to = null;
-            if (jDateChooserFromHLV.getDate() != null && jDateChooserToHLV.getDate() == null) {
-                from = new Date(jDateChooserFromHLV.getDate().getTime());
-                to = new Date(System.currentTimeMillis());
-            } else if (jDateChooserToHLV.getDate() != null && jDateChooserFromHLV.getDate() == null) {
-                String Date1 = "01/01/2024"; // Đây là ngày mặc định
-                from = ConvertDate.getInstance().convertStringToDate(Date1);
-                to = new Date(jDateChooserToHLV.getDate().getTime());
-            } else {
-                from = new Date(jDateChooserFromHLV.getDate().getTime());
-                to = new Date(jDateChooserToHLV.getDate().getTime());
-                if (from.getTime() > to.getTime()) {
-                    JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                    jDateChooserFromHLV.setCalendar(null);
-                    jDateChooserToHLV.setCalendar(null);
-                    return; 
-                }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date from = null;
+        Date to = null;
+
+        if (jDateChooserFromHLV.getDate() != null) {
+            String fromString = sdf.format(jDateChooserFromHLV.getDate());
+            from = Date.valueOf(fromString);
+        }
+
+        if (jDateChooserToHLV.getDate() != null) {
+            String toString = sdf.format(jDateChooserToHLV.getDate());
+            to = Date.valueOf(toString);
+        }
+
+        if (from == null && to != null) {
+            from = Date.valueOf("2024-01-01"); // Ngày mặc định nếu không chọn "from"
+        }
+
+        if (from != null && to == null) {
+            to = new Date(System.currentTimeMillis()); // Hiện tại nếu không chọn "to"
+        } 
+        if (from != null && to != null) {
+            if (from.after(to)) {
+                JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                jDateChooserFromHLV.setCalendar(null);
+                jDateChooserToHLV.setCalendar(null);
+                return;
             }
             hlvList = HuanLuyenVienDAO.getInstance().selectAll(from, to);
         } else {
             hlvList = HuanLuyenVienDAO.getInstance().selectAll();
         }
+
         loadDataToTableDSHLV(hlvList);
     }
     
     public void timNhanVien() throws ParseException {
         ArrayList<NhanVien> nvList = new ArrayList<>();
-        if (jDateChooserFromNV.getDate() != null || jDateChooserToNV.getDate() != null) {
-            Date from = null;
-            Date to = null;
-            if (jDateChooserFromNV.getDate() != null && jDateChooserToNV.getDate() == null) {
-                from = new Date(jDateChooserFromNV.getDate().getTime());
-                to = new Date(System.currentTimeMillis());
-            } else if (jDateChooserToNV.getDate() != null && jDateChooserFromNV.getDate() == null) {
-                String Date1 = "01/01/2024"; // Đây là ngày mặc định
-                from = ConvertDate.getInstance().convertStringToDate(Date1);
-                to = new Date(jDateChooserToNV.getDate().getTime());
-            } else {
-                from = new Date(jDateChooserFromNV.getDate().getTime());
-                to = new Date(jDateChooserToNV.getDate().getTime());
-                if (from.getTime() > to.getTime()) {
-                    JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                    jDateChooserFromNV.setCalendar(null);
-                    jDateChooserToNV.setCalendar(null);
-                    return; 
-                }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date from = null;
+        Date to = null;
+
+        if (jDateChooserFromNV.getDate() != null) {
+            String fromString = sdf.format(jDateChooserFromNV.getDate());
+            from = Date.valueOf(fromString);
+        }
+
+        if (jDateChooserToNV.getDate() != null) {
+            String toString = sdf.format(jDateChooserToNV.getDate());
+            to = Date.valueOf(toString);
+        }
+
+        if (from == null && to != null) {
+            from = Date.valueOf("2024-01-01"); // Ngày mặc định nếu không chọn "from"
+        }
+
+        if (from != null && to == null) {
+            to = new Date(System.currentTimeMillis()); // Hiện tại nếu không chọn "to"
+        } 
+        if (from != null && to != null) {
+            if (from.after(to)) {
+                JOptionPane.showMessageDialog(this, "Thời gian không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                jDateChooserFromNV.setCalendar(null);
+                jDateChooserToNV.setCalendar(null);
+                return;
             }
             nvList = NhanVienDAO.getInstance().selectAll(from, to);
         } else {
             nvList = NhanVienDAO.getInstance().selectAll();
         }
+
         loadDataToTableDSNV(nvList);
     }
     
@@ -333,6 +389,8 @@ public class ThongKe extends javax.swing.JPanel {
         tb_THONGKETHANHTOAN = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         lb_DOANHTHU = new javax.swing.JLabel();
+        pn_XuatExcel = new javax.swing.JPanel();
+        lb_DOANHTHU1 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         tf_TIMKIEMHLV = new javax.swing.JTextField();
@@ -543,7 +601,7 @@ public class ThongKe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -685,6 +743,34 @@ public class ThongKe extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        pn_XuatExcel.setBackground(new java.awt.Color(102, 255, 102));
+        pn_XuatExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pn_XuatExcelMouseClicked(evt);
+            }
+        });
+
+        lb_DOANHTHU1.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        lb_DOANHTHU1.setForeground(new java.awt.Color(255, 255, 255));
+        lb_DOANHTHU1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/excel-file (1).png"))); // NOI18N
+        lb_DOANHTHU1.setText("Xuất excel");
+
+        javax.swing.GroupLayout pn_XuatExcelLayout = new javax.swing.GroupLayout(pn_XuatExcel);
+        pn_XuatExcel.setLayout(pn_XuatExcelLayout);
+        pn_XuatExcelLayout.setHorizontalGroup(
+            pn_XuatExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_XuatExcelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lb_DOANHTHU1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pn_XuatExcelLayout.setVerticalGroup(
+            pn_XuatExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_XuatExcelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lb_DOANHTHU1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -694,7 +780,10 @@ public class ThongKe extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pn_XuatExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -703,9 +792,11 @@ public class ThongKe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pn_XuatExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Doanh thu", jPanel5);
@@ -855,7 +946,7 @@ public class ThongKe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1009,7 +1100,7 @@ public class ThongKe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1063,9 +1154,8 @@ public class ThongKe extends javax.swing.JPanel {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jb_RESET4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                        .addComponent(tf_TIMKIEMTB)))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(tf_TIMKIEMTB, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
 
@@ -1124,7 +1214,7 @@ public class ThongKe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1378,6 +1468,52 @@ public class ThongKe extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_TIMKIEMTHETAPActionPerformed
 
+    private void pn_XuatExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_XuatExcelMouseClicked
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Doanh thu");
+                
+                Row rowHeader = sheet.createRow(0);
+                for (int i = 0; i < tblModel2.getColumnCount(); i++) {
+                    Cell cell = rowHeader.createCell(i);
+                    cell.setCellValue(tblModel2.getColumnName(i));
+                }
+                
+                for (int i = 0; i < tblModel2.getRowCount(); i++) {
+                    Row dataRow = sheet.createRow(i + 1);
+                    for (int j = 0; j < tblModel2.getColumnCount(); j++) {
+                        Cell cell = dataRow.createCell(j);
+                        cell.setCellValue(tblModel2.getValueAt(i, j).toString());
+                    }
+                }
+                
+                int totalRow = tblModel2.getRowCount() + 1;
+                Row totalDataRow = sheet.createRow(totalRow);
+                Cell totalLabelCell = totalDataRow.createCell(tblModel2.getColumnCount() - 2);
+                totalLabelCell.setCellValue("Tổng doanh thu:");
+                Cell totalValueCell = totalDataRow.createCell(tblModel2.getColumnCount() - 1);
+                totalValueCell.setCellValue(CurrencyUtils.formatCurrency(tongTien));
+                
+                for (int i = 0; i < tblModel2.getColumnCount(); i++) {
+                    sheet.autoSizeColumn(i);
+                }
+                
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                JOptionPane.showMessageDialog(this, "Xuất dữ liệu thành công!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_pn_XuatExcelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooserFromHLV;
@@ -1430,11 +1566,13 @@ public class ThongKe extends javax.swing.JPanel {
     private javax.swing.JLabel jb_RESET3;
     private javax.swing.JLabel jb_RESET4;
     private javax.swing.JLabel lb_DOANHTHU;
+    private javax.swing.JLabel lb_DOANHTHU1;
     private javax.swing.JLabel lb_HLV;
     private javax.swing.JLabel lb_NV;
     private javax.swing.JLabel lb_SLKH;
     private javax.swing.JLabel lb_TB;
     private javax.swing.JLabel lb_Title;
+    private javax.swing.JPanel pn_XuatExcel;
     private javax.swing.JTable tb_HLV;
     private javax.swing.JTable tb_NV;
     private javax.swing.JTable tb_THIETBI;

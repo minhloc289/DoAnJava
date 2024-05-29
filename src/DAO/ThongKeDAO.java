@@ -30,7 +30,7 @@ public class ThongKeDAO {
                     + "INNER JOIN KHACHHANG ON THETAP.Id_KH = KHACHHANG.Id_KH "
                     + "INNER JOIN GOITAP ON THETAP.Id_GT = GOITAP.Id_GT "
                     + "WHERE NgayBD BETWEEN ? AND ? "
-                    + "ORDER BY Id_TTap ASC";
+                    + "ORDER BY TO_NUMBER(SUBSTR(Id_TTap, 3)) ASC";
             
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setDate(1, ngayBatDau);
@@ -63,7 +63,7 @@ public class ThongKeDAO {
                     + "FROM THETAP "
                     + "INNER JOIN KHACHHANG ON THETAP.Id_KH = KHACHHANG.Id_KH "
                     + "INNER JOIN GOITAP ON THETAP.Id_GT = GOITAP.Id_GT "
-                    + "ORDER BY Id_TTap ASC";
+                    + "ORDER BY TO_NUMBER(SUBSTR(Id_TTap, 3)) ASC";
                     
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -94,7 +94,7 @@ public class ThongKeDAO {
                     + "INNER JOIN KHACHHANG ON THANHTOAN.Id_KH = KHACHHANG.Id_KH "
                     + "INNER JOIN NHANVIEN ON THANHTOAN.Id_NV = NHANVIEN.Id_NV "
                     + "WHERE NgayTT BETWEEN ? AND ? AND TrangThai = 'Đã thanh toán' "
-                    + "ORDER BY Id_TToan ASC";
+                    + "ORDER BY TO_NUMBER(SUBSTR(Id_TToan, 2)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setDate(1, ngayBatDau);
             pst.setDate(2, ngayKetThuc);
@@ -126,7 +126,7 @@ public class ThongKeDAO {
                     + "INNER JOIN KHACHHANG ON THANHTOAN.Id_KH = KHACHHANG.Id_KH "
                     + "INNER JOIN NHANVIEN ON THANHTOAN.Id_NV = NHANVIEN.Id_NV "
                     + "WHERE TrangThai = 'Đã thanh toán' "
-                    + "ORDER BY Id_TToan ASC";
+                    + "ORDER BY TO_NUMBER(SUBSTR(Id_TToan, 2)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             

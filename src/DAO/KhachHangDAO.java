@@ -112,7 +112,7 @@ public class KhachHangDAO implements DAOInterface<KhachHang> {
         ArrayList<KhachHang> khList = new ArrayList<>();
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM KHACHHANG WHERE isDeleted = 0 ORDER BY Id_KH ASC";
+            String sql = "SELECT * FROM KHACHHANG WHERE isDeleted = 0 ORDER BY TO_NUMBER(SUBSTR(Id_KH, 3)) ASC";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
