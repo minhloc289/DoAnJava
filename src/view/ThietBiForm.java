@@ -236,16 +236,30 @@ public class ThietBiForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_SearchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_SearchBarActionPerformed
-        // TODO add your handling code here:
+        String keyword = tf_SearchBar.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        ThietBi tb =  ThietBiDAO.getInstance().selectById(keyword);
+        model.setRowCount(0); 
+        
+        if (tb != null) {
+            Object[] row = {tb.getId_TB(), tb.getTenTB(), tb.getLoaiTB(), tb.getSoLuong(), tb.getTinhTrang()};
+            model.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_tf_SearchBarActionPerformed
 
     private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
-        String searched = tf_SearchBar.getText().trim().toLowerCase();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THIETBI.getModel());
-        tb_THIETBI.setRowSorter(sorter);
-        
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searched);
-        sorter.setRowFilter(rowFilter);
+//        String searched = tf_SearchBar.getText().trim().toLowerCase();
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THIETBI.getModel());
+//        tb_THIETBI.setRowSorter(sorter);
+//        
+//        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searched);
+//        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked

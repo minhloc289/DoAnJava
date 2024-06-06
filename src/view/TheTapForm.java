@@ -94,6 +94,7 @@ public class TheTapForm extends javax.swing.JPanel {
         lb_icReset = new javax.swing.JLabel();
         lb_Update = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_THETAP = new javax.swing.JTable();
 
@@ -105,6 +106,11 @@ public class TheTapForm extends javax.swing.JPanel {
         tf_SearchBar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tf_SearchBarFocusGained(evt);
+            }
+        });
+        tf_SearchBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_SearchBarActionPerformed(evt);
             }
         });
         tf_SearchBar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -155,6 +161,13 @@ public class TheTapForm extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("QUẢN LÝ THẺ TẬP");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Update.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout topLayout = new javax.swing.GroupLayout(top);
         top.setLayout(topLayout);
         topLayout.setHorizontalGroup(
@@ -162,22 +175,24 @@ public class TheTapForm extends javax.swing.JPanel {
             .addGroup(topLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(topLayout.createSequentialGroup()
                         .addComponent(tf_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lb_icSearch)
-                        .addGap(79, 79, 79)
+                        .addGap(72, 72, 72)
                         .addComponent(lb_icAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                        .addComponent(lb_icDelete)
                         .addGap(71, 71, 71)
+                        .addComponent(lb_icDelete)
+                        .addGap(69, 69, 69)
                         .addComponent(lb_Update)
-                        .addGap(73, 73, 73)
+                        .addGap(68, 68, 68)
                         .addComponent(lb_icReset)
-                        .addGap(109, 109, 109))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(32, 32, 32))))
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +214,10 @@ public class TheTapForm extends javax.swing.JPanel {
                                     .addComponent(lb_icAdd)
                                     .addComponent(lb_Update))
                                 .addContainerGap())))
-                    .addComponent(lb_icReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lb_icReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(topLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         tb_THETAP.setModel(new javax.swing.table.DefaultTableModel(
@@ -247,13 +265,13 @@ public class TheTapForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
-        String searchText = tf_SearchBar.getText().trim().toLowerCase();
-
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THETAP.getModel());
-        tb_THETAP.setRowSorter(sorter);
-
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
-        sorter.setRowFilter(rowFilter);
+//        String searchText = tf_SearchBar.getText().trim().toLowerCase();
+//
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THETAP.getModel());
+//        tb_THETAP.setRowSorter(sorter);
+//
+//        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
+//        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
@@ -296,7 +314,7 @@ public class TheTapForm extends javax.swing.JPanel {
             update.setVisible(true);
         }
         else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thẻ tập để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thẻ tập để gia hạn.", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_lb_icResetMouseClicked
 
@@ -316,9 +334,32 @@ public class TheTapForm extends javax.swing.JPanel {
             tf_SearchBar.setText("");
     }//GEN-LAST:event_tf_SearchBarFocusGained
 
+    private void tf_SearchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_SearchBarActionPerformed
+        String keyword = tf_SearchBar.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        TheTap ttap =  TheTapDAO.getInstance().selectById(keyword);
+        tblModel.setRowCount(0); 
+        
+        if (ttap != null) {
+            Object[] row = {ttap.getId_TTap(), ttap.getId_KH(), ttap.getId_GT(), ttap.getNgayBD(), ttap.getNgayHH()};
+            tblModel.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_tf_SearchBarActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        refreshTableData();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_Update;

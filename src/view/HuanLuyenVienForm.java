@@ -250,7 +250,21 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TextTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextTimKiemActionPerformed
-        // TODO add your handling code here:
+       String keyword = TextTimKiem.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        HuanLuyenVien hlv = HuanLuyenVienDAO.getInstance().selectById(keyword);
+        tblModel.setRowCount(0); 
+        
+        if (hlv != null) {
+            Object[] row = {hlv.getId_HLV(), hlv.getHoTen(), hlv.getNgaySinh(), hlv.getGioiTinh(), hlv.getDiaChi(), hlv.getSoDT(), hlv.getNgayVL(), hlv.getChuyenMon(), hlv.getEmail(), CurrencyUtils.formatCurrency(hlv.getGiaThue())};
+            tblModel.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_TextTimKiemActionPerformed
 
      private void refreshTable() {
@@ -267,13 +281,13 @@ public class HuanLuyenVienForm extends javax.swing.JPanel {
     }//GEN-LAST:event_TextTimKiemKeyPressed
 
     private void TextTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextTimKiemKeyReleased
-        String searchText = TextTimKiem.getText().trim().toLowerCase();
-     
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) jTable1.getModel());
-        jTable1.setRowSorter(sorter);
-        
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
-        sorter.setRowFilter(rowFilter);
+//        String searchText = TextTimKiem.getText().trim().toLowerCase();
+//     
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) jTable1.getModel());
+//        jTable1.setRowSorter(sorter);
+//        
+//        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
+//        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_TextTimKiemKeyReleased
 
     private void labelResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelResetMouseClicked

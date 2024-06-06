@@ -135,6 +135,11 @@ public class TaiKhoan extends javax.swing.JPanel {
                 tf_SearchBarFocusGained(evt);
             }
         });
+        tf_SearchBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_SearchBarActionPerformed(evt);
+            }
+        });
         tf_SearchBar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_SearchBarKeyReleased(evt);
@@ -320,19 +325,37 @@ public class TaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_UpdateMouseClicked
 
     private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
-        String searchText = tf_SearchBar.getText().trim().toLowerCase();
-        
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_TAIKHOAN.getModel());
-        tb_TAIKHOAN.setRowSorter(sorter);
-        
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
-        sorter.setRowFilter(rowFilter);  
+//        String searchText = tf_SearchBar.getText().trim().toLowerCase();
+//        
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_TAIKHOAN.getModel());
+//        tb_TAIKHOAN.setRowSorter(sorter);
+//        
+//        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
+//        sorter.setRowFilter(rowFilter);  
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void tf_SearchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_SearchBarFocusGained
         if(tf_SearchBar.getText().equals("Tìm kiếm ..."))
             tf_SearchBar.setText("");
     }//GEN-LAST:event_tf_SearchBarFocusGained
+
+    private void tf_SearchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_SearchBarActionPerformed
+        String keyword = tf_SearchBar.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        NhanVienAcc acc =  NhanVienAccDAO.getInstance().selectById(keyword);
+        tblModel.setRowCount(0); 
+        
+        if (acc != null) {
+            Object[] row = {acc.getId_NV(), acc.getTenDN(), acc.getMatKhau(), acc.getTrangThai()};
+            tblModel.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_tf_SearchBarActionPerformed
     
     public void refreshTable() {
         ArrayList<NhanVienAcc> acc = NhanVienAccDAO.getInstance().selectAll(); // Gọi hàm lấy tất cả khách hàng không bị xóa

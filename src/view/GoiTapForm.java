@@ -110,6 +110,11 @@ public class GoiTapForm extends javax.swing.JPanel {
                 TextTimKiemFocusGained(evt);
             }
         });
+        TextTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextTimKiemActionPerformed(evt);
+            }
+        });
         TextTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TextTimKiemKeyReleased(evt);
@@ -230,13 +235,13 @@ public class GoiTapForm extends javax.swing.JPanel {
     }//GEN-LAST:event_TextTimKiemFocusGained
 
     private void TextTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextTimKiemKeyReleased
-        String searchText = TextTimKiem.getText().trim().toLowerCase();
-     
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) jTable1.getModel());
-        jTable1.setRowSorter(sorter);
-        
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
-        sorter.setRowFilter(rowFilter);
+//        String searchText = TextTimKiem.getText().trim().toLowerCase();
+//     
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) jTable1.getModel());
+//        jTable1.setRowSorter(sorter);
+//        
+//        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
+//        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_TextTimKiemKeyReleased
 
     private void labelResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelResetMouseClicked
@@ -281,6 +286,25 @@ public class GoiTapForm extends javax.swing.JPanel {
         else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để chỉnh sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }    }//GEN-LAST:event_labelUpdateMouseClicked
+
+    private void TextTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextTimKiemActionPerformed
+        String keyword = TextTimKiem.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        GOITAP gt = GoiTapDAO.getInstance().selectById(keyword);
+        tblModel.setRowCount(0); 
+        
+        if (gt != null) {
+            Object[] row = {gt.getId_GT(), gt.getTenGoi(), gt.getMoTa(), CurrencyUtils.formatCurrency(gt.getGiaTien())};
+            tblModel.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_TextTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

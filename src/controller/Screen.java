@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
+import model.User;
 
 /**
  *
@@ -26,13 +27,15 @@ public class Screen {
     private JPanel root;
     private String kindSelected = "";
     private List<ListDM> listItem = null;
+    private User currentUser;
 
-    public Screen(JPanel jpnRoot) {
+    public Screen(JPanel jpnRoot, User currentUser) {
         this.root = jpnRoot;
+        this.currentUser = currentUser;
     }
 
     public void setView(JPanel jpnItem, JLabel jblItem) {
-        kindSelected="Home";
+        kindSelected = "Home";
         jpnItem.setBackground(Color.white);
         jblItem.setBackground(Color.white);
         root.removeAll();
@@ -42,19 +45,24 @@ public class Screen {
         root.repaint();
     }
 
-    
     public void setEvent(List<ListDM> listItem) {
-            this.listItem=listItem;
-        for(ListDM item: listItem){
-            item.getJlb().addMouseListener(new LabelEvent(item.getKind(),item.getJpn(),item.getJlb()));
+        this.listItem = listItem;
+        for (ListDM item : listItem) {
+            item.getJlb().addMouseListener(new LabelEvent(item.getKind(), item.getJpn(), item.getJlb()));
         }
     }
 
+    public boolean isAccessibleForUser(String kind) {
+        if (currentUser != null && "Nhân viên".equals(currentUser.getChucVu())) {
+            return !("NhanVien".equals(kind) || "TaiKhoan".equals(kind) || "ThietBi".equals(kind) ||
+                    "HuanLuyenVien".equals(kind) || "ThongKe".equals(kind));
+        }
+        return true;
+    }
 
     class LabelEvent implements MouseListener {
         private JPanel node;
-        
-        private  String kind;
+        private String kind;
         private JPanel jpnItem;
         private JLabel jlbItem;
 
@@ -64,52 +72,52 @@ public class Screen {
             this.jlbItem = jlbItem;
         }
 
-
         @Override
         public void mouseClicked(MouseEvent e) {
-            switch(kind) {
-                case "Home":
-                    node = new Home();
-                    break;
-                case "KhachHang":
-                    node = new KhachHangForm();
-                    break;
-                case "GoiTap":
-                    node = new GoiTapForm();
-                    break;
-                case "HuanLuyenVien":
-                    node = new HuanLuyenVienForm();
-                    break;
-                case "TheTap":
-                    node = new TheTapForm();
-                    break;
-                case "Thue":
-                    node = new ThueForm();
-                    break;
-                case "ThietBi":
-                    node = new ThietBiForm();
-                    break;
-                case "ThanhToan":
-                    node = new ThanhToanForm();
-                    break;
-                case "ThongKe":
-                    node = new ThongKe();
-                    break;
-                case "NhanVien":
-                    node = new NhanVienForm();
-                    break;
-                case "TaiKhoan":
-                    node = new TaiKhoan();
-                    break;
+            if (isAccessibleForUser(kind)) {
+                switch (kind) {
+                    case "Home":
+                        node = new Home();
+                        break;
+                    case "KhachHang":
+                        node = new KhachHangForm();
+                        break;
+                    case "GoiTap":
+                        node = new GoiTapForm();
+                        break;
+                    case "HuanLuyenVien":
+                        node = new HuanLuyenVienForm();
+                        break;
+                    case "TheTap":
+                        node = new TheTapForm();
+                        break;
+                    case "Thue":
+                        node = new ThueForm();
+                        break;
+                    case "ThietBi":
+                        node = new ThietBiForm();
+                        break;
+                    case "ThanhToan":
+                        node = new ThanhToanForm();
+                        break;
+                    case "ThongKe":
+                        node = new ThongKe();
+                        break;
+                    case "NhanVien":
+                        node = new NhanVienForm();
+                        break;
+                    case "TaiKhoan":
+                        node = new TaiKhoan();
+                        break;
+                }
+                root.removeAll();
+                root.setLayout(new BorderLayout());
+                root.add(node);
+                root.validate();
+                root.repaint();
+                setChangeBackground(kind);
             }
-            root.removeAll();
-            root.setLayout(new BorderLayout());
-            root.add(node);
-            root.validate();
-            root.repaint();
-            setChangeBackground(kind);
         }
-        
 
         @Override
         public void mousePressed(MouseEvent e) {
@@ -120,7 +128,6 @@ public class Screen {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            
         }
 
         @Override

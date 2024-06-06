@@ -241,13 +241,13 @@ public class KhachHangForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
-        String searchText = tf_SearchBar.getText().trim().toLowerCase();
-        
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_KHACHHANG.getModel());
-        tb_KHACHHANG.setRowSorter(sorter);
-        
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
-        sorter.setRowFilter(rowFilter);  
+//        String searchText = tf_SearchBar.getText().trim().toLowerCase();
+//        
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_KHACHHANG.getModel());
+//        tb_KHACHHANG.setRowSorter(sorter);
+//        
+//        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); // Sử dụng biểu thức chính quy không phân biệt hoa thường
+//        sorter.setRowFilter(rowFilter);  
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
@@ -309,7 +309,21 @@ public class KhachHangForm extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_icResetMouseClicked
 
     private void tf_SearchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_SearchBarActionPerformed
-        // TODO add your handling code here:
+        String keyword = tf_SearchBar.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        KhachHang kh = KhachHangDAO.getInstance().selectById(keyword);
+        tblModel.setRowCount(0); 
+        
+        if (kh != null) {
+            Object[] row = {kh.getId_KH(), kh.getHoTen(), kh.getNgaySinh(), kh.getGioiTinh(), kh.getDiaChi(), kh.getSoDT(), kh.getEmail()};
+            tblModel.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_tf_SearchBarActionPerformed
 
     private void tf_SearchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_SearchBarFocusGained

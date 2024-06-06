@@ -2,6 +2,7 @@ package test;
 
 import DAO.ThanhToanDAO;
 import DAO.ThongKeDAO;
+import DAO.ThueDAO;
 import database.JDBC;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -9,21 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.ThanhToanDetail;
 import model.ThongKeTheTap;
+import model.Thue;
 
 public class test2 {
      public static void main(String[] args) {
-        // Tạo kết nối đến cơ sở dữ liệu
-        Connection conn = JDBC.getConnection();
-
-        // Tạo đối tượng ThongKeDAO
-        ThongKeDAO thongKeDAO = new ThongKeDAO();
-
-        // Gọi phương thức dsKhachHang
-        ArrayList<ThongKeTheTap> ketQua = thongKeDAO.dsKhachHang();
-
-        // In ra kết quả
-        for (ThongKeTheTap tk : ketQua) {
-            System.out.println(tk);
-        }
+        ThueDAO thue = new ThueDAO();
+        Thue t = thue.selectById("KH001");
+        
     }
 }

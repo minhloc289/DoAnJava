@@ -7,6 +7,7 @@ import model.NhanVienAcc;
 import database.JDBC;
 import java.sql.*;
 import java.util.ArrayList;
+import model.User;
 
 
 /**
@@ -81,7 +82,7 @@ public class NhanVienAccDAO implements DAOInterface<NhanVienAcc> {
             conn = JDBC.getConnection();
 
             // Câu lệnh SQL để gọi procedure
-            String sql = "{CALL CapNhatTaiKhoanNhanVien(?, ?, ?)}";
+            String sql = "{CALL SuaTaiKhoanNhanVien(?, ?, ?)}";
             cstmt = conn.prepareCall(sql);
 
             // Đặt các tham số cho procedure
@@ -212,61 +213,34 @@ public class NhanVienAccDAO implements DAOInterface<NhanVienAcc> {
          return false;
     }
     
-//    public boolean checkIfAccountExists(String id_NV) {
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//
-//        try {
-//            // Thiết lập kết nối tới cơ sở dữ liệu
-//            conn = JDBC.getConnection();
-//
-//            // Câu lệnh SQL để kiểm tra tài khoản
-//            String sql = "SELECT COUNT(*) FROM NHANVIENACC WHERE Id_NV = ?";
-//            pstmt = conn.prepareStatement(sql);
-//
-//            // Đặt tham số cho câu lệnh SQL
-//            pstmt.setString(1, id_NV);
-//
-//            // Thực thi câu lệnh SQL và lấy kết quả
-//            rs = pstmt.executeQuery();
-//
-//            // Kiểm tra kết quả
-//            if (rs.next()) {
-//                int count = rs.getInt(1);
-//                if (count > 0) {
-//                    // Nếu count > 0, có nghĩa là đã có tài khoản với Id_NV này
-//                    return true;
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            // Đóng các tài nguyên
-//            if (rs != null) {
-//                try {
-//                    rs.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            if (pstmt != null) {
-//                try {
-//                    pstmt.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return false;
-//}
+    public User getUserByUsername(String username) {
+        User user = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection conn = JDBC.getConnection();
 
+        try {
+            String sql = "SELECT nv.*, acc.TenDN FROM NHANVIEN nv JOIN NHANVIENACC acc ON nv.Id_NV = acc.Id_NV WHERE acc.TenDN = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user = new User();
+                user.setUsername(rs.getString("TenDN"));
+                user.setChucVu(rs.getString("ChucVu"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+        return user;
+    }
 
 }

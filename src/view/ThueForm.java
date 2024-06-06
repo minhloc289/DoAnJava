@@ -115,6 +115,11 @@ public class ThueForm extends javax.swing.JPanel {
                 tf_SearchBarFocusGained(evt);
             }
         });
+        tf_SearchBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_SearchBarActionPerformed(evt);
+            }
+        });
         tf_SearchBar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_SearchBarKeyReleased(evt);
@@ -252,13 +257,13 @@ public class ThueForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_SearchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_SearchBarKeyReleased
-        String searchText = tf_SearchBar.getText().trim().toLowerCase();
-
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THUE.getModel());
-        tb_THUE.setRowSorter(sorter);
-
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
-        sorter.setRowFilter(rowFilter);
+//        String searchText = tf_SearchBar.getText().trim().toLowerCase();
+//
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tb_THUE.getModel());
+//        tb_THUE.setRowSorter(sorter);
+//
+//        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText); 
+//        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_tf_SearchBarKeyReleased
 
     private void lb_icAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_icAddMouseClicked
@@ -313,6 +318,24 @@ public class ThueForm extends javax.swing.JPanel {
         if(tf_SearchBar.getText().equals("Tìm kiếm ..."))
             tf_SearchBar.setText("");
     }//GEN-LAST:event_tf_SearchBarFocusGained
+
+    private void tf_SearchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_SearchBarActionPerformed
+        String keyword = tf_SearchBar.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Thue thue =  ThueDAO.getInstance().selectById(keyword);
+        tblModel.setRowCount(0); 
+        
+        if (thue != null) {
+            Object[] row = {thue.getId_KH(), thue.getId_HLV(), thue.getNgayBD(), thue.getNgayKT(), thue.getThoiGianThue(), CurrencyUtils.formatCurrency(thue.getTongTien())};
+            tblModel.addRow(row);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_tf_SearchBarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

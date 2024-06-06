@@ -163,15 +163,16 @@ public class ThueDAO implements DAOInterface<Thue> {
         Thue thue = null;
         try {
             Connection conn = JDBC.getConnection();
-            String sql = "SELECT * FROM THUE WHERE Id_KH = ?";
+            String sql = "SELECT Id_KH, Id_HLV, NGAYBD, NGAYKT, ThoiGianThue, TongTienThue FROM THUE WHERE Id_KH = ? AND isDeleted = 0";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, t);
+            pst.setString(2,t);
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {
                 String id_KH = rs.getString("Id_KH");
                 String id_HLV = rs.getString("Id_HLV");
                 Date ngayBD = rs.getDate("NGAYBD");
-                Date ngayKT = rs.getDate("NGAYHH");
+                Date ngayKT = rs.getDate("NGAYKT");
                 int thoiGianThue = rs.getInt("ThoiGianThue");
                 double tongTien = rs.getDouble("TongTienThue");
                 

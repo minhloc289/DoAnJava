@@ -2,8 +2,11 @@
 package view;
 
 import DAO.NhanVienAccDAO;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import model.User;
 
 
 public class LoginMain extends javax.swing.JFrame {
@@ -142,27 +145,31 @@ public class LoginMain extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String user = jUser.getText().trim();
         String pass = String.valueOf(jPassword.getPassword());
-        
+
         if (user.equals("") || pass.equals("")){
             if (jUser.getText().trim().isEmpty()) {
                 jUser.setText("Please enter username");
-        }
+            }
             if (pass.equals("")) {
                 jPassword.setText("Please enter password");
-        }
+            }
             JOptionPane.showMessageDialog(this, "Không được để trống thông tin đăng nhập", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-    }
-        else{
-            
-        NhanVienAccDAO nhanvienAcc = new NhanVienAccDAO();
-        boolean isLogin = nhanvienAcc.checkLogin(user, pass);
+        } else {
+            NhanVienAccDAO nhanvienAcc = NhanVienAccDAO.getInstance();
+            boolean isLogin = nhanvienAcc.checkLogin(user, pass);
             if (isLogin) {
-                JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
-                Dashboard dashboard = new Dashboard();
-                dashboard.setVisible(true);
-                dispose();
-            }   
-            else JOptionPane.showMessageDialog(this, "Đăng nhập thất bại", "Cảnh báo", JOptionPane.WARNING_MESSAGE); 
+                User currentUser = nhanvienAcc.getUserByUsername(user);
+                if (currentUser != null) {
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+                    Dashboard dashboard = new Dashboard(currentUser);
+                    dashboard.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy thông tin người dùng", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Đăng nhập thất bại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -186,29 +193,11 @@ public class LoginMain extends javax.swing.JFrame {
 
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
         }
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

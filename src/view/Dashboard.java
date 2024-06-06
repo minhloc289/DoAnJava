@@ -4,6 +4,7 @@
  */
 package view;
 
+import DAO.NhanVienAccDAO;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.*;
 import javax.swing.UIManager;
@@ -13,6 +14,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import  java.util.List;
 import controller.Screen;
 import java.util.ArrayList;
+import model.User;
 
 
 /**
@@ -20,33 +22,45 @@ import java.util.ArrayList;
  * @author ADMIN
  */
 public class Dashboard extends javax.swing.JFrame {
+    private User currentUser;
+    private Screen switchScreen;
 
-    /**
-     * Creates new form Dashboard
-     */
-    public Dashboard() {
+    public Dashboard(User currentUser) {
+        this.currentUser = currentUser;
         initComponents();
         setSize(1086, 760);
         setLocationRelativeTo(null);
-        setResizable(false);  
-        Screen switchScreen = new Screen(jPanelContent);
+        setResizable(false);
+
+        switchScreen = new Screen(jPanelContent, currentUser);
         switchScreen.setView(pn_Home, jLabelHome);
         List<ListDM> listItem = new ArrayList<>();
-        listItem.add(new ListDM("Home",pn_Home,jLabelHome));
-        listItem.add(new ListDM("KhachHang",pn_KH,jLabelKhachHang));
-        listItem.add(new ListDM("GoiTap",pn_GT,jLabelGT));
-        listItem.add(new ListDM("HuanLuyenVien",pn_HLV,jLabelHLV));
-        listItem.add(new ListDM("TheTap",pn_TrainCard,jLabelTheTap));
-        listItem.add(new ListDM("Thue",pn_Thue,jLabelThue));
-        listItem.add(new ListDM("ThietBi",pn_TB,jLabelThietBi));
-        listItem.add(new ListDM("ThanhToan",pn_TT,jLabelThanhToan));
-        listItem.add(new ListDM("ThongKe",pn_TK,jLabelThongKe));
-        listItem.add(new ListDM("NhanVien",pn_NV,jLabelNhanVien));
-        listItem.add(new ListDM("TaiKhoan",pn_TaiKhoan,jLabelTaiKhoan));
-        
+        listItem.add(new ListDM("Home", pn_Home, jLabelHome));
+        listItem.add(new ListDM("KhachHang", pn_KH, jLabelKhachHang));
+        listItem.add(new ListDM("GoiTap", pn_GT, jLabelGT));
+        listItem.add(new ListDM("HuanLuyenVien", pn_HLV, jLabelHLV));
+        listItem.add(new ListDM("TheTap", pn_TrainCard, jLabelTheTap));
+        listItem.add(new ListDM("Thue", pn_Thue, jLabelThue));
+        listItem.add(new ListDM("ThietBi", pn_TB, jLabelThietBi));
+        listItem.add(new ListDM("ThanhToan", pn_TT, jLabelThanhToan));
+        listItem.add(new ListDM("ThongKe", pn_TK, jLabelThongKe));
+        listItem.add(new ListDM("NhanVien", pn_NV, jLabelNhanVien));
+        listItem.add(new ListDM("TaiKhoan", pn_TaiKhoan, jLabelTaiKhoan));
+
         switchScreen.setEvent(listItem);
+        disableMenuItemsForNhanVien(listItem);
     }
-    
+
+    private void disableMenuItemsForNhanVien(List<ListDM> listItem) {
+        if (currentUser != null && currentUser.getChucVu().equals("Nhân viên")) {
+            for (ListDM item : listItem) {
+                if (!switchScreen.isAccessibleForUser(item.getKind())) {
+                    item.getJpn().setEnabled(false);
+                    item.getJlb().setEnabled(false);
+                }
+            }
+        }
+    }
     
     /*
      * This method is called from within the constructor to initialize the form.
@@ -72,8 +86,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelHLV = new javax.swing.JLabel();
         pn_TB = new javax.swing.JPanel();
         jLabelThietBi = new javax.swing.JLabel();
-        pn_TT = new javax.swing.JPanel();
-        jLabelThanhToan = new javax.swing.JLabel();
         pn_Hello = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         pn_NV = new javax.swing.JPanel();
@@ -86,6 +98,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelThongKe = new javax.swing.JLabel();
         pn_TaiKhoan = new javax.swing.JPanel();
         jLabelTaiKhoan = new javax.swing.JLabel();
+        pn_TT = new javax.swing.JPanel();
+        jLabelThanhToan = new javax.swing.JLabel();
         pn_LogOut = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -154,7 +168,9 @@ public class Dashboard extends javax.swing.JFrame {
         pn_Home.setLayout(pn_HomeLayout);
         pn_HomeLayout.setHorizontalGroup(
             pn_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pn_HomeLayout.createSequentialGroup()
+                .addComponent(jLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_HomeLayout.setVerticalGroup(
             pn_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +198,7 @@ public class Dashboard extends javax.swing.JFrame {
         pn_GTLayout.setHorizontalGroup(
             pn_GTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_GTLayout.createSequentialGroup()
-                .addComponent(jLabelGT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelGT, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_GTLayout.setVerticalGroup(
@@ -211,7 +227,7 @@ public class Dashboard extends javax.swing.JFrame {
         pn_KHLayout.setHorizontalGroup(
             pn_KHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_KHLayout.createSequentialGroup()
-                .addComponent(jLabelKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_KHLayout.setVerticalGroup(
@@ -239,7 +255,7 @@ public class Dashboard extends javax.swing.JFrame {
         pn_HLVLayout.setHorizontalGroup(
             pn_HLVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_HLVLayout.createSequentialGroup()
-                .addComponent(jLabelHLV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelHLV, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_HLVLayout.setVerticalGroup(
@@ -269,45 +285,13 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TBLayout.setHorizontalGroup(
             pn_TBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TBLayout.createSequentialGroup()
-                .addComponent(jLabelThietBi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelThietBi, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TBLayout.setVerticalGroup(
             pn_TBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TBLayout.createSequentialGroup()
                 .addComponent(jLabelThietBi, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        pn_TT.setBackground(new java.awt.Color(243, 197, 192));
-        pn_TT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pn_TT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pn_TTMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pn_TTMouseExited(evt);
-            }
-        });
-
-        jLabelThanhToan.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jLabelThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Payment.png"))); // NOI18N
-        jLabelThanhToan.setText("    Thanh toán");
-        jLabelThanhToan.setPreferredSize(new java.awt.Dimension(230, 0));
-
-        javax.swing.GroupLayout pn_TTLayout = new javax.swing.GroupLayout(pn_TT);
-        pn_TT.setLayout(pn_TTLayout);
-        pn_TTLayout.setHorizontalGroup(
-            pn_TTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_TTLayout.createSequentialGroup()
-                .addComponent(jLabelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pn_TTLayout.setVerticalGroup(
-            pn_TTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_TTLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -355,7 +339,7 @@ public class Dashboard extends javax.swing.JFrame {
         pn_NVLayout.setHorizontalGroup(
             pn_NVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_NVLayout.createSequentialGroup()
-                .addComponent(jLabelNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_NVLayout.setVerticalGroup(
@@ -385,7 +369,7 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TrainCardLayout.setHorizontalGroup(
             pn_TrainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TrainCardLayout.createSequentialGroup()
-                .addComponent(jLabelTheTap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTheTap, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TrainCardLayout.setVerticalGroup(
@@ -415,15 +399,14 @@ public class Dashboard extends javax.swing.JFrame {
         pn_ThueLayout.setHorizontalGroup(
             pn_ThueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_ThueLayout.createSequentialGroup()
-                .addComponent(jLabelThue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelThue, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_ThueLayout.setVerticalGroup(
             pn_ThueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_ThueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelThue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabelThue, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
         );
 
         pn_TK.setBackground(new java.awt.Color(243, 197, 192));
@@ -447,7 +430,7 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TKLayout.setHorizontalGroup(
             pn_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TKLayout.createSequentialGroup()
-                .addComponent(jLabelThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_TKLayout.setVerticalGroup(
@@ -475,13 +458,45 @@ public class Dashboard extends javax.swing.JFrame {
         pn_TaiKhoanLayout.setHorizontalGroup(
             pn_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_TaiKhoanLayout.createSequentialGroup()
-                .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE))
         );
         pn_TaiKhoanLayout.setVerticalGroup(
             pn_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_TaiKhoanLayout.createSequentialGroup()
                 .addComponent(jLabelTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pn_TT.setBackground(new java.awt.Color(243, 197, 192));
+        pn_TT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pn_TT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_TTMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_TTMouseExited(evt);
+            }
+        });
+
+        jLabelThanhToan.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabelThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ic_Payment.png"))); // NOI18N
+        jLabelThanhToan.setText("    Thanh toán");
+        jLabelThanhToan.setPreferredSize(new java.awt.Dimension(230, 0));
+
+        javax.swing.GroupLayout pn_TTLayout = new javax.swing.GroupLayout(pn_TT);
+        pn_TT.setLayout(pn_TTLayout);
+        pn_TTLayout.setHorizontalGroup(
+            pn_TTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_TTLayout.createSequentialGroup()
+                .addComponent(jLabelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pn_TTLayout.setVerticalGroup(
+            pn_TTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_TTLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -500,38 +515,38 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(pn_TrainCard, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
             .addComponent(pn_Thue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_TB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_TT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_TK, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_NV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pn_TT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         sideLayout.setVerticalGroup(
             sideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sideLayout.createSequentialGroup()
                 .addComponent(pn_Hello, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_Home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_KH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_GT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_HLV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(pn_TrainCard, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pn_Home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(pn_KH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(pn_TrainCard, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(pn_Thue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pn_TB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pn_TT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pn_GT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pn_HLV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pn_TB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pn_TK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(pn_NV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(pn_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -715,6 +730,35 @@ public class Dashboard extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabelHomeMouseClicked
 
+//    public boolean checkuser(String user){
+//        if(!user.equals("0901234567")){
+//            jLabelNhanVien.setBackground(new Color(243, 197, 192));
+//            jLabelNhanVien.setForeground(new Color(204,204,204));
+//            jLabelThongKe.setBackground(new Color(243, 197, 192));
+//            jLabelThongKe.setForeground(new Color(204,204,204));
+//            jLabelTaiKhoan.setBackground(new Color(243, 197, 192));
+//            jLabelTaiKhoan.setForeground(new Color(204,204,204));
+//            jLabelHLV.setBackground(new Color(243, 197, 192));
+//            jLabelHLV.setForeground(new Color(204,204,204));
+//            jLabelThietBi.setBackground(new Color(243, 197, 192));
+//            jLabelThietBi.setForeground(new Color(204,204,204));
+//            JLabel jlb = new JLabel();
+//            JLabel jlb1 = new JLabel();
+//            URL iconURL = getClass().getResource("/thanh_phan_log/icon/icon/pass (1) (1).png");
+//            URL iconURL1 = getClass().getResource("/thanh_phan_log/icon/icon/pass (1) (1).png");
+//
+//            ImageIcon icon = new ImageIcon(iconURL);
+//            ImageIcon icon1 = new ImageIcon(iconURL1);
+//            NhanVienjlb.setIcon(icon);
+//            ThongKejlb.setIcon(icon);
+//            return false;
+//    }
+//        else{
+//        listItem.add(new DanhMuc("NhanVien", NhanVienjpn, NhanVienjlb));
+//        listItem.add(new DanhMuc("ThongKe",ThongKejpn,ThongKejlb)); 
+//            return true;
+//        }
+//} 
     
     /**
      * @param args the command line arguments
@@ -729,7 +773,10 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                User currentUser = new User(); // replace with actual user retrieval logic
+                currentUser.setUsername("username"); // set username
+                currentUser.setChucVu("Nhân viên"); // set role
+                new Dashboard(currentUser).setVisible(true);
             }
         });
     }
